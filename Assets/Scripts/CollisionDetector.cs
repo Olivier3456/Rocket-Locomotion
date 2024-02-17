@@ -7,6 +7,9 @@ public class CollisionDetector : MonoBehaviour
 {
     public UnityEvent<GameObject, Vector3, Vector3> OnCollision = new UnityEvent<GameObject, Vector3, Vector3>();
 
+    [SerializeField] private Transform playerFeet;
+    [SerializeField] private LayerMask groundLayerMask;
+
     private void OnCollisionEnter(Collision collision)
     {
         Vector3 relativeVelocity = collision.relativeVelocity;
@@ -17,4 +20,19 @@ public class CollisionDetector : MonoBehaviour
         //Vector3 contactNormal = collision.contacts[0].normal;
         OnCollision.Invoke(collision.gameObject, relativeVelocity, collisionNormal);
     }
+
+
+    private void FixedUpdate()
+    {
+        if (Physics.CheckSphere(playerFeet.position, 0.1f, groundLayerMask))
+        {
+            //Debug.Log("Collider detected");
+        }        
+    }
+
+    //// Not working
+    //private void OnCollisionStay(Collision collision)
+    //{
+    //    Debug.Log("collision");
+    //}
 }
