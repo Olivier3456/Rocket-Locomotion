@@ -92,7 +92,7 @@ public class Thrusters : MonoBehaviour
 
     private void LeftForwardThruster_Action_started(InputAction.CallbackContext obj)
     {
-        if (!isLeftForward && canLeftThrust)
+        if (!isLeftForward && canLeftThrust && leftInput == 0)
         {
             isLeftForward = true;
             StartCoroutine(RotateThruster(leftThrusterVisual));
@@ -116,7 +116,7 @@ public class Thrusters : MonoBehaviour
 
     private void RightForwardThruster_Action_started(InputAction.CallbackContext obj)
     {
-        if (!isRightForward && canRightThrust)
+        if (!isRightForward && canRightThrust && rightInput == 0)
         {
             isRightForward = true;
             StartCoroutine(RotateThruster(rightThrusterVisual));
@@ -140,7 +140,7 @@ public class Thrusters : MonoBehaviour
 
     private void LeftBackwardThruster_Action_started(InputAction.CallbackContext obj)
     {
-        if (isLeftForward && canLeftThrust)
+        if (isLeftForward && canLeftThrust && leftInput == 0)
         {
             isLeftForward = false;
             StartCoroutine(RotateThruster(leftThrusterVisual));
@@ -164,7 +164,7 @@ public class Thrusters : MonoBehaviour
 
     private void RightBackwardThruster_Action_started(InputAction.CallbackContext obj)
     {
-        if (isRightForward && canRightThrust)
+        if (isRightForward && canRightThrust && rightInput == 0)
         {
             isRightForward = false;
             StartCoroutine(RotateThruster(rightThrusterVisual));
