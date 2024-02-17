@@ -253,7 +253,6 @@ public class Thrusters : MonoBehaviour
             progress += Time.deltaTime / rotationTime;
             float value = thrusterRotationAnimCurve.Evaluate(progress);
             transformToRotate.forward = rotatesToForward ? Vector3.Slerp(-hand.forward, hand.forward, value) : Vector3.Slerp(hand.forward, -hand.forward, value);
-            //transformToRotate.forward = rotatesToForward ? Vector3.Slerp(-hand.forward, hand.forward, progress) : Vector3.Slerp(hand.forward, -hand.forward, progress);
         }
 
         transformToRotate.forward = rotatesToForward ? hand.forward : -hand.forward;

@@ -15,12 +15,15 @@ public class PlayerLife : MonoBehaviour
     [SerializeField] private AudioClip deathAudioClip;
 
     [SerializeField] private Material redSpriteMaterial;
+    [SerializeField] private float minMaskAmount = 0.6f;
+    [SerializeField] private float maxMaskAmount = 1f;
 
 
     private float currentLife;
 
     private bool isAlive = true;
     public bool IsAlive { get { return isAlive; } }
+
 
 
     [SerializeField] private CollisionDetector collisionDetector;
@@ -38,6 +41,7 @@ public class PlayerLife : MonoBehaviour
     private void OnDisable()
     {
         collisionDetector.OnCollision.RemoveListener(OnCollision);
+        redSpriteMaterial.SetFloat("_MaskAmount", maxMaskAmount);
     }
 
     private void Start()
@@ -45,11 +49,19 @@ public class PlayerLife : MonoBehaviour
         UpdateRedCanvasGroupAlpha();
     }
 
-    private void OnCollision(GameObject other, float relativeVelocity)
+    private void OnCollision(GameObject other, Vector3 relativeVelocity, Vector3 collisionNormal)
     {
-        if (relativeVelocity > relativeVelocityThresholdToLoseLife)
+        float relativeVelocityMagnitude = relativeVelocity.magnitude;
+        Vector3 relativeVelocityDirection = relativeVelocity.normalized;
+        float dot = Vector3.Dot(collisionNormal, relativeVelocityDirection);
+        float collisionForce = relativeVelocityMagnitude * dot;
+
+        Debug.Log($"Relative velocity magnitude: {relativeVelocityMagnitude}. Dot product of relative velocity direction and collisionNormal: {dot}. Collision force: {collisionForce}");
+
+
+        if (collisionForce > relativeVelocityThresholdToLoseLife)
         {
-            float lifeLost = relativeVelocity * lifePointsLostPerVelocityUnit;
+            float lifeLost = relativeVelocityMagnitude * lifePointsLostPerVelocityUnit;
             currentLife -= lifeLost;
             OnLifeLost.Invoke(lifeLost, currentLife);
 
@@ -85,8 +97,8 @@ public class PlayerLife : MonoBehaviour
 
     private void UpdateRedCanvasGroupAlpha()
     {
-        float minMaskAmount = 0.6f;
-        float maxMaskAmount = 1f;
+        minMaskAmount = 0.6f;
+        maxMaskAmount = 1f;
         float difference = maxMaskAmount - minMaskAmount;
         float maskAmount = maxMaskAmount - (((startLife - currentLife) / startLife) * difference);
         redSpriteMaterial.SetFloat("_MaskAmount", maskAmount);
