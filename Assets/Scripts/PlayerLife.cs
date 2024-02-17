@@ -14,7 +14,7 @@ public class PlayerLife : MonoBehaviour
     [SerializeField] private AudioClip injuryAudioClip;
     [SerializeField] private AudioClip deathAudioClip;
 
-    [SerializeField] private CanvasGroup redCanvasGroup;
+    [SerializeField] private Material redSpriteMaterial;
 
 
     private float currentLife;
@@ -40,6 +40,11 @@ public class PlayerLife : MonoBehaviour
         collisionDetector.OnCollision.RemoveListener(OnCollision);
     }
 
+    private void Start()
+    {
+        UpdateRedCanvasGroupAlpha();
+    }
+
     private void OnCollision(GameObject other, float relativeVelocity)
     {
         if (relativeVelocity > relativeVelocityThresholdToLoseLife)
@@ -48,8 +53,6 @@ public class PlayerLife : MonoBehaviour
             currentLife -= lifeLost;
             OnLifeLost.Invoke(lifeLost, currentLife);
 
-            Debug.Log($"Player is injured. Life lost: {lifeLost}. Current life: {currentLife}");
-
             UpdateRedCanvasGroupAlpha();
 
             if (currentLife <= 0)
@@ -57,10 +60,12 @@ public class PlayerLife : MonoBehaviour
                 isAlive = false;
                 OnDeath.Invoke();
                 playerAudioSource.PlayOneShot(deathAudioClip);
+                Debug.Log($"Player is dead. Life lost: {lifeLost}. Current life: {currentLife}");
             }
             else
             {
                 playerAudioSource.PlayOneShot(injuryAudioClip);
+                Debug.Log($"Player is injured. Life lost: {lifeLost}. Current life: {currentLife}");
             }
         }
     }
@@ -72,17 +77,18 @@ public class PlayerLife : MonoBehaviour
         if (isAlive && currentLife < startLife)
         {
             currentLife += Time.deltaTime * lifePointsRecoveredPerSec;
-            currentLife = Mathf.Clamp(currentLife, 0, 100);
+            currentLife = Mathf.Clamp(currentLife, 0f, 100f);
             UpdateRedCanvasGroupAlpha();
-
-            Debug.Log($"Life: {currentLife}");
         }
     }
 
 
     private void UpdateRedCanvasGroupAlpha()
     {
-        float alpha = 1 - (currentLife / startLife);
-        redCanvasGroup.alpha = alpha;
+        float minMaskAmount = 0.6f;
+        float maxMaskAmount = 1f;
+        float difference = maxMaskAmount - minMaskAmount;
+        float maskAmount = maxMaskAmount - (((startLife - currentLife) / startLife) * difference);
+        redSpriteMaterial.SetFloat("_MaskAmount", maskAmount);
     }
 }
