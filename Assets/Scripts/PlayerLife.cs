@@ -48,9 +48,6 @@ public class PlayerLife : MonoBehaviour
         UpdateRedCanvasGroupAlpha();
     }
 
-   
-
-
 
     private void OnCollision(float velocityDifference)
     {
@@ -73,7 +70,6 @@ public class PlayerLife : MonoBehaviour
             Debug.Log($"Player is injured. Life lost: {lifeLost}. Current life: {currentLife}");
         }
     }
-
 
 
     private void Update()
@@ -110,7 +106,6 @@ public class PlayerLife : MonoBehaviour
     //    float collisionForce = relativeVelocityMagnitude * dot;
 
     //    Debug.Log($"Relative velocity magnitude: {relativeVelocityMagnitude}. Dot product of relative velocity direction and collisionNormal: {dot}. Collision force: {collisionForce}");
-
 
     //    if (collisionForce > relativeVelocityThresholdToLoseLife)
     //    {

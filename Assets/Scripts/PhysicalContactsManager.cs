@@ -6,8 +6,8 @@ using UnityEngine.Events;
 public class PhysicalContactsManager : MonoBehaviour
 {
     [SerializeField] private Transform colliderTransform;
-    [SerializeField] private Transform playerFeetTransform;
     [SerializeField] private CapsuleCollider playerCollider;
+    [SerializeField] private Transform playerFeetTransform;
     [SerializeField] private Camera cam;
     [SerializeField] private Transform xrOrigin;
     [SerializeField] private Rigidbody rb;
@@ -20,12 +20,7 @@ public class PhysicalContactsManager : MonoBehaviour
     private bool isGrounded;
     public bool IsGrounded { get { return isGrounded; } }
 
-
-    private Vector3 lastVelocity = Vector3.zero;
     private float lastVelocitySqrtMagnitude = 0;
-
-
-    private float highestVelocityDifference = 0;
 
     private float dangerousVelocityDifference = 1000;
 
@@ -44,8 +39,7 @@ public class PhysicalContactsManager : MonoBehaviour
         Vector3 velocity = rb.velocity;
         float velocitySqrtMagnitude = velocity.sqrMagnitude;
 
-        float velocityDifference = Mathf.Abs(velocitySqrtMagnitude - lastVelocitySqrtMagnitude);
-        
+        float velocityDifference = Mathf.Abs(velocitySqrtMagnitude - lastVelocitySqrtMagnitude);        
 
         if (velocityDifference > dangerousVelocityDifference)
         {
@@ -53,8 +47,6 @@ public class PhysicalContactsManager : MonoBehaviour
             OnPhysicalShock.Invoke(velocityDifference);
         }
 
-
-        lastVelocity = velocity;
         lastVelocitySqrtMagnitude = velocitySqrtMagnitude;
     }
 
@@ -64,7 +56,6 @@ public class PhysicalContactsManager : MonoBehaviour
     {
         float camYoffset = cam.transform.position.y - xrOrigin.position.y;
         playerCollider.height = (camYoffset * 2f) - (playerCollider.radius * 2);
-        //halfColliderHeight = (capsuleCollider.height * 0.5f) + capsuleCollider.radius;
 
         float yOffset = camYoffset - ((playerCollider.height * 0.5f) - playerCollider.radius);
         Vector3 position = new Vector3(cam.transform.position.x, xrOrigin.position.y + yOffset, cam.transform.position.z);

@@ -1577,7 +1577,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 717104517}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ca482350e7f35140802a945c0dc6ea2, type: 3}
   m_Name: 
@@ -3238,7 +3238,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 806744728}
@@ -15520,8 +15520,8 @@ MonoBehaviour:
   physicalContactsManager: {fileID: 717104521}
   startLife: 100
   lifePointsRecoveredPerSec: 5
-  dangerousVelocityDifference: 50
-  lifePointsLostPerVelocityDifferenceUnit: 0.3
+  dangerousVelocityDifference: 25
+  lifePointsLostPerVelocityDifferenceUnit: 0.5
   playerAudioSource: {fileID: 717104524}
   injuryAudioClip: {fileID: 8300000, guid: c0d228a5c24901f42913d7c9ae7e9282, type: 3}
   deathAudioClip: {fileID: 8300000, guid: 601ef7af3de0fa64a8c3db2f2976a1b9, type: 3}
