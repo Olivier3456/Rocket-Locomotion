@@ -1577,12 +1577,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 717104517}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ca482350e7f35140802a945c0dc6ea2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerGroundCheck: {fileID: 717104521}
+  physicalContactsManager: {fileID: 717104521}
   playerPhysicMaterial: {fileID: 13400000, guid: d1292788f57f33a4e87d0e5be2251635,
     type: 2}
   staticFrictionWhenGrounded: 5
@@ -3222,12 +3222,12 @@ GameObject:
   - component: {fileID: 917941009}
   - component: {fileID: 917941008}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: DEBUG Visual Marker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &917941007
 Transform:
   m_ObjectHideFlags: 0
@@ -15443,7 +15443,7 @@ MonoBehaviour:
     type: 3}
   rightBackwardThruster: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  thrusterForceFactor: 750
+  thrusterForceFactor: 700
   rb: {fileID: 717104518}
   leftThrusterAudioSource: {fileID: 2019793488}
   rightThrusterAudioSource: {fileID: 1139985742}
@@ -15517,17 +15517,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d3ec4873807ce419ef1ff4ca1cf1f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  physicalContactsManager: {fileID: 717104521}
   startLife: 100
   lifePointsRecoveredPerSec: 5
-  dangerousVelocityDifference: 75
-  lifePointsLostPerVelocityDifferenceUnit: 0.2
+  dangerousVelocityDifference: 50
+  lifePointsLostPerVelocityDifferenceUnit: 0.3
   playerAudioSource: {fileID: 717104524}
   injuryAudioClip: {fileID: 8300000, guid: c0d228a5c24901f42913d7c9ae7e9282, type: 3}
   deathAudioClip: {fileID: 8300000, guid: 601ef7af3de0fa64a8c3db2f2976a1b9, type: 3}
   redSpriteMaterial: {fileID: 2100000, guid: ff524504849fbf7409f466f2bc8a5876, type: 2}
   minMaskAmount: 0.6
   maxMaskAmount: 1
-  physicalContactsManager: {fileID: 717104521}
   OnDeath:
     m_PersistentCalls:
       m_Calls: []

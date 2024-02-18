@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerFriction : MonoBehaviour
 {
-    [SerializeField] private PhysicalContactsManager playerGroundCheck;
+    [SerializeField] private PhysicalContactsManager physicalContactsManager;
     [Space(20)]
     [SerializeField] private PhysicMaterial playerPhysicMaterial;
     [SerializeField] private float staticFrictionWhenGrounded = 5f;
@@ -15,12 +15,12 @@ public class PlayerFriction : MonoBehaviour
 
     private void Awake()
     {
-        playerGroundCheck.IsGroundedEvent.AddListener(OnPlayerGrounded);
+        physicalContactsManager.IsGroundedEvent.AddListener(OnPlayerGrounded);
     }
 
     private void OnDisable()
     {
-        playerGroundCheck.IsGroundedEvent.RemoveListener(OnPlayerGrounded);
+        physicalContactsManager.IsGroundedEvent.RemoveListener(OnPlayerGrounded);
     }
 
     private void OnPlayerGrounded(bool isGrounded)
