@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PhysicsWalk : MonoBehaviour
 {
-    [SerializeField] private GroundCheck playerGroundCheck;
+    [SerializeField] private PhysicalContactsManager physicalContactsManager;
     [SerializeField] private PlayerLife playerLife;
     [SerializeField] private InputActionReference moveInputAction;
     [SerializeField] private Transform head;
@@ -33,7 +33,7 @@ public class PhysicsWalk : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (moveInput == Vector2.zero || !playerGroundCheck.IsGrounded || !playerLife.IsAlive)
+        if (moveInput == Vector2.zero || !physicalContactsManager.IsGrounded || !playerLife.IsAlive)
         {
             return;
         }

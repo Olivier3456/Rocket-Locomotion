@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -30,9 +31,23 @@ public class CollisionDetector : MonoBehaviour
         }        
     }
 
+
+
     //// Not working
+    //private void OnCollisionEnter()
+    //{
+    //    Debug.Log("COLLISION ENTER!");
+    //}
     //private void OnCollisionStay(Collision collision)
     //{
-    //    Debug.Log("collision");
+    //    Debug.Log("COLLISION STAY!");
+    //}
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    Debug.Log("TRIGGER ENTER!");        
+    //}
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    Debug.Log("TRIGGER STAY!");
     //}
 }

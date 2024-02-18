@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerFriction : MonoBehaviour
 {
-    [SerializeField] private GroundCheck playerGroundCheck;
+    [SerializeField] private PhysicalContactsManager playerGroundCheck;
     [Space(20)]
     [SerializeField] private PhysicMaterial playerPhysicMaterial;
     [SerializeField] private float staticFrictionWhenGrounded = 5f;

@@ -1552,7 +1552,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 717104517}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e66a36981e8690499c3855c30b6a8ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 636565b4c5a246b4d8ed42e272bb55e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   colliderTransform: {fileID: 1692029815}
@@ -1560,10 +1560,14 @@ MonoBehaviour:
   playerCollider: {fileID: 1692029817}
   cam: {fileID: 175587119}
   xrOrigin: {fileID: 1852495662}
+  rb: {fileID: 717104518}
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
   IsGroundedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPhysicalShock:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &717104522
@@ -10325,7 +10329,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1692029815}
   - component: {fileID: 1692029817}
-  - component: {fileID: 1692029816}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Untagged
@@ -10349,25 +10352,6 @@ Transform:
   - {fileID: 806744728}
   m_Father: {fileID: 717104519}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1692029816
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1692029814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: accd2c1789a40e94f83d1bf15914044a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnCollision:
-    m_PersistentCalls:
-      m_Calls: []
-  playerFeet: {fileID: 806744728}
-  groundLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!136 &1692029817
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -15514,7 +15498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b875a97e15b3c7541b846b48cc2e63ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerGroundCheck: {fileID: 717104521}
+  physicalContactsManager: {fileID: 717104521}
   playerLife: {fileID: 1852495665}
   moveInputAction: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
@@ -15535,15 +15519,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startLife: 100
   lifePointsRecoveredPerSec: 5
-  relativeVelocityThresholdToLoseLife: 7
-  lifePointsLostPerVelocityUnit: 5
+  dangerousVelocityDifference: 75
+  lifePointsLostPerVelocityDifferenceUnit: 0.2
   playerAudioSource: {fileID: 717104524}
   injuryAudioClip: {fileID: 8300000, guid: c0d228a5c24901f42913d7c9ae7e9282, type: 3}
   deathAudioClip: {fileID: 8300000, guid: 601ef7af3de0fa64a8c3db2f2976a1b9, type: 3}
   redSpriteMaterial: {fileID: 2100000, guid: ff524504849fbf7409f466f2bc8a5876, type: 2}
   minMaskAmount: 0.6
   maxMaskAmount: 1
-  collisionDetector: {fileID: 1692029816}
+  physicalContactsManager: {fileID: 717104521}
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
