@@ -16,17 +16,17 @@ public class PlayerColliderPlacement : MonoBehaviour
     //}
 
 
-    void Update()
-    {
-        float camYoffset = cam.position.y - xrOrigin.position.y;
-        capsuleCollider.height = (camYoffset * 2f) - (capsuleCollider.radius * 2);
-        //halfColliderHeight = (capsuleCollider.height * 0.5f) + capsuleCollider.radius;
+    //void Update()
+    //{
+    //    float camYoffset = cam.position.y - xrOrigin.position.y;
+    //    capsuleCollider.height = (camYoffset * 2f) - (capsuleCollider.radius * 2);
+    //    //halfColliderHeight = (capsuleCollider.height * 0.5f) + capsuleCollider.radius;
 
-        float yOffset = camYoffset - ((capsuleCollider.height * 0.5f) - capsuleCollider.radius);
-        Vector3 position = new Vector3(cam.position.x, xrOrigin.position.y + yOffset, cam.position.z);
+    //    float yOffset = camYoffset - ((capsuleCollider.height * 0.5f) - capsuleCollider.radius);
+    //    Vector3 position = new Vector3(cam.position.x, xrOrigin.position.y + yOffset, cam.position.z);
 
-        transform.position = position;
-    }
+    //    transform.position = position;
+    //}
 
 
 
