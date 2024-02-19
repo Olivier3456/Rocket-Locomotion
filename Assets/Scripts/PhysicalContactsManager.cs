@@ -54,14 +54,11 @@ public class PhysicalContactsManager : MonoBehaviour
 
     private void UpdateCollider()
     {
-        //float camYoffset = cam.transform.position.y - xrOrigin.position.y;
         Vector3 camOffset = cam.transform.position - xrOrigin.position;
 
-        //playerCollider.height = (camYoffset * 2f) - (playerCollider.radius * 2);
-        playerCollider.height = (camOffset.y * 2f) - (playerCollider.radius * 2);
+        //playerCollider.height = (camOffset.y * 2f) - (playerCollider.radius * 2);
 
-        //float yOffset = camYoffset - ((playerCollider.height * 0.5f) - playerCollider.radius);
-        float yOffset = ((playerCollider.height * 0.5f) - playerCollider.radius);
+        float yOffset = (playerCollider.height * 0.5f) - playerCollider.radius;
 
         Vector3 position = new Vector3(camOffset.x, yOffset, camOffset.z);
 

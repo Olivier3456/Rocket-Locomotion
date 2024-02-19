@@ -96,11 +96,6 @@ public class PlayerLife : MonoBehaviour
     }
 
 
-
-
-
-    // The legacy method to detect injuries, before the collider placement, which disable collisions detection on the collider. Was a listener of the event OnCollision of CollisionDectector.
-
     private void OnCollision(GameObject other, Vector3 relativeVelocity, Vector3 collisionNormal)
     {
         if (currentLife < 0)
