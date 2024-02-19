@@ -15,12 +15,12 @@ public class PlayerFriction : MonoBehaviour
 
     private void Awake()
     {
-        physicalContactsManager.IsGroundedEvent.AddListener(OnPlayerGrounded);
+        physicalContactsManager.OnGrounded.AddListener(OnPlayerGrounded);
     }
 
     private void OnDisable()
     {
-        physicalContactsManager.IsGroundedEvent.RemoveListener(OnPlayerGrounded);
+        physicalContactsManager.OnGrounded.RemoveListener(OnPlayerGrounded);
     }
 
     private void OnPlayerGrounded(bool isGrounded)

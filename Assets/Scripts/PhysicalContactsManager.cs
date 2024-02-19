@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class PhysicalContactsManager : MonoBehaviour
 {
-    [SerializeField] private Transform colliderTransform;
     [SerializeField] private CapsuleCollider playerCollider;
     [SerializeField] private Transform playerFeetTransform;
     [SerializeField] private Camera cam;
@@ -13,10 +12,11 @@ public class PhysicalContactsManager : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private LayerMask groundLayerMask;
     [Space(20)]
-    public UnityEvent<bool> IsGroundedEvent = new UnityEvent<bool>();
-    public UnityEvent<float> OnPhysicalShock = new UnityEvent<float>();
+    public UnityEvent<bool> OnGrounded = new UnityEvent<bool>();
+    //public UnityEvent<float> OnPhysicalShock = new UnityEvent<float>();
+    public UnityEvent<GameObject, Vector3, Vector3> OnCollision = new UnityEvent<GameObject, Vector3, Vector3>();
 
-    
+
     private bool isGrounded;
     public bool IsGrounded { get { return isGrounded; } }
 
@@ -30,37 +30,42 @@ public class PhysicalContactsManager : MonoBehaviour
         UpdateCollider();
         UpdatePlayerFeetPosition();        
         GroundCheck();
-        VelocityCheck();
+        //VelocityCheck();
     }
 
 
-    private void VelocityCheck()
-    {
-        Vector3 velocity = rb.velocity;
-        float velocitySqrtMagnitude = velocity.sqrMagnitude;
+    //private void VelocityCheck()
+    //{
+    //    Vector3 velocity = rb.velocity;
+    //    float velocitySqrtMagnitude = velocity.sqrMagnitude;
 
-        float velocityDifference = Mathf.Abs(velocitySqrtMagnitude - lastVelocitySqrtMagnitude);        
+    //    float velocityDifference = Mathf.Abs(velocitySqrtMagnitude - lastVelocitySqrtMagnitude);        
 
-        if (velocityDifference > dangerousVelocityDifference)
-        {
-            Debug.Log($"Violent shock detected: velocity difference = {velocityDifference}");
-            OnPhysicalShock.Invoke(velocityDifference);
-        }
+    //    if (velocityDifference > dangerousVelocityDifference)
+    //    {
+    //        Debug.Log($"Violent shock detected: velocity difference = {velocityDifference}");
+    //        OnPhysicalShock.Invoke(velocityDifference);
+    //    }
 
-        lastVelocitySqrtMagnitude = velocitySqrtMagnitude;
-    }
+    //    lastVelocitySqrtMagnitude = velocitySqrtMagnitude;
+    //}
 
     
 
     private void UpdateCollider()
     {
-        float camYoffset = cam.transform.position.y - xrOrigin.position.y;
-        playerCollider.height = (camYoffset * 2f) - (playerCollider.radius * 2);
+        //float camYoffset = cam.transform.position.y - xrOrigin.position.y;
+        Vector3 camOffset = cam.transform.position - xrOrigin.position;
 
-        float yOffset = camYoffset - ((playerCollider.height * 0.5f) - playerCollider.radius);
-        Vector3 position = new Vector3(cam.transform.position.x, xrOrigin.position.y + yOffset, cam.transform.position.z);
+        //playerCollider.height = (camYoffset * 2f) - (playerCollider.radius * 2);
+        playerCollider.height = (camOffset.y * 2f) - (playerCollider.radius * 2);
 
-        colliderTransform.position = position;
+        //float yOffset = camYoffset - ((playerCollider.height * 0.5f) - playerCollider.radius);
+        float yOffset = ((playerCollider.height * 0.5f) - playerCollider.radius);
+
+        Vector3 position = new Vector3(camOffset.x, yOffset, camOffset.z);
+
+        playerCollider.center = position;
     }
 
 
@@ -68,9 +73,9 @@ public class PhysicalContactsManager : MonoBehaviour
     {
         float playerFeetYOffset = (playerCollider.height * 0.5f);
 
-        Vector3 playerFeetPosition = new Vector3(colliderTransform.position.x, colliderTransform.position.y - playerFeetYOffset, colliderTransform.position.z);
+        Vector3 playerFeetPosition = new Vector3(playerCollider.center.x, playerCollider.center.y - playerFeetYOffset, playerCollider.center.z);
 
-        playerFeetTransform.position = playerFeetPosition;
+        playerFeetTransform.localPosition = playerFeetPosition;
     }
 
 
@@ -81,7 +86,7 @@ public class PhysicalContactsManager : MonoBehaviour
             if (!isGrounded)
             {
                 isGrounded = true;
-                IsGroundedEvent.Invoke(isGrounded);
+                OnGrounded.Invoke(isGrounded);
                 Debug.Log("Player is grounded");
             }
         }
@@ -90,14 +95,27 @@ public class PhysicalContactsManager : MonoBehaviour
             if (isGrounded)
             {
                 isGrounded = false;
-                IsGroundedEvent.Invoke(isGrounded);
+                OnGrounded.Invoke(isGrounded);
                 Debug.Log("Player is not grounded anymore.");
             }
         }
     }
 
-    public void SetDangerousVelocityDifference(float threshold)
+
+    private void OnCollisionEnter(Collision collision)
     {
-        dangerousVelocityDifference = threshold;
+        Vector3 relativeVelocity = collision.relativeVelocity;
+        Vector3 collisionNormal = collision.contacts[0].normal;
+        Debug.Log($"Number of contact points of the collision: {collision.contacts.Length}. Collision's normal vector (for the first contact point): {collisionNormal}");
+
+        //Vector3 contactNormal = collision.contacts[0].normal;
+        OnCollision.Invoke(collision.gameObject, relativeVelocity, collisionNormal);
     }
+
+
+
+    //public void SetDangerousVelocityDifference(float threshold)
+    //{
+    //    dangerousVelocityDifference = threshold;
+    //}
 }

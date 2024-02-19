@@ -9,8 +9,10 @@ public class PlayerLife : MonoBehaviour
     [Space(20)]
     [SerializeField] private float startLife = 100f;
     [SerializeField] private float lifePointsRecoveredPerSec = 5f;
-    [SerializeField] private float dangerousVelocityDifference = 100f;
-    [SerializeField] private float lifePointsLostPerVelocityDifferenceUnit = 0.2f;
+    //[SerializeField] private float dangerousVelocityDifference = 100f;
+    //[SerializeField] private float lifePointsLostPerVelocityDifferenceUnit = 0.2f;
+    [SerializeField] private float relativeVelocityThresholdToLoseLife = 5f;
+    [SerializeField] private float lifePointsLostPerCollisionForceUnit = 1f;
     [Space(20)]
     [SerializeField] private AudioSource playerAudioSource;
     [SerializeField] private AudioClip injuryAudioClip;
@@ -32,44 +34,45 @@ public class PlayerLife : MonoBehaviour
 
     private void Awake()
     {
-        physicalContactsManager.OnPhysicalShock.AddListener(OnCollision);
+        //physicalContactsManager.OnPhysicalShock.AddListener(OnCollision);
+        physicalContactsManager.OnCollision.AddListener(OnCollision);
         currentLife = startLife;
     }
 
     private void OnDisable()
     {
-        physicalContactsManager.OnPhysicalShock.RemoveListener(OnCollision);
+        //physicalContactsManager.OnPhysicalShock.RemoveListener(OnCollision);
         redSpriteMaterial.SetFloat("_MaskAmount", maxMaskAmount);
     }
 
     private void Start()
     {
-        physicalContactsManager.SetDangerousVelocityDifference(dangerousVelocityDifference);
+        //physicalContactsManager.SetDangerousVelocityDifference(dangerousVelocityDifference);
         UpdateRedCanvasGroupAlpha();
     }
 
 
-    private void OnCollision(float velocityDifference)
-    {
-        float lifeLost = velocityDifference * lifePointsLostPerVelocityDifferenceUnit;
-        currentLife -= lifeLost;
-        OnLifeLost.Invoke(lifeLost, currentLife);
+    //private void OnCollision(float velocityDifference)
+    //{
+    //    float lifeLost = velocityDifference * lifePointsLostPerVelocityDifferenceUnit;
+    //    currentLife -= lifeLost;
+    //    OnLifeLost.Invoke(lifeLost, currentLife);
 
-        UpdateRedCanvasGroupAlpha();
+    //    UpdateRedCanvasGroupAlpha();
 
-        if (currentLife <= 0)
-        {
-            isAlive = false;
-            OnDeath.Invoke();
-            playerAudioSource.PlayOneShot(deathAudioClip);
-            Debug.Log($"Player is dead. Life lost: {lifeLost}. Current life: {currentLife}");
-        }
-        else
-        {
-            playerAudioSource.PlayOneShot(injuryAudioClip);
-            Debug.Log($"Player is injured. Life lost: {lifeLost}. Current life: {currentLife}");
-        }
-    }
+    //    if (currentLife <= 0)
+    //    {
+    //        isAlive = false;
+    //        OnDeath.Invoke();
+    //        playerAudioSource.PlayOneShot(deathAudioClip);
+    //        Debug.Log($"Player is dead. Life lost: {lifeLost}. Current life: {currentLife}");
+    //    }
+    //    else
+    //    {
+    //        playerAudioSource.PlayOneShot(injuryAudioClip);
+    //        Debug.Log($"Player is injured. Life lost: {lifeLost}. Current life: {currentLife}");
+    //    }
+    //}
 
 
     private void Update()
@@ -98,35 +101,40 @@ public class PlayerLife : MonoBehaviour
 
     // The legacy method to detect injuries, before the collider placement, which disable collisions detection on the collider. Was a listener of the event OnCollision of CollisionDectector.
 
-    //private void OnCollision(GameObject other, Vector3 relativeVelocity, Vector3 collisionNormal)
-    //{
-    //    float relativeVelocityMagnitude = relativeVelocity.magnitude;
-    //    Vector3 relativeVelocityDirection = relativeVelocity.normalized;
-    //    float dot = Vector3.Dot(collisionNormal, relativeVelocityDirection);
-    //    float collisionForce = relativeVelocityMagnitude * dot;
+    private void OnCollision(GameObject other, Vector3 relativeVelocity, Vector3 collisionNormal)
+    {
+        if (currentLife < 0)
+        {
+            return;
+        }
 
-    //    Debug.Log($"Relative velocity magnitude: {relativeVelocityMagnitude}. Dot product of relative velocity direction and collisionNormal: {dot}. Collision force: {collisionForce}");
+        float relativeVelocityMagnitude = relativeVelocity.magnitude;
+        Vector3 relativeVelocityDirection = relativeVelocity.normalized;
+        float dot = Vector3.Dot(collisionNormal, relativeVelocityDirection);
+        float collisionForce = relativeVelocityMagnitude * dot;
 
-    //    if (collisionForce > relativeVelocityThresholdToLoseLife)
-    //    {
-    //        float lifeLost = relativeVelocityMagnitude * lifePointsLostPerVelocityDifferenceUnit;
-    //        currentLife -= lifeLost;
-    //        OnLifeLost.Invoke(lifeLost, currentLife);
+        Debug.Log($"Relative velocity magnitude: {relativeVelocityMagnitude}. Dot product of relative velocity direction and collisionNormal: {dot}. Collision force: {collisionForce}");
 
-    //        UpdateRedCanvasGroupAlpha();
+        if (collisionForce > relativeVelocityThresholdToLoseLife)
+        {
+            float lifeLost = collisionForce * lifePointsLostPerCollisionForceUnit;
+            currentLife -= lifeLost;
+            OnLifeLost.Invoke(lifeLost, currentLife);
 
-    //        if (currentLife <= 0)
-    //        {
-    //            isAlive = false;
-    //            OnDeath.Invoke();
-    //            playerAudioSource.PlayOneShot(deathAudioClip);
-    //            Debug.Log($"Player is dead. Life lost: {lifeLost}. Current life: {currentLife}");
-    //        }
-    //        else
-    //        {
-    //            playerAudioSource.PlayOneShot(injuryAudioClip);
-    //            Debug.Log($"Player is injured. Life lost: {lifeLost}. Current life: {currentLife}");
-    //        }
-    //    }
-    //}
+            UpdateRedCanvasGroupAlpha();
+
+            if (currentLife <= 0)
+            {
+                isAlive = false;
+                OnDeath.Invoke();
+                playerAudioSource.PlayOneShot(deathAudioClip);
+                Debug.Log($"Player is dead. Life lost: {lifeLost}. Current life: {currentLife}");
+            }
+            else
+            {
+                playerAudioSource.PlayOneShot(injuryAudioClip);
+                Debug.Log($"Player is injured. Life lost: {lifeLost}. Current life: {currentLife}");
+            }
+        }
+    }
 }
