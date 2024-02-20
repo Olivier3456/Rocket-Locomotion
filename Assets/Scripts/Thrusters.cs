@@ -19,7 +19,7 @@ public class Thrusters : MonoBehaviour
     [SerializeField] private InputActionReference rightForwardThruster;
     [SerializeField] private InputActionReference rightBackwardThruster;
     [Space(20)]
-    [SerializeField] private float thrusterForceFactor = 750f;
+    [SerializeField] private float thrusterForceFactor = 700f;
     [Space(20)]
     [SerializeField] private Rigidbody rb;
     [Space(20)]
