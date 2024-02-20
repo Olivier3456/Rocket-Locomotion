@@ -225,7 +225,7 @@ public class Thrusters : MonoBehaviour
 
         Vector3 totalPushVector = leftPushVector + rightPushVector;
 
-        float clamp = 1.5f;
+        float clamp = 1.75f;
         Vector3 clampedPushVector = Vector3.ClampMagnitude(totalPushVector, thrusterForceFactor * clamp);
 
         rb.AddForce(clampedPushVector);
