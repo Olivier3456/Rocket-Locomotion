@@ -9,7 +9,6 @@ public class SpeedParticles : MonoBehaviour
     [SerializeField] private ParticleSystem particle;
     [SerializeField] private float sqrSpeedThreshold = 100f;
     [SerializeField] private float minParticleStartSpeed = 10f;
-    [SerializeField] private float minParticleEmissionRateOverTime = 10f;
 
     private ParticleSystem.MainModule mainModule;
     private ParticleSystem.EmissionModule emissionModule;
@@ -28,6 +27,7 @@ public class SpeedParticles : MonoBehaviour
     {
         mainModule.startSpeed = 0f;
         mainModule.startSize = 0f;
+        emissionModule.rateOverTime = 0f;
 
         startSizeFactor = 0.01f / sqrSpeedThreshold;
     }
@@ -68,7 +68,7 @@ public class SpeedParticles : MonoBehaviour
         float startSpeedFactor = 0.05f;
         mainModule.startSpeed = minParticleStartSpeed + velocitySqrMagnitude * startSpeedFactor;
         
-        mainModule.startSize = (velocitySqrMagnitude * startSizeFactor) - (sqrSpeedThreshold * startSizeFactor);
+        mainModule.startSize = Mathf.Clamp((velocitySqrMagnitude * startSizeFactor) - (sqrSpeedThreshold * startSizeFactor), 0, 0.1f);
 
         float rateOverTimeFactor = 0.025f;
         emissionModule.rateOverTime = velocitySqrMagnitude * rateOverTimeFactor;

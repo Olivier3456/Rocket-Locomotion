@@ -4878,8 +4878,7 @@ MonoBehaviour:
   playerRb: {fileID: 6813037175123203175}
   particle: {fileID: 8887137467184407977}
   sqrSpeedThreshold: 500
-  minParticleStartSpeed: 10
-  minParticleEmissionRateOverTime: 10
+  minParticleStartSpeed: 0
 --- !u!1 &977042440096053057
 GameObject:
   m_ObjectHideFlags: 0
