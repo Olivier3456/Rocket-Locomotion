@@ -23,13 +23,16 @@ public class Thrusters : MonoBehaviour
     [Space(20)]
     [SerializeField] private Rigidbody rb;
     [Space(20)]
-    [SerializeField] private AudioSource leftThrusterAudioSource;
-    [SerializeField] private AudioSource rightThrusterAudioSource;
+    [SerializeField] private AudioSource leftThrusterBoostAudioSource;
+    [SerializeField] private AudioSource leftThrusterRotateAudioSource;
+    [SerializeField] private AudioSource rightThrusterBoostAudioSource;
+    [SerializeField] private AudioSource rightThrusterRotateAudioSource;
     [Space(20)]
     [SerializeField] private ParticleSystem leftThrusterParticle;
     [SerializeField] private ParticleSystem rightThrusterParticle;
     [Space(20)]
     [SerializeField] private AnimationCurve thrusterRotationAnimCurve;
+    [SerializeField] private AnimationCurve thrusterAudioAnimCurve;
     [Space(40)]
     public bool debug;
     public Canvas canvas;
@@ -189,15 +192,18 @@ public class Thrusters : MonoBehaviour
 
     private void Update()
     {
-        leftThrusterAudioSource.volume = canLeftThrust && playerLife.IsAlive ? Mathf.Abs(leftInput) : 0;
-        rightThrusterAudioSource.volume = canRightThrust && playerLife.IsAlive ? Mathf.Abs(rightInput) : 0;
+        float absLeftInput = Mathf.Abs(leftInput);
+        float absRightInput = Mathf.Abs(rightInput);
+
+        leftThrusterBoostAudioSource.volume = canLeftThrust && playerLife.IsAlive ? absLeftInput : 0;
+        rightThrusterBoostAudioSource.volume = canRightThrust && playerLife.IsAlive ? absRightInput : 0;
 
         float particleValueMultiplier = 20f;
-        leftThrusterMain.startSpeed = canLeftThrust && playerLife.IsAlive ? Mathf.Abs(leftInput) * particleValueMultiplier : 0;
-        leftThrusterEm.rateOverTime = canLeftThrust && playerLife.IsAlive ? Mathf.Abs(leftInput) * particleValueMultiplier : 0;
+        leftThrusterMain.startSpeed = canLeftThrust && playerLife.IsAlive ? absLeftInput * particleValueMultiplier : 0;
+        leftThrusterEm.rateOverTime = canLeftThrust && playerLife.IsAlive ? absLeftInput * particleValueMultiplier : 0;
 
-        rightThrusterMain.startSpeed = canRightThrust && playerLife.IsAlive ? Mathf.Abs(rightInput) * particleValueMultiplier : 0;
-        rightThrusterEm.rateOverTime = canRightThrust && playerLife.IsAlive ? Mathf.Abs(rightInput) * particleValueMultiplier : 0;
+        rightThrusterMain.startSpeed = canRightThrust && playerLife.IsAlive ? absRightInput * particleValueMultiplier : 0;
+        rightThrusterEm.rateOverTime = canRightThrust && playerLife.IsAlive ? absRightInput * particleValueMultiplier : 0;
     }
 
 
@@ -236,12 +242,14 @@ public class Thrusters : MonoBehaviour
             canLeftThrust = false;
             hand = leftControllerTransform;
             rotatesToForward = isLeftForward ? true : false;
+            leftThrusterRotateAudioSource.Play();
         }
         else
         {
             canRightThrust = false;
             hand = rightControllerTransform;
             rotatesToForward = isRightForward ? true : false;
+            rightThrusterRotateAudioSource.Play();
         }
 
         float rotationTime = 0.5f;
@@ -253,6 +261,15 @@ public class Thrusters : MonoBehaviour
             progress += Time.deltaTime / rotationTime;
             float value = thrusterRotationAnimCurve.Evaluate(progress);
             transformToRotate.forward = rotatesToForward ? Vector3.Slerp(-hand.forward, hand.forward, value) : Vector3.Slerp(hand.forward, -hand.forward, value);
+
+            if (transformToRotate == leftThrusterVisual)
+            {
+                leftThrusterRotateAudioSource.pitch = 1 + thrusterAudioAnimCurve.Evaluate(progress);
+            }
+            else
+            {
+                rightThrusterRotateAudioSource.pitch = 1 + thrusterAudioAnimCurve.Evaluate(progress);
+            }
         }
 
         transformToRotate.forward = rotatesToForward ? hand.forward : -hand.forward;
@@ -260,10 +277,12 @@ public class Thrusters : MonoBehaviour
         if (transformToRotate == leftThrusterVisual)
         {
             canLeftThrust = true;
+            leftThrusterRotateAudioSource.Stop();
         }
         else
         {
             canRightThrust = true;
+            rightThrusterRotateAudioSource.Stop();
         }
     }
 }

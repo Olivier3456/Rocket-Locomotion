@@ -109277,16 +109277,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Rig Physic Locomotion
       objectReference: {fileID: 0}
-    - target: {fileID: 6525314297085141997, guid: 11371c26a15ce514fa42b88eb32065a5,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6813037175123203175, guid: 11371c26a15ce514fa42b88eb32065a5,
-        type: 3}
-      propertyPath: m_Drag
-      value: 0.125
-      objectReference: {fileID: 0}
     - target: {fileID: 9214336484023828279, guid: 11371c26a15ce514fa42b88eb32065a5,
         type: 3}
       propertyPath: m_LocalPosition.x
