@@ -109154,30 +109154,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2214548660853881877, guid: 11371c26a15ce514fa42b88eb32065a5,
-        type: 3}
-      propertyPath: sqrSpeedThreshold
-      value: 500
-      objectReference: {fileID: 0}
     - target: {fileID: 4678887908120963039, guid: 11371c26a15ce514fa42b88eb32065a5,
         type: 3}
       propertyPath: m_Name
       value: XR Rig Physic Locomotion
-      objectReference: {fileID: 0}
-    - target: {fileID: 8887137467184407977, guid: 11371c26a15ce514fa42b88eb32065a5,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8887137467184407977, guid: 11371c26a15ce514fa42b88eb32065a5,
-        type: 3}
-      propertyPath: ColorBySpeedModule.enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8887137467184407977, guid: 11371c26a15ce514fa42b88eb32065a5,
-        type: 3}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9214336484023828279, guid: 11371c26a15ce514fa42b88eb32065a5,
         type: 3}
