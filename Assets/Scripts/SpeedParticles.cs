@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class SpeedParticles : MonoBehaviour
 {
     [SerializeField] private Rigidbody playerRb;
     [SerializeField] private ParticleSystem particle;
-    [SerializeField] private float sqrSpeedThreshold = 50f;
+    [SerializeField] private float sqrSpeedThreshold = 100f;
     [SerializeField] private float minParticleStartSpeed = 10f;
     [SerializeField] private float minParticleEmissionRateOverTime = 10f;
 
@@ -14,6 +15,8 @@ public class SpeedParticles : MonoBehaviour
     private ParticleSystem.EmissionModule emissionModule;
 
     private float particleSystemDistanceToCamera = 10f;
+
+    private float startSizeFactor;
 
     private void Awake()
     {
@@ -24,6 +27,9 @@ public class SpeedParticles : MonoBehaviour
     void Start()
     {
         mainModule.startSpeed = 0f;
+        mainModule.startSize = 0f;
+
+        startSizeFactor = 0.01f / sqrSpeedThreshold;
     }
 
 
@@ -35,13 +41,14 @@ public class SpeedParticles : MonoBehaviour
 
         if (velocitySqrMagnitude < sqrSpeedThreshold)
         {
-            mainModule.startSpeed = 0f;
-            emissionModule.rateOverTime = 0f;
-
             if (particle.isPlaying)
             {
                 particle.Clear();
                 particle.Stop();
+
+                mainModule.startSpeed = 0f;
+                mainModule.startSize = 0f;
+                emissionModule.rateOverTime = 0f;
             }
 
             return;
@@ -58,7 +65,12 @@ public class SpeedParticles : MonoBehaviour
         transform.forward = particleDirection;
         transform.position = transform.parent.position - particleDirection * particleSystemDistanceToCamera;
 
-        mainModule.startSpeed = minParticleStartSpeed + velocitySqrMagnitude * 0.05f;
-        emissionModule.rateOverTime = velocitySqrMagnitude * 0.025f;
+        float startSpeedFactor = 0.05f;
+        mainModule.startSpeed = minParticleStartSpeed + velocitySqrMagnitude * startSpeedFactor;
+        
+        mainModule.startSize = (velocitySqrMagnitude * startSizeFactor) - (sqrSpeedThreshold * startSizeFactor);
+
+        float rateOverTimeFactor = 0.025f;
+        emissionModule.rateOverTime = velocitySqrMagnitude * rateOverTimeFactor;
     }
 }
