@@ -9,8 +9,6 @@ public class PlayerLife : MonoBehaviour
     [Space(20)]
     [SerializeField] private float startLife = 100f;
     [SerializeField] private float lifePointsRecoveredPerSec = 5f;
-    //[SerializeField] private float dangerousVelocityDifference = 100f;
-    //[SerializeField] private float lifePointsLostPerVelocityDifferenceUnit = 0.2f;
     [SerializeField] private float relativeVelocityThresholdToLoseLife = 5f;
     [SerializeField] private float lifePointsLostPerCollisionForceUnit = 1f;
     [Space(20)]
@@ -34,45 +32,19 @@ public class PlayerLife : MonoBehaviour
 
     private void Awake()
     {
-        //physicalContactsManager.OnPhysicalShock.AddListener(OnCollision);
         physicalContactsManager.OnCollision.AddListener(OnCollision);
         currentLife = startLife;
     }
 
     private void OnDisable()
     {
-        //physicalContactsManager.OnPhysicalShock.RemoveListener(OnCollision);
         redSpriteMaterial.SetFloat("_MaskAmount", maxMaskAmount);
     }
 
     private void Start()
     {
-        //physicalContactsManager.SetDangerousVelocityDifference(dangerousVelocityDifference);
         UpdateRedCanvasGroupAlpha();
     }
-
-
-    //private void OnCollision(float velocityDifference)
-    //{
-    //    float lifeLost = velocityDifference * lifePointsLostPerVelocityDifferenceUnit;
-    //    currentLife -= lifeLost;
-    //    OnLifeLost.Invoke(lifeLost, currentLife);
-
-    //    UpdateRedCanvasGroupAlpha();
-
-    //    if (currentLife <= 0)
-    //    {
-    //        isAlive = false;
-    //        OnDeath.Invoke();
-    //        playerAudioSource.PlayOneShot(deathAudioClip);
-    //        Debug.Log($"Player is dead. Life lost: {lifeLost}. Current life: {currentLife}");
-    //    }
-    //    else
-    //    {
-    //        playerAudioSource.PlayOneShot(injuryAudioClip);
-    //        Debug.Log($"Player is injured. Life lost: {lifeLost}. Current life: {currentLife}");
-    //    }
-    //}
 
 
     private void Update()

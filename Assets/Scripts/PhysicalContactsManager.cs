@@ -9,7 +9,7 @@ public class PhysicalContactsManager : MonoBehaviour
     [SerializeField] private Transform playerFeetTransform;
     [SerializeField] private Camera cam;
     [SerializeField] private Transform xrOrigin;
-    [SerializeField] private Rigidbody rb;
+    //[SerializeField] private Rigidbody rb;
     [SerializeField] private LayerMask groundLayerMask;
     [Space(20)]
     public UnityEvent<bool> OnGrounded = new UnityEvent<bool>();
@@ -20,9 +20,9 @@ public class PhysicalContactsManager : MonoBehaviour
     private bool isGrounded;
     public bool IsGrounded { get { return isGrounded; } }
 
-    private float lastVelocitySqrtMagnitude = 0;
+    //private float lastVelocitySqrtMagnitude = 0;
 
-    private float dangerousVelocityDifference = 1000;
+    //private float dangerousVelocityDifference = 1000;
 
 
     private void FixedUpdate()
