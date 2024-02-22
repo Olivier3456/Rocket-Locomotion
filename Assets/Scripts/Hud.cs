@@ -14,6 +14,9 @@ public class Hud : MonoBehaviour
     [SerializeField] private Color minColor;
     [SerializeField] private Color maxColor;
 
+    private float speedRefreshDelay = 0.2f;
+    private float speedRefreshTimer = 0;
+
 
     private void Awake()
     {
@@ -38,14 +41,20 @@ public class Hud : MonoBehaviour
 
     void Update()
     {
-        float magnitude = rb.velocity.magnitude;
-        float speedKmH = magnitude * 3.6f;
+        speedRefreshTimer += Time.deltaTime;
+        if (speedRefreshTimer > speedRefreshDelay)
+        {
+            speedRefreshTimer = 0;
 
-        float maxSpeedForColor = 200f;
-        float lerp = speedKmH / maxSpeedForColor;
+            float magnitude = rb.velocity.magnitude;
+            float speedKmH = magnitude * 3.6f;
 
-        speedText.color = Color.Lerp(minColor, maxColor, lerp);
-        speedText.text = speedKmH.ToString("0");
+            float maxSpeedForColor = 200f;
+            float lerp = speedKmH / maxSpeedForColor;
+
+            speedText.color = Color.Lerp(minColor, maxColor, lerp);
+            speedText.text = speedKmH.ToString("0");
+        }
     }
 
 
@@ -57,14 +66,19 @@ public class Hud : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         float timer = 0;
-        while (timer < 2)
+        bool sceneLoading = false;
+        while (true)
         {
             yield return null;
-            deadTMP.fontSize += Time.deltaTime;
+            deadTMP.fontSize += Time.deltaTime * 0.1f;
             deadTMP.color = new Color(deadTMP.color.r, deadTMP.color.g, deadTMP.color.b, deadTMP.color.a + (Time.deltaTime * 0.5f));
             timer += Time.deltaTime;
-        }
 
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+            if (timer > 2 && !sceneLoading)
+            {
+                SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+                sceneLoading = true;
+            }
+        }
     }
 }

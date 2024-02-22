@@ -53,8 +53,11 @@ public class Thrusters : MonoBehaviour
 
     private ParticleSystem.MainModule leftThrusterMain;
     private ParticleSystem.MainModule rightThrusterMain;
-    private ParticleSystem.EmissionModule leftThrusterEm;
-    private ParticleSystem.EmissionModule rightThrusterEm;
+    //private ParticleSystem.EmissionModule leftThrusterEm;
+    //private ParticleSystem.EmissionModule rightThrusterEm;
+
+    private Color transparent = new Color(1, 1, 1, 0);
+    private Color maxOpacity = new Color(1, 1, 1, 0.5f);
 
 
     void Start()
@@ -82,8 +85,8 @@ public class Thrusters : MonoBehaviour
 
         leftThrusterMain = leftThrusterParticle.main;
         rightThrusterMain = rightThrusterParticle.main;
-        leftThrusterEm = leftThrusterParticle.emission;
-        rightThrusterEm = rightThrusterParticle.emission;
+        //leftThrusterEm = leftThrusterParticle.emission;
+        //rightThrusterEm = rightThrusterParticle.emission;
 
 
         if (debug) canvas.gameObject.SetActive(true);
@@ -91,6 +94,28 @@ public class Thrusters : MonoBehaviour
     }
 
 
+    private void OnDestroy()
+    {
+        leftForwardThruster.action.started -= LeftForwardThruster_Action_started;
+        leftForwardThruster.action.performed -= LeftForwardThruster_Action_performed;
+        leftForwardThruster.action.canceled -= LeftForwardThruster_Action_canceled;
+        leftForwardThruster.action.Disable();
+
+        rightForwardThruster.action.started -= RightForwardThruster_Action_started;
+        rightForwardThruster.action.performed -= RightForwardThruster_Action_performed;
+        rightForwardThruster.action.canceled -= RightForwardThruster_Action_canceled;
+        rightForwardThruster.action.Disable();
+
+        leftBackwardThruster.action.started -= LeftBackwardThruster_Action_started;
+        leftBackwardThruster.action.performed -= LeftBackwardThruster_Action_performed;
+        leftBackwardThruster.action.canceled -= LeftBackwardThruster_Action_canceled;
+        leftBackwardThruster.action.Disable();
+
+        rightBackwardThruster.action.started -= RightBackwardThruster_Action_started;
+        rightBackwardThruster.action.performed -= RightBackwardThruster_Action_performed;
+        rightBackwardThruster.action.canceled -= RightBackwardThruster_Action_canceled;
+        rightBackwardThruster.action.Disable();
+    }
 
 
     private void LeftForwardThruster_Action_started(InputAction.CallbackContext obj)
@@ -198,12 +223,14 @@ public class Thrusters : MonoBehaviour
         leftThrusterBoostAudioSource.volume = canLeftThrust && playerLife.IsAlive ? absLeftInput : 0;
         rightThrusterBoostAudioSource.volume = canRightThrust && playerLife.IsAlive ? absRightInput : 0;
 
-        float particleValueMultiplier = 20f;
-        leftThrusterMain.startSpeed = canLeftThrust && playerLife.IsAlive ? absLeftInput * particleValueMultiplier : 0;
-        leftThrusterEm.rateOverTime = canLeftThrust && playerLife.IsAlive ? absLeftInput * particleValueMultiplier : 0;
+        //float particleValueMultiplier = 20f;
+        Color flameColorLeft = Color.Lerp(transparent, maxOpacity, absLeftInput);
+        leftThrusterMain.startColor = canLeftThrust && playerLife.IsAlive ? flameColorLeft : transparent;
+        //leftThrusterEm.rateOverTime = canLeftThrust && playerLife.IsAlive ? absLeftInput * particleValueMultiplier : 0;
 
-        rightThrusterMain.startSpeed = canRightThrust && playerLife.IsAlive ? absRightInput * particleValueMultiplier : 0;
-        rightThrusterEm.rateOverTime = canRightThrust && playerLife.IsAlive ? absRightInput * particleValueMultiplier : 0;
+        Color flameColorRight = Color.Lerp(transparent, maxOpacity, absRightInput);
+        rightThrusterMain.startColor = canRightThrust && playerLife.IsAlive ? flameColorRight : transparent;
+        //rightThrusterEm.rateOverTime = canRightThrust && playerLife.IsAlive ? absRightInput * particleValueMultiplier : 0;
     }
 
 
