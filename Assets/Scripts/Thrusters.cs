@@ -16,8 +16,10 @@ public class Thrusters : MonoBehaviour
     [Space(20)]
     [SerializeField] private InputActionReference leftThruster;
     [SerializeField] private InputActionReference leftRotateThruster;
+    [SerializeField] private InputActionReference leftBoost;
     [SerializeField] private InputActionReference rightThruster;
     [SerializeField] private InputActionReference rightRotateThruster;
+    [SerializeField] private InputActionReference rightBoost;
     [Space(20)]
     [SerializeField] private float thrusterForceFactor = 700f;
     [Space(20)]
@@ -42,6 +44,9 @@ public class Thrusters : MonoBehaviour
 
     private float leftInput = 0;
     private float rightInput = 0;
+
+    private float leftBoostInput = 0;
+    private float rightBoostInput = 0;
 
 
     private bool isLeftForward = true;
@@ -74,7 +79,15 @@ public class Thrusters : MonoBehaviour
         rightRotateThruster.action.started += RightRotate_Action_started;
         rightRotateThruster.action.Enable();
 
-        
+        leftBoost.action.performed += LeftBoost_Action_performed;
+        leftBoost.action.canceled += LeftBoost_Action_canceled;
+        leftBoost.action.Enable();
+
+        rightBoost.action.performed += RightBoost_Action_performed;
+        rightBoost.action.canceled += RightBoost_Action_canceled;
+        rightBoost.action.Enable();
+
+
         leftThrusterMain = leftThrusterParticle.main;
         rightThrusterMain = rightThrusterParticle.main;
 
@@ -82,8 +95,6 @@ public class Thrusters : MonoBehaviour
         if (debug) canvas.gameObject.SetActive(true);
         else canvas.gameObject.SetActive(false);
     }
-
-
 
 
     private void OnDestroy()
@@ -100,10 +111,18 @@ public class Thrusters : MonoBehaviour
         leftRotateThruster.action.started -= LeftRotate_Action_started;
 
         rightRotateThruster.action.Disable();
-        rightRotateThruster.action.started -= RightRotate_Action_started;       
+        rightRotateThruster.action.started -= RightRotate_Action_started;
+
+        leftBoost.action.Disable();
+        leftBoost.action.performed -= LeftBoost_Action_performed;
+        leftBoost.action.canceled -= LeftBoost_Action_canceled;
+
+        rightBoost.action.Disable();
+        rightBoost.action.performed -= RightBoost_Action_performed;
+        rightBoost.action.canceled -= RightBoost_Action_canceled;
     }
 
-    
+
     private void LeftThruster_Action_performed(InputAction.CallbackContext obj)
     {
         leftInput = isLeftForward ? obj.ReadValue<float>() : -obj.ReadValue<float>();
@@ -136,6 +155,22 @@ public class Thrusters : MonoBehaviour
             StartCoroutine(RotateThruster(rightThrusterVisual));
         }
     }
+    private void LeftBoost_Action_performed(InputAction.CallbackContext obj)
+    {
+        leftBoostInput = obj.ReadValue<float>();
+    }
+    private void LeftBoost_Action_canceled(InputAction.CallbackContext obj)
+    {
+        leftBoostInput = 0f;
+    }
+    private void RightBoost_Action_performed(InputAction.CallbackContext obj)
+    {
+        rightBoostInput = obj.ReadValue<float>();
+    }
+    private void RightBoost_Action_canceled(InputAction.CallbackContext obj)
+    {
+        rightBoostInput = 0f;
+    }
 
 
     private void Update()
@@ -162,20 +197,23 @@ public class Thrusters : MonoBehaviour
             return;
         }
 
-        if (leftInput == 0 && rightInput == 0)
+        if (leftInput == 0 && rightInput == 0 && leftBoostInput == 0 && rightBoostInput == 0)
         {
             return;
         }
 
-        Vector3 leftPushVector = canLeftThrust ? leftControllerTransform.forward * leftInput * thrusterForceFactor : Vector3.zero;
-        Vector3 rightPushVector = canRightThrust ? rightControllerTransform.forward * rightInput * thrusterForceFactor : Vector3.zero;
+        Vector3 leftPushVector = canLeftThrust ? leftControllerTransform.forward * (leftInput + leftBoostInput) * thrusterForceFactor : Vector3.zero;
+        Vector3 rightPushVector = canRightThrust ? rightControllerTransform.forward * (rightInput + rightBoostInput) * thrusterForceFactor : Vector3.zero;
 
         Vector3 totalPushVector = leftPushVector + rightPushVector;
 
-        float clamp = 1.75f;
-        Vector3 clampedPushVector = Vector3.ClampMagnitude(totalPushVector, thrusterForceFactor * clamp);
+        if (leftBoostInput == 0 && rightBoostInput == 0)
+        {
+            float clamp = 1.75f;
+            totalPushVector = Vector3.ClampMagnitude(totalPushVector, thrusterForceFactor * clamp);
+        }
 
-        rb.AddForce(clampedPushVector);
+        rb.AddForce(totalPushVector);
     }
 
 
