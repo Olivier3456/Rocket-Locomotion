@@ -60,7 +60,8 @@ public class Thrusters : MonoBehaviour
     private ParticleSystem.MainModule rightThrusterMain;
 
     private Color transparent = new Color(1, 1, 1, 0);
-    private Color maxOpacity = new Color(1, 1, 1, 0.4f);
+    private Color maxOpacity_NoBoost = new Color(1, 1, 1, 0.25f);
+    private Color boostColor = new Color(0.9f, 0.1f, 0, 0.75f);    //Red
 
 
     void Start()
@@ -181,10 +182,12 @@ public class Thrusters : MonoBehaviour
         leftThrusterBoostAudioSource.volume = canLeftThrust && playerLife.IsAlive ? absLeftInput : 0;
         rightThrusterBoostAudioSource.volume = canRightThrust && playerLife.IsAlive ? absRightInput : 0;
 
-        Color flameColorLeft = Color.Lerp(transparent, maxOpacity, absLeftInput);
+        Color flameColorLeft = Color.Lerp(transparent, maxOpacity_NoBoost, absLeftInput);
+        flameColorLeft = Color.Lerp(flameColorLeft, boostColor, leftBoostInput);
         leftThrusterMain.startColor = canLeftThrust && playerLife.IsAlive ? flameColorLeft : transparent;
 
-        Color flameColorRight = Color.Lerp(transparent, maxOpacity, absRightInput);
+        Color flameColorRight = Color.Lerp(transparent, maxOpacity_NoBoost, absRightInput);
+        flameColorRight = Color.Lerp(flameColorRight, boostColor, rightBoostInput);
         rightThrusterMain.startColor = canRightThrust && playerLife.IsAlive ? flameColorRight : transparent;
     }
 
@@ -202,8 +205,8 @@ public class Thrusters : MonoBehaviour
             return;
         }
 
-        Vector3 leftPushVector = canLeftThrust ? leftControllerTransform.forward * (leftInput + leftBoostInput) * thrusterForceFactor : Vector3.zero;
-        Vector3 rightPushVector = canRightThrust ? rightControllerTransform.forward * (rightInput + rightBoostInput) * thrusterForceFactor : Vector3.zero;
+        Vector3 leftPushVector = canLeftThrust ? leftControllerTransform.forward * leftInput * (1 + leftBoostInput) * thrusterForceFactor : Vector3.zero;
+        Vector3 rightPushVector = canRightThrust ? rightControllerTransform.forward * rightInput * (1 + rightBoostInput) * thrusterForceFactor : Vector3.zero;
 
         Vector3 totalPushVector = leftPushVector + rightPushVector;
 
