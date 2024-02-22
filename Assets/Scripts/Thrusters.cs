@@ -14,10 +14,10 @@ public class Thrusters : MonoBehaviour
     [SerializeField] private Transform leftThrusterVisual;
     [SerializeField] private Transform rightThrusterVisual;
     [Space(20)]
-    [SerializeField] private InputActionReference leftForwardThruster;
-    [SerializeField] private InputActionReference leftBackwardThruster;
-    [SerializeField] private InputActionReference rightForwardThruster;
-    [SerializeField] private InputActionReference rightBackwardThruster;
+    [SerializeField] private InputActionReference leftThruster;
+    [SerializeField] private InputActionReference leftRotateThruster;
+    [SerializeField] private InputActionReference rightThruster;
+    [SerializeField] private InputActionReference rightRotateThruster;
     [Space(20)]
     [SerializeField] private float thrusterForceFactor = 700f;
     [Space(20)]
@@ -53,40 +53,30 @@ public class Thrusters : MonoBehaviour
 
     private ParticleSystem.MainModule leftThrusterMain;
     private ParticleSystem.MainModule rightThrusterMain;
-    //private ParticleSystem.EmissionModule leftThrusterEm;
-    //private ParticleSystem.EmissionModule rightThrusterEm;
 
     private Color transparent = new Color(1, 1, 1, 0);
-    private Color maxOpacity = new Color(1, 1, 1, 0.5f);
+    private Color maxOpacity = new Color(1, 1, 1, 0.4f);
 
 
     void Start()
     {
-        leftForwardThruster.action.started += LeftForwardThruster_Action_started;
-        leftForwardThruster.action.performed += LeftForwardThruster_Action_performed;
-        leftForwardThruster.action.canceled += LeftForwardThruster_Action_canceled;
-        leftForwardThruster.action.Enable();
+        leftThruster.action.performed += LeftThruster_Action_performed;
+        leftThruster.action.canceled += LeftThruster_Action_canceled;
+        leftThruster.action.Enable();
 
-        rightForwardThruster.action.started += RightForwardThruster_Action_started;
-        rightForwardThruster.action.performed += RightForwardThruster_Action_performed;
-        rightForwardThruster.action.canceled += RightForwardThruster_Action_canceled;
-        rightForwardThruster.action.Enable();
+        rightThruster.action.performed += RightThruster_Action_performed;
+        rightThruster.action.canceled += RightThruster_Action_canceled;
+        rightThruster.action.Enable();
 
-        leftBackwardThruster.action.started += LeftBackwardThruster_Action_started;
-        leftBackwardThruster.action.performed += LeftBackwardThruster_Action_performed;
-        leftBackwardThruster.action.canceled += LeftBackwardThruster_Action_canceled;
-        leftBackwardThruster.action.Enable();
+        leftRotateThruster.action.started += LeftRotate_Action_started;
+        leftRotateThruster.action.Enable();
 
-        rightBackwardThruster.action.started += RightBackwardThruster_Action_started;
-        rightBackwardThruster.action.performed += RightBackwardThruster_Action_performed;
-        rightBackwardThruster.action.canceled += RightBackwardThruster_Action_canceled;
-        rightBackwardThruster.action.Enable();
+        rightRotateThruster.action.started += RightRotate_Action_started;
+        rightRotateThruster.action.Enable();
 
-
+        
         leftThrusterMain = leftThrusterParticle.main;
         rightThrusterMain = rightThrusterParticle.main;
-        //leftThrusterEm = leftThrusterParticle.emission;
-        //rightThrusterEm = rightThrusterParticle.emission;
 
 
         if (debug) canvas.gameObject.SetActive(true);
@@ -94,125 +84,58 @@ public class Thrusters : MonoBehaviour
     }
 
 
+
+
     private void OnDestroy()
     {
-        leftForwardThruster.action.started -= LeftForwardThruster_Action_started;
-        leftForwardThruster.action.performed -= LeftForwardThruster_Action_performed;
-        leftForwardThruster.action.canceled -= LeftForwardThruster_Action_canceled;
-        leftForwardThruster.action.Disable();
+        leftThruster.action.Disable();
+        leftThruster.action.performed -= LeftThruster_Action_performed;
+        leftThruster.action.canceled -= LeftThruster_Action_canceled;
 
-        rightForwardThruster.action.started -= RightForwardThruster_Action_started;
-        rightForwardThruster.action.performed -= RightForwardThruster_Action_performed;
-        rightForwardThruster.action.canceled -= RightForwardThruster_Action_canceled;
-        rightForwardThruster.action.Disable();
+        rightThruster.action.Disable();
+        rightThruster.action.performed -= RightThruster_Action_performed;
+        rightThruster.action.canceled -= RightThruster_Action_canceled;
 
-        leftBackwardThruster.action.started -= LeftBackwardThruster_Action_started;
-        leftBackwardThruster.action.performed -= LeftBackwardThruster_Action_performed;
-        leftBackwardThruster.action.canceled -= LeftBackwardThruster_Action_canceled;
-        leftBackwardThruster.action.Disable();
+        leftRotateThruster.action.Disable();
+        leftRotateThruster.action.started -= LeftRotate_Action_started;
 
-        rightBackwardThruster.action.started -= RightBackwardThruster_Action_started;
-        rightBackwardThruster.action.performed -= RightBackwardThruster_Action_performed;
-        rightBackwardThruster.action.canceled -= RightBackwardThruster_Action_canceled;
-        rightBackwardThruster.action.Disable();
+        rightRotateThruster.action.Disable();
+        rightRotateThruster.action.started -= RightRotate_Action_started;       
     }
 
-
-    private void LeftForwardThruster_Action_started(InputAction.CallbackContext obj)
+    
+    private void LeftThruster_Action_performed(InputAction.CallbackContext obj)
     {
-        if (!isLeftForward && canLeftThrust && leftInput == 0)
+        leftInput = isLeftForward ? obj.ReadValue<float>() : -obj.ReadValue<float>();
+    }
+    private void LeftThruster_Action_canceled(InputAction.CallbackContext obj)
+    {
+        leftInput = 0f;
+    }
+    private void RightThruster_Action_performed(InputAction.CallbackContext obj)
+    {
+        rightInput = isRightForward ? obj.ReadValue<float>() : -obj.ReadValue<float>();
+    }
+    private void RightThruster_Action_canceled(InputAction.CallbackContext obj)
+    {
+        rightInput = 0f;
+    }
+    private void LeftRotate_Action_started(InputAction.CallbackContext obj)
+    {
+        if (leftInput == 0 && canLeftThrust)
         {
-            isLeftForward = true;
+            isLeftForward = !isLeftForward;
             StartCoroutine(RotateThruster(leftThrusterVisual));
         }
     }
-    private void LeftForwardThruster_Action_performed(InputAction.CallbackContext obj)
+    private void RightRotate_Action_started(InputAction.CallbackContext obj)
     {
-        if (isLeftForward)
+        if (rightInput == 0 && canRightThrust)
         {
-            leftInput = obj.ReadValue<float>();
-        }
-    }
-    private void LeftForwardThruster_Action_canceled(InputAction.CallbackContext obj)
-    {
-        if (isLeftForward)
-        {
-            leftInput = 0f;
-        }
-    }
-
-
-    private void RightForwardThruster_Action_started(InputAction.CallbackContext obj)
-    {
-        if (!isRightForward && canRightThrust && rightInput == 0)
-        {
-            isRightForward = true;
+            isRightForward = !isRightForward;
             StartCoroutine(RotateThruster(rightThrusterVisual));
         }
     }
-    private void RightForwardThruster_Action_performed(InputAction.CallbackContext obj)
-    {
-        if (isRightForward)
-        {
-            rightInput = obj.ReadValue<float>();
-        }
-    }
-    private void RightForwardThruster_Action_canceled(InputAction.CallbackContext obj)
-    {
-        if (isRightForward)
-        {
-            rightInput = 0f;
-        }
-    }
-
-
-    private void LeftBackwardThruster_Action_started(InputAction.CallbackContext obj)
-    {
-        if (isLeftForward && canLeftThrust && leftInput == 0)
-        {
-            isLeftForward = false;
-            StartCoroutine(RotateThruster(leftThrusterVisual));
-        }
-    }
-    private void LeftBackwardThruster_Action_performed(InputAction.CallbackContext obj)
-    {
-        if (!isLeftForward)
-        {
-            leftInput = -obj.ReadValue<float>();
-        }
-    }
-    private void LeftBackwardThruster_Action_canceled(InputAction.CallbackContext obj)
-    {
-        if (!isLeftForward)
-        {
-            leftInput = 0f;
-        }
-    }
-
-
-    private void RightBackwardThruster_Action_started(InputAction.CallbackContext obj)
-    {
-        if (isRightForward && canRightThrust && rightInput == 0)
-        {
-            isRightForward = false;
-            StartCoroutine(RotateThruster(rightThrusterVisual));
-        }
-    }
-    private void RightBackwardThruster_Action_performed(InputAction.CallbackContext obj)
-    {
-        if (!isRightForward)
-        {
-            rightInput = -obj.ReadValue<float>();
-        }
-    }
-    private void RightBackwardThruster_Action_canceled(InputAction.CallbackContext obj)
-    {
-        if (!isRightForward)
-        {
-            rightInput = 0f;
-        }
-    }
-
 
 
     private void Update()
@@ -223,14 +146,11 @@ public class Thrusters : MonoBehaviour
         leftThrusterBoostAudioSource.volume = canLeftThrust && playerLife.IsAlive ? absLeftInput : 0;
         rightThrusterBoostAudioSource.volume = canRightThrust && playerLife.IsAlive ? absRightInput : 0;
 
-        //float particleValueMultiplier = 20f;
         Color flameColorLeft = Color.Lerp(transparent, maxOpacity, absLeftInput);
         leftThrusterMain.startColor = canLeftThrust && playerLife.IsAlive ? flameColorLeft : transparent;
-        //leftThrusterEm.rateOverTime = canLeftThrust && playerLife.IsAlive ? absLeftInput * particleValueMultiplier : 0;
 
         Color flameColorRight = Color.Lerp(transparent, maxOpacity, absRightInput);
         rightThrusterMain.startColor = canRightThrust && playerLife.IsAlive ? flameColorRight : transparent;
-        //rightThrusterEm.rateOverTime = canRightThrust && playerLife.IsAlive ? absRightInput * particleValueMultiplier : 0;
     }
 
 
@@ -268,14 +188,14 @@ public class Thrusters : MonoBehaviour
         {
             canLeftThrust = false;
             hand = leftControllerTransform;
-            rotatesToForward = isLeftForward ? true : false;
+            rotatesToForward = isLeftForward;
             leftThrusterRotateAudioSource.Play();
         }
         else
         {
             canRightThrust = false;
             hand = rightControllerTransform;
-            rotatesToForward = isRightForward ? true : false;
+            rotatesToForward = isRightForward;
             rightThrusterRotateAudioSource.Play();
         }
 

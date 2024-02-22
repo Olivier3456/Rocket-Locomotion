@@ -2600,6 +2600,62 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "XRI LeftHand Buttons",
+            "id": "74dd0569-01aa-4172-b6e3-63d914403dad",
+            "actions": [
+                {
+                    "name": "X Button",
+                    "type": "Button",
+                    "id": "7391089a-08ba-4d0b-96cf-69a612da7029",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f2b5092e-b652-4ec6-9f4b-909ed0e514d5",
+                    "path": "<XRController>{LeftHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "X Button",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "XRI RightHand Buttons",
+            "id": "1227ee6d-e8fa-4113-bc9c-781d7308c3fc",
+            "actions": [
+                {
+                    "name": "A Button",
+                    "type": "Button",
+                    "id": "9f63816a-fd57-4ed8-afdf-39ba5f7c2bba",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "341ce216-7b84-4a71-9e51-56c567a7cc18",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "A Button",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
