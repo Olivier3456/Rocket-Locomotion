@@ -21,13 +21,14 @@ public class Thrusters : MonoBehaviour
     [SerializeField] private InputActionReference rightRotateThruster;
     [SerializeField] private InputActionReference rightBoost;
     [Space(20)]
-    [SerializeField] private float thrusterForceFactor = 700f;
+    [SerializeField] private float thrusterBaseForceFactor = 700f;
+    [SerializeField] private float thrusterBoostForceFactor = 700f;
     [Space(20)]
     [SerializeField] private Rigidbody rb;
     [Space(20)]
-    [SerializeField] private AudioSource leftThrusterBoostAudioSource;
+    [SerializeField] private AudioSource leftThrusterAudioSource;
     [SerializeField] private AudioSource leftThrusterRotateAudioSource;
-    [SerializeField] private AudioSource rightThrusterBoostAudioSource;
+    [SerializeField] private AudioSource rightThrusterAudioSource;
     [SerializeField] private AudioSource rightThrusterRotateAudioSource;
     [Space(20)]
     [SerializeField] private ParticleSystem leftThrusterParticle;
@@ -42,18 +43,24 @@ public class Thrusters : MonoBehaviour
     public TextMeshProUGUI leftText;
 
 
-    private float leftInput = 0;
-    private float rightInput = 0;
-
+    private float leftBaseInput = 0;
+    private float rightBaseInput = 0;
     private float leftBoostInput = 0;
     private float rightBoostInput = 0;
 
+    private float leftBaseValue = 0;
+    private float rightBaseValue = 0;
+    private float leftBoostValue = 0;
+    private float rightBoostValue = 0;
 
     private bool isLeftForward = true;
     private bool isRightForward = true;
 
     private bool canLeftThrust = true;
     private bool canRightThrust = true;
+
+    private bool canLeftBoost = true;
+    private bool canRightBoost = true;
 
 
     private ParticleSystem.MainModule leftThrusterMain;
@@ -95,6 +102,9 @@ public class Thrusters : MonoBehaviour
 
         if (debug) canvas.gameObject.SetActive(true);
         else canvas.gameObject.SetActive(false);
+
+        leftThrusterAudioSource.time = Random.Range(0, leftThrusterAudioSource.clip.length);
+        rightThrusterAudioSource.time = Random.Range(0, rightThrusterAudioSource.clip.length);
     }
 
 
@@ -126,23 +136,23 @@ public class Thrusters : MonoBehaviour
 
     private void LeftThruster_Action_performed(InputAction.CallbackContext obj)
     {
-        leftInput = isLeftForward ? obj.ReadValue<float>() : -obj.ReadValue<float>();
+        leftBaseInput = obj.ReadValue<float>();
     }
     private void LeftThruster_Action_canceled(InputAction.CallbackContext obj)
     {
-        leftInput = 0f;
+        leftBaseInput = 0f;
     }
     private void RightThruster_Action_performed(InputAction.CallbackContext obj)
     {
-        rightInput = isRightForward ? obj.ReadValue<float>() : -obj.ReadValue<float>();
+        rightBaseInput = obj.ReadValue<float>();
     }
     private void RightThruster_Action_canceled(InputAction.CallbackContext obj)
     {
-        rightInput = 0f;
+        rightBaseInput = 0f;
     }
     private void LeftRotate_Action_started(InputAction.CallbackContext obj)
     {
-        if (leftInput == 0 && canLeftThrust)
+        if (canLeftThrust)
         {
             isLeftForward = !isLeftForward;
             StartCoroutine(RotateThruster(leftThrusterVisual));
@@ -150,7 +160,7 @@ public class Thrusters : MonoBehaviour
     }
     private void RightRotate_Action_started(InputAction.CallbackContext obj)
     {
-        if (rightInput == 0 && canRightThrust)
+        if (canRightThrust)
         {
             isRightForward = !isRightForward;
             StartCoroutine(RotateThruster(rightThrusterVisual));
@@ -176,22 +186,21 @@ public class Thrusters : MonoBehaviour
 
     private void Update()
     {
-        float absLeftInput = Mathf.Abs(leftInput);
-        float absRightInput = Mathf.Abs(rightInput);
+        UpdateThrustersValues();
 
-        leftThrusterBoostAudioSource.volume = canLeftThrust && playerLife.IsAlive ? absLeftInput + leftBoostInput : 0;
-        leftThrusterBoostAudioSource.pitch = 1 + leftBoostInput;
+        leftThrusterAudioSource.volume = leftBaseValue;
+        leftThrusterAudioSource.pitch = 1 + leftBoostValue;
 
-        rightThrusterBoostAudioSource.volume = canRightThrust && playerLife.IsAlive ? absRightInput + rightBoostInput : 0;
-        rightThrusterBoostAudioSource.pitch = 1 + rightBoostInput;
+        rightThrusterAudioSource.volume = rightBaseValue;
+        rightThrusterAudioSource.pitch = 1 + rightBoostValue;
 
-        Color flameColorLeft = Color.Lerp(transparent, maxOpacity_NoBoost, absLeftInput);
-        flameColorLeft = Color.Lerp(flameColorLeft, boostColor, leftBoostInput);
-        leftThrusterMain.startColor = canLeftThrust && playerLife.IsAlive ? flameColorLeft : transparent;
+        Color flameColorLeft = Color.Lerp(transparent, maxOpacity_NoBoost, leftBaseValue);
+        flameColorLeft = Color.Lerp(flameColorLeft, boostColor, leftBoostValue);
+        leftThrusterMain.startColor = flameColorLeft;
 
-        Color flameColorRight = Color.Lerp(transparent, maxOpacity_NoBoost, absRightInput);
-        flameColorRight = Color.Lerp(flameColorRight, boostColor, rightBoostInput);
-        rightThrusterMain.startColor = canRightThrust && playerLife.IsAlive ? flameColorRight : transparent;
+        Color flameColorRight = Color.Lerp(transparent, maxOpacity_NoBoost, rightBaseValue);
+        flameColorRight = Color.Lerp(flameColorRight, boostColor, rightBoostValue);
+        rightThrusterMain.startColor = flameColorRight;
     }
 
 
@@ -203,25 +212,81 @@ public class Thrusters : MonoBehaviour
             return;
         }
 
-        if (leftInput == 0 && rightInput == 0 && leftBoostInput == 0 && rightBoostInput == 0)
+        UpdateThrustersValues();
+
+        if (leftBaseValue == 0 && rightBaseValue == 0 && leftBoostValue == 0 && rightBoostValue == 0)
         {
             return;
         }
 
-        Vector3 leftPushVector = canLeftThrust ? leftControllerTransform.forward * leftInput * (1 + leftBoostInput) * thrusterForceFactor : Vector3.zero;
-        Vector3 rightPushVector = canRightThrust ? rightControllerTransform.forward * rightInput * (1 + rightBoostInput) * thrusterForceFactor : Vector3.zero;
 
-        Vector3 totalPushVector = leftPushVector + rightPushVector;
+        Vector3 leftThrusterVector;
+        Vector3 leftBoostVector;
+        Vector3 rightThrusterVector;
+        Vector3 rightBoostVector;
 
-        if (leftBoostInput == 0 && rightBoostInput == 0)
+
+        leftThrusterVector = leftControllerTransform.forward * leftBaseValue * thrusterBaseForceFactor;
+        leftBoostVector = leftControllerTransform.forward * leftBoostValue * thrusterBoostForceFactor;
+
+        if (!isLeftForward)
         {
-            float clamp = 1.75f;
-            totalPushVector = Vector3.ClampMagnitude(totalPushVector, thrusterForceFactor * clamp);
+            leftThrusterVector *= -1;
+            leftBoostVector *= -1;
         }
 
-        rb.AddForce(totalPushVector);
+
+        rightThrusterVector = rightControllerTransform.forward * rightBaseValue * thrusterBaseForceFactor;
+        rightBoostVector = rightControllerTransform.forward * rightBoostValue * thrusterBoostForceFactor;
+
+        if (!isRightForward)
+        {
+            rightThrusterVector *= -1;
+            rightBoostVector *= -1;
+        }
+
+
+        float clamp = 1.75f;
+        Vector3 totalBaseVector = Vector3.ClampMagnitude(leftThrusterVector + rightThrusterVector, thrusterBaseForceFactor * clamp);
+        Vector3 totalBoostVector = leftBoostVector + rightBoostVector;
+        Vector3 finalVector = totalBaseVector + totalBoostVector;
+
+        rb.AddForce(finalVector);
     }
 
+
+    private void UpdateThrustersValues()
+    {
+        if (!playerLife.IsAlive)
+        {
+            leftBaseValue = 0f;
+            rightBaseValue = 0f;
+            leftBoostValue = 0f;
+            rightBoostValue = 0f;
+            return;
+        }
+
+        leftBoostValue = canLeftThrust && canLeftBoost ? leftBoostInput : 0f;
+        rightBoostValue = canRightThrust && canRightBoost ? rightBoostInput : 0f;
+
+        if (leftBoostValue == 0)
+        {
+            leftBaseValue = canLeftThrust ? leftBaseInput : 0f;
+        }
+        else // If the thruster boosts, even a little, its base force vector is at max.
+        {
+            leftBaseValue = 1;
+        }
+
+        if (rightBoostValue == 0)
+        {
+            rightBaseValue = canRightThrust ? rightBaseInput : 0f;
+        }
+        else // If the thruster boosts, even a little, its base force vector is at max.
+        {
+            rightBaseValue = 1;
+        }
+    }
 
 
     private IEnumerator RotateThruster(Transform transformToRotate)
