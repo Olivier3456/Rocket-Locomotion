@@ -11,7 +11,7 @@ public class Thruster : MonoBehaviour
     [Space(20)]
     [SerializeField] private ApplyThrustersForceToRigidbody applyThrustersForceToRigidbody;
     [Space(20)]
-    [SerializeField] private ThrusterBoostManager thrusterBoostManager;
+    [SerializeField] private ThrustersBoostManager thrusterBoostManager;
     [Space(20)]
     [SerializeField] private Transform controllerTransform;
     [Space(20)]
@@ -121,7 +121,7 @@ public class Thruster : MonoBehaviour
     {
         UpdateThrustersValues();
 
-        thrusterBoostManager.Boost(boostValue);
+        thrusterBoostManager.Boost(this, boostValue);
 
         mainAudioSource.volume = thrustValue;
         mainAudioSource.pitch = 1 + boostValue;
@@ -174,7 +174,7 @@ public class Thruster : MonoBehaviour
         {
             thrustValue = canThrust ? thrustInput : 0f;
         }
-        else // If the thruster boosts, even a little, its base force vector is at max.
+        else // If the thrusterLeft boosts, even a little, its base force vector is at max.
         {
             thrustValue = 1;
         }
