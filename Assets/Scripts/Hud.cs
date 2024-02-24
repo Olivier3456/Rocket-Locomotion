@@ -76,7 +76,7 @@ public class Hud : MonoBehaviour
 
             if (timer > 2 && !sceneLoading)
             {
-                SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+                SceneManager.LoadSceneAsync(0);
                 sceneLoading = true;
             }
         }
