@@ -11,7 +11,7 @@ public class Thruster : MonoBehaviour
     [Space(20)]
     [SerializeField] private ApplyThrustersForceToRigidbody applyThrustersForceToRigidbody;
     [Space(20)]
-    [SerializeField] private ThrustersBoostManager thrustersBoostManager;
+    [SerializeField] private ThrusterBoostManager thrusterBoostManager;
     [Space(20)]
     [SerializeField] private Transform controllerTransform;
     [Space(20)]
@@ -121,7 +121,7 @@ public class Thruster : MonoBehaviour
     {
         UpdateThrustersValues();
 
-        thrustersBoostManager.Boost(this, boostValue);
+        thrusterBoostManager.Boost(boostValue);
 
         mainAudioSource.volume = thrustValue;
         mainAudioSource.pitch = 1 + boostValue;
