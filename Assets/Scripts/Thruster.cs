@@ -9,7 +9,8 @@ public class Thruster : MonoBehaviour
 {
     [SerializeField] private PlayerLife playerLife;
     [Space(20)]
-    [SerializeField] private AddForceToRigidbody addForceToRigidbody;
+    //[SerializeField] private AddForceToRigidbody addForceToRigidbody;
+    [SerializeField] private Thruster otherThruster;
     [Space(20)]
     [SerializeField] private ThrustersBoostManager thrustersBoostManager;
     [SerializeField] private Transform controllerTransform;
@@ -51,9 +52,16 @@ public class Thruster : MonoBehaviour
     public float ThrusterBaseForceFactor { get { return thrusterBaseForceFactor; } }
     public float BoostValue { get { return boostValue; } }
 
+    public bool IsMainThruster { get; private set; }
+
 
     void Start()
     {
+        if (!otherThruster.IsMainThruster) 
+        {
+            IsMainThruster = true;
+        }
+
         thrust.action.performed += Thrust_Action_performed;
         thrust.action.canceled += Thrust_Action_canceled;
         thrust.action.Enable();
@@ -153,6 +161,13 @@ public class Thruster : MonoBehaviour
 
         addForceToRigidbody.SetForceVector(this, thrustVector, boostVector);
     }
+
+
+    public void SetForceValuesToSendToRidigbody(Vector3 thrustForce, Vector3 boostForce)
+    {
+
+    }
+
 
 
     private void UpdateThrustersValues()
