@@ -2,44 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AddForceToRigidbody : MonoBehaviour
+public class ApplyThrustersForceToRigidbody : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Thruster leftThruster;
 
-    private Vector3 leftThrustForce = Vector3.zero;
-    private Vector3 rightThrustForce = Vector3.zero;
+    private Vector3 leftThrustForce;
+    private Vector3 rightThrustForce;
 
-    private Vector3 leftBoostForce = Vector3.zero;
-    private Vector3 rightBoostForce = Vector3.zero;
+    private Vector3 leftBoostForce;
+    private Vector3 rightBoostForce;
 
-    private float thrustersUpdated = 0;
+    private bool leftThrusterUpdated = false;
+    private bool rightThrusterUpdated = false;
 
     public void SetForceVector(Thruster thruster, Vector3 thrustForce, Vector3 boostForce)
     {
-        thrustersUpdated++;
-
         if (thruster == leftThruster)
         {
             leftThrustForce = thrustForce;
             leftBoostForce = boostForce;
+            leftThrusterUpdated = true;
         }
         else
         {
             rightThrustForce = thrustForce;
             rightBoostForce = boostForce;
+            rightThrusterUpdated = true;
         }
 
-        if (thrustersUpdated == 2)
+        if (leftThrusterUpdated && rightThrusterUpdated)
         {
-            thrustersUpdated = 0;
-
             float clamp = 1.75f;
             Vector3 totalThrustVector = Vector3.ClampMagnitude(leftThrustForce + rightThrustForce, leftThruster.ThrusterBaseForceFactor * clamp);
             Vector3 totalBoostVector = leftBoostForce + rightBoostForce;
             Vector3 finalVector = totalThrustVector + totalBoostVector;
 
             rb.AddForce(finalVector);
+
+            leftThrusterUpdated = false;
+            rightThrusterUpdated = false;
         }
     }
 }

@@ -9,10 +9,10 @@ public class Thruster : MonoBehaviour
 {
     [SerializeField] private PlayerLife playerLife;
     [Space(20)]
-    //[SerializeField] private AddForceToRigidbody addForceToRigidbody;
-    [SerializeField] private Thruster otherThruster;
+    [SerializeField] private ApplyThrustersForceToRigidbody applyThrustersForceToRigidbody;
     [Space(20)]
     [SerializeField] private ThrustersBoostManager thrustersBoostManager;
+    [Space(20)]
     [SerializeField] private Transform controllerTransform;
     [Space(20)]
     [SerializeField] private Transform thrusterVisual;
@@ -45,23 +45,17 @@ public class Thruster : MonoBehaviour
 
     private ParticleSystem.MainModule particleMainModule;
 
-    private Color transparent = new Color(1, 1, 1, 0);
-    private Color maxOpacity_NoBoost = new Color(1, 1, 1, 0.2f);
-    private Color boostColor = new Color(0.9f, 0.1f, 0, 0.75f);    //Red
+    private Color transparentThrust = new Color(1, 1, 1, 0);
+    private Color thrustColor = new Color(1, 1, 1, 0.2f);          // White.
+    private Color transparentBoost = new Color(0.9f, 0.1f, 0, 0f);
+    private Color boostColor = new Color(0.9f, 0.1f, 0, 0.75f);    //Red with a bit of orange.
 
     public float ThrusterBaseForceFactor { get { return thrusterBaseForceFactor; } }
     public float BoostValue { get { return boostValue; } }
 
-    public bool IsMainThruster { get; private set; }
-
 
     void Start()
     {
-        if (!otherThruster.IsMainThruster) 
-        {
-            IsMainThruster = true;
-        }
-
         thrust.action.performed += Thrust_Action_performed;
         thrust.action.canceled += Thrust_Action_canceled;
         thrust.action.Enable();
@@ -132,9 +126,11 @@ public class Thruster : MonoBehaviour
         mainAudioSource.volume = thrustValue;
         mainAudioSource.pitch = 1 + boostValue;
 
-        Color flameColorLeft = Color.Lerp(transparent, maxOpacity_NoBoost, thrustValue);
-        flameColorLeft = Color.Lerp(flameColorLeft, boostColor, boostValue);
-        particleMainModule.startColor = flameColorLeft;
+        //Color flameColor = Color.Lerp(transparentThrust, thrustColor, thrustValue);
+        //flameColor = Color.Lerp(flameColor, boostColor, boostValue);
+
+        Color flameColor = boostValue == 0 ? Color.Lerp(transparentThrust, thrustColor, thrustValue) : Color.Lerp(transparentBoost, boostColor, (boostValue + thrustValue) * 0.5f);
+        particleMainModule.startColor = flameColor;
     }
 
 
@@ -159,15 +155,9 @@ public class Thruster : MonoBehaviour
             boostVector *= -1;
         }
 
-        addForceToRigidbody.SetForceVector(this, thrustVector, boostVector);
+        applyThrustersForceToRigidbody.SetForceVector(this, thrustVector, boostVector);
+        thrustersBoostManager.Boost(this, boostValue);
     }
-
-
-    public void SetForceValuesToSendToRidigbody(Vector3 thrustForce, Vector3 boostForce)
-    {
-
-    }
-
 
 
     private void UpdateThrustersValues()
