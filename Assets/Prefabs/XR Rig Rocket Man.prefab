@@ -7076,6 +7076,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerLife: {fileID: 4126628068372180587}
   addForceToRigidbody: {fileID: 1972910877495188515}
+  thrustersBoostManager: {fileID: 7414913354261400042}
   controllerTransform: {fileID: 6632263751561479307}
   thrusterVisual: {fileID: 4237352399608845183}
   thrust: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f, type: 3}
@@ -8670,6 +8671,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerLife: {fileID: 4126628068372180587}
   addForceToRigidbody: {fileID: 1972910877495188515}
+  thrustersBoostManager: {fileID: 7414913354261400042}
   controllerTransform: {fileID: 3024611055137797069}
   thrusterVisual: {fileID: 1586055734345264831}
   thrust: {fileID: -4289430672226363583, guid: c348712bda248c246b8c49b3db54643f, type: 3}
@@ -8846,6 +8848,7 @@ GameObject:
   - component: {fileID: 7197467876375252210}
   - component: {fileID: 7643204804829460560}
   - component: {fileID: 2280495700026505767}
+  - component: {fileID: 7414913354261400042}
   m_Layer: 0
   m_Name: XR Origin (XR Rig)
   m_TagString: Untagged
@@ -9045,6 +9048,21 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
+--- !u!114 &7414913354261400042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7467772666769937577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8aa5dbfbe280d64a99ab2f0e203e9f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftThruster: {fileID: 359657898334839473}
+  rightThruster: {fileID: 9132470021220051716}
+  reserveGainPerSec: 0.1
 --- !u!1 &8769668518381666253
 GameObject:
   m_ObjectHideFlags: 0

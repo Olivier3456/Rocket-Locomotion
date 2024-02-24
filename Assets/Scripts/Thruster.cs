@@ -11,6 +11,7 @@ public class Thruster : MonoBehaviour
     [Space(20)]
     [SerializeField] private AddForceToRigidbody addForceToRigidbody;
     [Space(20)]
+    [SerializeField] private ThrustersBoostManager thrustersBoostManager;
     [SerializeField] private Transform controllerTransform;
     [Space(20)]
     [SerializeField] private Transform thrusterVisual;
@@ -48,6 +49,7 @@ public class Thruster : MonoBehaviour
     private Color boostColor = new Color(0.9f, 0.1f, 0, 0.75f);    //Red
 
     public float ThrusterBaseForceFactor { get { return thrusterBaseForceFactor; } }
+    public float BoostValue { get { return boostValue; } }
 
 
     void Start()
@@ -116,6 +118,8 @@ public class Thruster : MonoBehaviour
     private void Update()
     {
         UpdateThrustersValues();
+
+        thrustersBoostManager.Boost(this, boostValue);
 
         mainAudioSource.volume = thrustValue;
         mainAudioSource.pitch = 1 + boostValue;
@@ -198,7 +202,7 @@ public class Thruster : MonoBehaviour
     }
 
 
-    public void SetCanBoost(bool canBoost)
+    public void AuthoriseBoost(bool canBoost)
     {
         this.canBoost = canBoost;
     }
