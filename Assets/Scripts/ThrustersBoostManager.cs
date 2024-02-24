@@ -6,18 +6,28 @@ public class ThrustersBoostManager : MonoBehaviour
 {
     [SerializeField] private Thruster leftThruster;
     [SerializeField] private Thruster rightThruster;
+    [SerializeField, Tooltip("Total lenght of the boost when the player presses the button entirely (boostValue = 1)")] private float boostLenght = 3f;
     [SerializeField, Range(0, 1)] private float reserveGainPerSec = 0.1f;
-    [SerializeField] private float boostTotalLenghtFullValue = 3f;
+    [SerializeField, Range(0, 1)] private float minimumReserveToBoost = 0.5f;
 
-    private float maxReserve = 1f;
+    private const float maxReserve = 1f;
     private float leftCurrentReserve;
     private float rightCurrentReserve;
+
+
+    private void Awake()
+    {
+        leftCurrentReserve = maxReserve;
+        rightCurrentReserve = maxReserve;
+    }
+
 
     private void Update()
     {
         if (leftCurrentReserve < maxReserve)
         {
             leftCurrentReserve += Time.deltaTime * reserveGainPerSec;
+            //Debug.Log("Left current boost reserve augmented. Current value: " + leftCurrentReserve);
         }
         if (rightCurrentReserve < maxReserve)
         {
@@ -28,7 +38,7 @@ public class ThrustersBoostManager : MonoBehaviour
         {
             leftThruster.AuthoriseBoost(false);
         }
-        else
+        else if (leftCurrentReserve > minimumReserveToBoost)
         {
             leftThruster.AuthoriseBoost(true);
         }
@@ -37,7 +47,7 @@ public class ThrustersBoostManager : MonoBehaviour
         {
             rightThruster.AuthoriseBoost(false);
         }
-        else
+        else if (rightCurrentReserve > minimumReserveToBoost)
         {
             rightThruster.AuthoriseBoost(true);
         }
@@ -47,11 +57,11 @@ public class ThrustersBoostManager : MonoBehaviour
     {
         if (thruster == leftThruster)
         {
-
+            leftCurrentReserve -= (Time.deltaTime / boostLenght) * boostValue;
         }
         else
         {
-
+            rightCurrentReserve -= (Time.deltaTime / boostLenght) * boostValue;
         }
     }
 }

@@ -156,7 +156,6 @@ public class Thruster : MonoBehaviour
         }
 
         applyThrustersForceToRigidbody.SetForceVector(this, thrustVector, boostVector);
-        thrustersBoostManager.Boost(this, boostValue);
     }
 
 
