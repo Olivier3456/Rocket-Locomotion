@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ThrustersBoostManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class ThrustersBoostManager : MonoBehaviour
     [SerializeField, Range(0, 1)] private float reserveGainPerSec = 0.1f;
     [SerializeField, Range(0, 1)] private float minimumReserveForNewBoost = 0.5f;
 
+
     private const float maxReserve = 1f;
     private float currentReserve;
     public float MaxReserve { get { return maxReserve; } }
@@ -17,6 +19,11 @@ public class ThrustersBoostManager : MonoBehaviour
 
     private float currentBoostValueLeft = 0;
     private float currentBoostValueRight = 0;
+
+    public UnityEvent OnDepleted = new UnityEvent();
+    public UnityEvent OnCanBoostAgain = new UnityEvent();
+
+    private bool isDepleted;
 
     private void Awake()
     {
@@ -31,15 +38,21 @@ public class ThrustersBoostManager : MonoBehaviour
             currentReserve += Time.deltaTime * reserveGainPerSec;
         }
 
-        if (currentReserve <= 0)
+        if (currentReserve <= 0 && !isDepleted)
         {
+            isDepleted = true;
             thrusterLeft.AuthoriseBoost(false);
             thrusterRight.AuthoriseBoost(false);
+            OnDepleted.Invoke();
+            Debug.Log("Boost reserve depleted");
         }
-        else if (currentReserve > minimumReserveForNewBoost)
+        else if (currentReserve > minimumReserveForNewBoost && isDepleted)
         {
+            isDepleted = false;
             thrusterLeft.AuthoriseBoost(true);
             thrusterRight.AuthoriseBoost(true);
+            OnCanBoostAgain.Invoke();
+            Debug.Log("Player can boost again");
         }
     }
 

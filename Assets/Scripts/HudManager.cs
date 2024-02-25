@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class Hud : MonoBehaviour
+public class HudManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI speedText;
     [SerializeField] private GameObject deadText;
