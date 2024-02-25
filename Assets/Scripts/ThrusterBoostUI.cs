@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,14 +6,14 @@ public class ThrusterBoostUI : MonoBehaviour
 {
     [SerializeField] private ThrustersBoostManager boostManager;
     [SerializeField] private RectTransform boostMainRectTransform;
-    [SerializeField] private Image boostReserveImage;
     [SerializeField] private Image boostBackgroundImage;
+    [SerializeField] private Image boostReserveImage;
     [SerializeField] private Gradient reserveGradient;
     [SerializeField] private AudioClip depletedAudioClip;
     [SerializeField] private AudioClip boostAuthorizedAudioClip;
     [SerializeField] private AudioSource audioSource;
 
-
+   
     private void Awake()
     {
         boostManager.OnDepleted.AddListener(BoostDepleted);
@@ -30,8 +29,8 @@ public class ThrusterBoostUI : MonoBehaviour
     void Update()
     {
         float status = boostManager.CurrentReserve / boostManager.MaxReserve;
-        boostReserveImage.color = reserveGradient.Evaluate(status);
         boostReserveImage.fillAmount = status;
+        boostReserveImage.color = reserveGradient.Evaluate(status);
     }
 
     private void BoostDepleted()
@@ -95,10 +94,11 @@ public class ThrusterBoostUI : MonoBehaviour
         float length = 0.4f;
         Vector3 normalScale = boostMainRectTransform.localScale;
         Vector3 bigScale = boostMainRectTransform.localScale * 1.5f;
-        Color boostReserveImageColor = boostReserveImage.color;
-        Color boostReserveImageTransparent = new Color(boostReserveImageColor.r, boostReserveImageColor.g, boostReserveImageColor.b, 0f);
+
         Color boostBackgroundImageColor = boostBackgroundImage.color;
         Color boostBackgroundImageTransparent = new Color(boostBackgroundImageColor.r, boostBackgroundImageColor.g, boostBackgroundImageColor.b, 0f);
+        Color boostReserveImageColor = boostReserveImage.color;
+        Color boostReserveImageTransparent = new Color(boostReserveImageColor.r, boostReserveImageColor.g, boostReserveImageColor.b, 0f);
 
         float lerp = 0f;
 
