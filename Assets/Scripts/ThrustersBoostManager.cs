@@ -24,6 +24,7 @@ public class ThrustersBoostManager : MonoBehaviour
     public UnityEvent OnCanBoostAgain = new UnityEvent();
 
     private bool isDepleted;
+    public bool IsDepleted { get { return isDepleted; } }
 
     private void Awake()
     {
