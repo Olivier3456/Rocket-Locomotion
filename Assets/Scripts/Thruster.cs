@@ -174,7 +174,7 @@ public class Thruster : MonoBehaviour
         {
             thrustValue = canThrust ? thrustInput : 0f;
         }
-        else // If the thrusterLeft boosts, even a little, its base force vector is at max.
+        else // If the thruster boosts, even a little, its base force vector is at max.
         {
             thrustValue = 1;
         }
