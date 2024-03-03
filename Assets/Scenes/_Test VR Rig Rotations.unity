@@ -2890,12 +2890,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503673498}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1645847170 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1886789724081163593, guid: 3a17b058a1b3bcc4d8ec81d0d2c075cf,
-    type: 3}
-  m_PrefabInstance: {fileID: 3551026887120107549}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1758842311
 GameObject:
   m_ObjectHideFlags: 0
@@ -3304,7 +3298,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1925179345}
   m_Layer: 0
-  m_Name: Ground
+  m_Name: Static Environment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3944,65 +3938,65 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2137418096}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1001 &209519233342142886
+--- !u!1001 &4698901348978534716
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1645847170}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2583205784025797188, guid: 18db8e4292a5bbf41b45abeeb5d3a0a3,
+    - target: {fileID: 3050901625314447435, guid: 14a20a0bcfc87aa49bfe2074b29f1a0d,
         type: 3}
       propertyPath: m_Name
-      value: Jet Cockpit Visual
+      value: XR Rig Rocket Man - ROTATIONS RIG 3
       objectReference: {fileID: 0}
-    - target: {fileID: 2923596289933822206, guid: 18db8e4292a5bbf41b45abeeb5d3a0a3,
+    - target: {fileID: 5337539387111394940, guid: 14a20a0bcfc87aa49bfe2074b29f1a0d,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2923596289933822206, guid: 18db8e4292a5bbf41b45abeeb5d3a0a3,
+    - target: {fileID: 5337539387111394940, guid: 14a20a0bcfc87aa49bfe2074b29f1a0d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.16
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2923596289933822206, guid: 18db8e4292a5bbf41b45abeeb5d3a0a3,
+    - target: {fileID: 5337539387111394940, guid: 14a20a0bcfc87aa49bfe2074b29f1a0d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.79
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2923596289933822206, guid: 18db8e4292a5bbf41b45abeeb5d3a0a3,
+    - target: {fileID: 5337539387111394940, guid: 14a20a0bcfc87aa49bfe2074b29f1a0d,
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2923596289933822206, guid: 18db8e4292a5bbf41b45abeeb5d3a0a3,
+    - target: {fileID: 5337539387111394940, guid: 14a20a0bcfc87aa49bfe2074b29f1a0d,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2923596289933822206, guid: 18db8e4292a5bbf41b45abeeb5d3a0a3,
+    - target: {fileID: 5337539387111394940, guid: 14a20a0bcfc87aa49bfe2074b29f1a0d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2923596289933822206, guid: 18db8e4292a5bbf41b45abeeb5d3a0a3,
+    - target: {fileID: 5337539387111394940, guid: 14a20a0bcfc87aa49bfe2074b29f1a0d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2923596289933822206, guid: 18db8e4292a5bbf41b45abeeb5d3a0a3,
+    - target: {fileID: 5337539387111394940, guid: 14a20a0bcfc87aa49bfe2074b29f1a0d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2923596289933822206, guid: 18db8e4292a5bbf41b45abeeb5d3a0a3,
+    - target: {fileID: 5337539387111394940, guid: 14a20a0bcfc87aa49bfe2074b29f1a0d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2923596289933822206, guid: 18db8e4292a5bbf41b45abeeb5d3a0a3,
+    - target: {fileID: 5337539387111394940, guid: 14a20a0bcfc87aa49bfe2074b29f1a0d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
@@ -4011,91 +4005,13 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 18db8e4292a5bbf41b45abeeb5d3a0a3, type: 3}
---- !u!4 &209519233342142887 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2923596289933822206, guid: 18db8e4292a5bbf41b45abeeb5d3a0a3,
-    type: 3}
-  m_PrefabInstance: {fileID: 209519233342142886}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &3551026887120107549
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1886789724081163593, guid: 3a17b058a1b3bcc4d8ec81d0d2c075cf,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1886789724081163593, guid: 3a17b058a1b3bcc4d8ec81d0d2c075cf,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1886789724081163593, guid: 3a17b058a1b3bcc4d8ec81d0d2c075cf,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1886789724081163593, guid: 3a17b058a1b3bcc4d8ec81d0d2c075cf,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1886789724081163593, guid: 3a17b058a1b3bcc4d8ec81d0d2c075cf,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1886789724081163593, guid: 3a17b058a1b3bcc4d8ec81d0d2c075cf,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1886789724081163593, guid: 3a17b058a1b3bcc4d8ec81d0d2c075cf,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1886789724081163593, guid: 3a17b058a1b3bcc4d8ec81d0d2c075cf,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1886789724081163593, guid: 3a17b058a1b3bcc4d8ec81d0d2c075cf,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1886789724081163593, guid: 3a17b058a1b3bcc4d8ec81d0d2c075cf,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5074256745340529942, guid: 3a17b058a1b3bcc4d8ec81d0d2c075cf,
-        type: 3}
-      propertyPath: m_Name
-      value: XR Rig Rocket Man - ROTATIONS - THRUSTERS MIXED
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 1886789724081163593, guid: 3a17b058a1b3bcc4d8ec81d0d2c075cf,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 209519233342142887}
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3a17b058a1b3bcc4d8ec81d0d2c075cf, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 14a20a0bcfc87aa49bfe2074b29f1a0d, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1925179345}
-  - {fileID: 3551026887120107549}
+  - {fileID: 4698901348978534716}
   - {fileID: 2017546613}
   - {fileID: 2045594235}
   - {fileID: 1853054981}

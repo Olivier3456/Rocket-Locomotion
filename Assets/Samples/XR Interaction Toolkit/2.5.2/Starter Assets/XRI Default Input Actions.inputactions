@@ -2602,7 +2602,7 @@
             ]
         },
         {
-            "name": "XRI LeftHand Buttons",
+            "name": "XRI LeftHand Custom",
             "id": "74dd0569-01aa-4172-b6e3-63d914403dad",
             "actions": [
                 {
@@ -2613,6 +2613,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Yaw",
+                    "type": "Value",
+                    "id": "0319e6dd-056f-49e2-86bc-87f7862e84d1",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -2626,11 +2635,22 @@
                     "action": "X Button",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ef5b8e82-fc58-46ad-94e7-4e3b8dc36f5b",
+                    "path": "<XRController>{LeftHand}/{Primary2DAxis}",
+                    "interactions": "",
+                    "processors": "StickDeadzone",
+                    "groups": "Continuous Move",
+                    "action": "Yaw",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
         {
-            "name": "XRI RightHand Buttons",
+            "name": "XRI RightHand Custom",
             "id": "1227ee6d-e8fa-4113-bc9c-781d7308c3fc",
             "actions": [
                 {
@@ -2641,6 +2661,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "PitchRoll",
+                    "type": "Value",
+                    "id": "0a477f1c-0cdd-4854-83c3-67337c7c6e26",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -2652,6 +2681,17 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "A Button",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4d4f10cf-393c-4e7a-86b7-f990494c45ab",
+                    "path": "<XRController>{RightHand}/{Primary2DAxis}",
+                    "interactions": "",
+                    "processors": "StickDeadzone",
+                    "groups": "Continuous Move;Generic XR Controller",
+                    "action": "PitchRoll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
