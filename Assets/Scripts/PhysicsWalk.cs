@@ -22,6 +22,13 @@ public class PhysicsWalk : MonoBehaviour
         moveInputAction.action.Enable();
     }
 
+    private void OnDestroy()
+    {
+        moveInputAction.action.Disable();
+        moveInputAction.action.performed -= moveInputAction_performed;
+        moveInputAction.action.canceled -= moveInputAction_canceled;
+    }
+
     private void moveInputAction_performed(InputAction.CallbackContext obj)
     {
         moveInput = obj.ReadValue<Vector2>();
@@ -33,7 +40,7 @@ public class PhysicsWalk : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (moveInput == Vector2.zero || !physicalContactsManager.IsGrounded || !playerLife.IsAlive)
+        if (moveInput == Vector2.zero || !physicalContactsManager.IsGrounded || MainManager.Instance.IsPaused || !MainManager.Instance.IsPlayerAlive)
         {
             return;
         }

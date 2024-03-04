@@ -2622,6 +2622,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "ToggleShowHideGameMenu",
+                    "type": "Button",
+                    "id": "68e64874-45f3-40f9-ae90-3341d4305c7d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -2644,6 +2653,17 @@
                     "processors": "StickDeadzone",
                     "groups": "Continuous Move",
                     "action": "Yaw",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2a6c5e04-ac6a-4220-b837-8f482033c2d2",
+                    "path": "<XRController>{LeftHand}/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "ToggleShowHideGameMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

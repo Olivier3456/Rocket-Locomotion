@@ -8,16 +8,16 @@ public class DeathUI : MonoBehaviour
 {
     [SerializeField] private GameObject deadText;
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private PlayerLife playerLife;
+    //[SerializeField] private PlayerLife playerLife;
 
-    private void Awake()
+    private void Start()
     {
-        playerLife.OnDeath.AddListener(HandleDeath);
+        MainManager.Instance.OnDeath.AddListener(HandleDeath);
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
-        playerLife.OnDeath.RemoveListener(HandleDeath);
+        MainManager.Instance.OnDeath.RemoveListener(HandleDeath);
     }
 
     private Coroutine handleDeathCoroutine;
@@ -47,7 +47,8 @@ public class DeathUI : MonoBehaviour
 
             if (timer > 2 && !sceneLoading)
             {
-                SceneManager.LoadSceneAsync(0);
+                //SceneManager.LoadSceneAsync(0);
+                MainManager.Instance.MainMenu.Show();
                 sceneLoading = true;
             }
         }

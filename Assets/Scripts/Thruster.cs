@@ -7,8 +7,8 @@ using UnityEngine.InputSystem;
 
 public class Thruster : MonoBehaviour
 {
-    [SerializeField] private PlayerLife playerLife;
-    [Space(20)]
+    //[SerializeField] private PlayerLife playerLife;
+    //[Space(20)]
     [SerializeField] private ApplyThrustersForceToRigidbody applyThrustersForceToRigidbody;
     [Space(20)]
     [SerializeField] private ThrustersBoostManager thrusterBoostManager;
@@ -126,9 +126,6 @@ public class Thruster : MonoBehaviour
         mainAudioSource.volume = thrustValue;
         mainAudioSource.pitch = 1 + boostValue;
 
-        //Color flameColor = Color.Lerp(transparentThrust, thrustColor, thrustValue);
-        //flameColor = Color.Lerp(flameColor, boostColor, boostValue);
-
         Color flameColor = boostValue == 0 ? Color.Lerp(transparentThrust, thrustColor, thrustValue) : Color.Lerp(transparentBoost, boostColor, (boostValue + thrustValue) * 0.5f);
         particleMainModule.startColor = flameColor;
     }
@@ -136,7 +133,7 @@ public class Thruster : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!playerLife.IsAlive)
+        if (MainManager.Instance.IsPaused || !MainManager.Instance.IsPlayerAlive)
         {
             return;
         }
@@ -161,7 +158,7 @@ public class Thruster : MonoBehaviour
 
     private void UpdateThrustersValues()
     {
-        if (!playerLife.IsAlive)
+        if (MainManager.Instance.IsPaused || !MainManager.Instance.IsPlayerAlive)
         {
             thrustValue = 0f;
             boostValue = 0f;

@@ -19,7 +19,7 @@ public class DisplaySpeed : MonoBehaviour
 
     void Update()
     {
-        if (!playerLife.IsAlive)
+        if (MainManager.Instance.IsPaused || !MainManager.Instance.IsPlayerAlive)
         {
             return;
         }

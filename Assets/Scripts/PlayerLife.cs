@@ -20,14 +20,14 @@ public class PlayerLife : MonoBehaviour
     [SerializeField] private float minMaskAmount = 0.6f;
     [SerializeField] private float maxMaskAmount = 1f;
     [Space(20)]
-    public UnityEvent OnDeath = new UnityEvent();
+    //public UnityEvent OnDeath = new UnityEvent();
     public UnityEvent<float, float> OnLifeLost = new UnityEvent<float, float>();
 
 
     private float currentLife;
 
-    private bool isAlive = true;
-    public bool IsAlive { get { return isAlive; } }
+    //private bool isAlive = true;
+    //public bool IsAlive { get { return isAlive; } }
 
 
     private void Awake()
@@ -49,7 +49,7 @@ public class PlayerLife : MonoBehaviour
 
     private void Update()
     {
-        if (isAlive && currentLife < startLife)
+        if (MainManager.Instance.IsPlayerAlive && currentLife < startLife)
         {
             currentLife += Time.deltaTime * lifePointsRecoveredPerSec;
             currentLife = Mathf.Clamp(currentLife, 0f, 100f);
@@ -92,8 +92,8 @@ public class PlayerLife : MonoBehaviour
 
             if (currentLife <= 0)
             {
-                isAlive = false;
-                OnDeath.Invoke();
+                //isAlive = false;                
+                MainManager.Instance.PlayerDeath();
                 playerAudioSource.PlayOneShot(deathAudioClip);
                 Debug.Log($"Player is dead. Life lost: {lifeLost}. Current life: {currentLife}");
             }

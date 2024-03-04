@@ -67,7 +67,7 @@ public class SpeedParticles : MonoBehaviour
 
         float startSpeedFactor = 0.05f;
         mainModule.startSpeed = minParticleStartSpeed + velocitySqrMagnitude * startSpeedFactor;
-        
+
         mainModule.startSize = Mathf.Clamp((velocitySqrMagnitude * startSizeFactor) - (sqrSpeedThreshold * startSizeFactor), 0, 0.1f);
 
         float rateOverTimeFactor = 0.025f;
