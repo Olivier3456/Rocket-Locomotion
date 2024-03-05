@@ -12,7 +12,6 @@ public class MainManager : MonoBehaviour
     public bool IsPaused { get; private set; }
 
     public UnityEvent<bool> OnPauseStatusChanged = new UnityEvent<bool>();
-
     public UnityEvent OnDeath = new UnityEvent();
 
     private MySceneManager mySceneManager;
@@ -39,10 +38,13 @@ public class MainManager : MonoBehaviour
         IsPlayerAlive = true;
     }
 
+
     private void SceneManager_sceneLoaded(Scene scene, LoadSceneMode mode)
     {
         MainMenu = FindObjectOfType<GameMenu>();
+        IsPlayerAlive = true;
     }
+
 
     public void Pause(bool pause)
     {
@@ -59,6 +61,7 @@ public class MainManager : MonoBehaviour
             OnDeath.Invoke();
         }
     }
+
 
     public void LoadScene(int buildIndex)
     {

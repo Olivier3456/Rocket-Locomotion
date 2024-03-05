@@ -14,7 +14,7 @@ public class ControllersManager : MonoBehaviour
     void Start()
     {
         MainManager.Instance.MainMenu.OnShow.AddListener(OnMenuShow);
-        MainManager.Instance.MainMenu.OnHide.AddListener(OnMenuShow);
+        MainManager.Instance.MainMenu.OnHide.AddListener(OnMenuHide);
 
         if (SceneManager.GetActiveScene().buildIndex != MySceneManager.MAIN_MENU_SCENE_BUILD_INDEX)
         {
@@ -25,7 +25,7 @@ public class ControllersManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        MainManager.Instance.MainMenu.OnShow.RemoveListener(OnMenuHide);
+        MainManager.Instance.MainMenu.OnShow.RemoveListener(OnMenuShow);
         MainManager.Instance.MainMenu.OnHide.RemoveListener(OnMenuHide);
     }
 

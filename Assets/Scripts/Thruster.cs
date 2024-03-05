@@ -9,7 +9,7 @@ public class Thruster : MonoBehaviour
 {
     //[SerializeField] private PlayerLife playerLife;
     //[Space(20)]
-    [SerializeField] private ApplyThrustersForceToRigidbody applyThrustersForceToRigidbody;
+    [SerializeField] private ApplyForcesToRigidbody applyForcesToRigidbody;
     [Space(20)]
     [SerializeField] private ThrustersBoostManager thrusterBoostManager;
     [Space(20)]
@@ -152,7 +152,7 @@ public class Thruster : MonoBehaviour
             boostVector *= -1;
         }
 
-        applyThrustersForceToRigidbody.SetForceVector(this, thrustVector, boostVector);
+        applyForcesToRigidbody.SetForceVector(this, thrustVector, boostVector);
     }
 
 

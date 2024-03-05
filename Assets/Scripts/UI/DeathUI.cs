@@ -7,8 +7,6 @@ using UnityEngine.SceneManagement;
 public class DeathUI : MonoBehaviour
 {
     [SerializeField] private GameObject deadText;
-    [SerializeField] private Rigidbody rb;
-    //[SerializeField] private PlayerLife playerLife;
 
     private void Start()
     {
@@ -37,20 +35,26 @@ public class DeathUI : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         float timer = 0;
-        bool sceneLoading = false;
-        while (true)
+        float length = 2;
+        while (timer < length)
         {
             yield return null;
             deadTMP.fontSize += Time.deltaTime * 0.1f;
-            deadTMP.color = new Color(deadTMP.color.r, deadTMP.color.g, deadTMP.color.b, deadTMP.color.a + (Time.deltaTime * 0.5f));
+            deadTMP.color = new Color(deadTMP.color.r, deadTMP.color.g, deadTMP.color.b, deadTMP.color.a + (Time.deltaTime / length));
             timer += Time.deltaTime;
 
-            if (timer > 2 && !sceneLoading)
-            {
-                //SceneManager.LoadSceneAsync(0);
-                MainManager.Instance.MainMenu.Show();
-                sceneLoading = true;
-            }
         }
+
+        timer = 0;
+        length = 0.5f;
+        while (timer < length)
+        {
+            yield return null;
+            deadTMP.fontSize += Time.deltaTime * 0.1f;
+            deadTMP.color = new Color(deadTMP.color.r, deadTMP.color.g, deadTMP.color.b, deadTMP.color.a - (Time.deltaTime / length));
+            timer += Time.deltaTime;
+        }
+
+        MainManager.Instance.MainMenu.Show();
     }
 }
