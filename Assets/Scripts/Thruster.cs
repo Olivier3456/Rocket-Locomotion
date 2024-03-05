@@ -51,7 +51,7 @@ public class Thruster : MonoBehaviour
     private Color boostColor = new Color(0.9f, 0.1f, 0, 0.75f);    //Red with a bit of orange.
 
     public float ThrusterBaseForceFactor { get { return thrusterBaseForceFactor; } }
-    public float BoostValue { get { return boostValue; } }
+    public float ThrustValue { get { return thrustValue; } }
 
 
     void Start()
@@ -152,7 +152,7 @@ public class Thruster : MonoBehaviour
             boostVector *= -1;
         }
 
-        applyForcesToRigidbody.SetForceVector(this, thrustVector, boostVector);
+        applyForcesToRigidbody.SetThrusterForceVector(this, thrustVector, boostVector);
     }
 
 

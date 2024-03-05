@@ -18,12 +18,12 @@ public class PlayerColliderPlacement : MonoBehaviour
 
     //void Update()
     //{
-    //    float camYoffset = cam.position.y - xrOrigin.position.y;
+    //    float camYoffset = camTransform.position.y - xrOrigin.position.y;
     //    capsuleCollider.height = (camYoffset * 2f) - (capsuleCollider.radius * 2);
     //    //halfColliderHeight = (capsuleCollider.height * 0.5f) + capsuleCollider.radius;
 
     //    float yOffset = camYoffset - ((capsuleCollider.height * 0.5f) - capsuleCollider.radius);
-    //    Vector3 position = new Vector3(cam.position.x, xrOrigin.position.y + yOffset, cam.position.z);
+    //    Vector3 position = new Vector3(camTransform.position.x, xrOrigin.position.y + yOffset, camTransform.position.z);
 
     //    transform.position = position;
     //}
@@ -33,12 +33,12 @@ public class PlayerColliderPlacement : MonoBehaviour
 
     //void Update()
     //{
-    //    float camYoffset = cam.position.y - xrOrigin.position.y;
+    //    float camYoffset = camTransform.position.y - xrOrigin.position.y;
     //    capsuleCollider.height = camYoffset * 2f - capsuleCollider.radius * 2;
     //    halfColliderHeight = (capsuleCollider.height * 0.5f) + capsuleCollider.radius;
 
     //    float yOffset = camYoffset - halfColliderHeight;
-    //    Vector3 position = new Vector3(cam.position.x, xrOrigin.position.y + yOffset, cam.position.z);
+    //    Vector3 position = new Vector3(camTransform.position.x, xrOrigin.position.y + yOffset, camTransform.position.z);
 
     //    transform.position = position;
     //}

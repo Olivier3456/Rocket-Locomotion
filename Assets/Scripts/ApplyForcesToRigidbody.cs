@@ -6,7 +6,8 @@ public class ApplyForcesToRigidbody : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Thruster leftThruster;
-    [SerializeField, Tooltip("Can stay empty if there is no wind in the scene.")] private Wind wind;
+    
+    private Wind wind;
 
     private Vector3 leftThrustForce;
     private Vector3 rightThrustForce;
@@ -17,7 +18,13 @@ public class ApplyForcesToRigidbody : MonoBehaviour
     private bool leftThrusterUpdated = false;
     private bool rightThrusterUpdated = false;
 
-    public void SetForceVector(Thruster thruster, Vector3 thrustForce, Vector3 boostForce)
+    private void Start()
+    {
+        wind = FindObjectOfType<Wind>();
+    }
+
+
+    public void SetThrusterForceVector(Thruster thruster, Vector3 thrustForce, Vector3 boostForce)
     {
         if (thruster == leftThruster)
         {
