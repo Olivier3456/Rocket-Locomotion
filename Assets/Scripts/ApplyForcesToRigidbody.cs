@@ -37,16 +37,7 @@ public class ApplyForcesToRigidbody : MonoBehaviour
             float clamp = 1.75f;
             Vector3 totalThrustVector = Vector3.ClampMagnitude(leftThrustForce + rightThrustForce, leftThruster.ThrusterBaseForceFactor * clamp);
             Vector3 totalBoostVector = leftBoostForce + rightBoostForce;
-            Vector3 finalVector;
-            
-            if (wind == null)
-            {
-                finalVector = totalThrustVector + totalBoostVector;
-            }
-            else
-            {
-                finalVector = totalThrustVector + totalBoostVector + wind.WindVector;
-            }            
+            Vector3 finalVector = wind == null ? totalThrustVector + totalBoostVector : totalThrustVector + totalBoostVector + wind.Vector;
 
             rb.AddForce(finalVector);
 
