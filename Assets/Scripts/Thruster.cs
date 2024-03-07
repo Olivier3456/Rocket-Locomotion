@@ -20,9 +20,7 @@ public class Thruster : MonoBehaviour
     [SerializeField] private InputActionReference thrust;
     [SerializeField] private InputActionReference boost;
     [SerializeField] private InputActionReference rotate;
-    [Space(20)]
-    [SerializeField] private float thrusterBaseForceFactor = 700f;
-    [SerializeField] private float thrusterBoostForceFactor = 700f;
+    
     [Space(20)]
     [SerializeField] private AudioSource mainAudioSource;
     [SerializeField] private AudioSource rotateAudioSource;
@@ -50,7 +48,6 @@ public class Thruster : MonoBehaviour
     private Color transparentBoost = new Color(0.9f, 0.1f, 0, 0f);
     private Color boostColor = new Color(0.9f, 0.1f, 0, 0.75f);    //Red with a bit of orange.
 
-    public float ThrusterBaseForceFactor { get { return thrusterBaseForceFactor; } }
     public float ThrustValue { get { return thrustValue; } }
 
 
@@ -143,8 +140,8 @@ public class Thruster : MonoBehaviour
         Vector3 thrustVector;
         Vector3 boostVector;
 
-        thrustVector = controllerTransform.forward * thrustValue * thrusterBaseForceFactor;
-        boostVector = controllerTransform.forward * boostValue * thrusterBoostForceFactor;
+        thrustVector = controllerTransform.forward * thrustValue;
+        boostVector = controllerTransform.forward * boostValue;
 
         if (!isForward)
         {

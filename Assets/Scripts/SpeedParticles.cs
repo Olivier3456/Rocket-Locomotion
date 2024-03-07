@@ -5,9 +5,10 @@ using static UnityEngine.ParticleSystem;
 
 public class SpeedParticles : MonoBehaviour
 {
-    [SerializeField] private Rigidbody playerRb;
+    [SerializeField] private AirMovements airMovements;
+    
     [SerializeField] private ParticleSystem particle;
-    [SerializeField] private float sqrSpeedThreshold = 100f;
+    [SerializeField] private float speedThreshold = 10f;
     [SerializeField] private float minParticleStartSpeed = 10f;
 
     private ParticleSystem.MainModule mainModule;
@@ -29,17 +30,17 @@ public class SpeedParticles : MonoBehaviour
         mainModule.startSize = 0f;
         emissionModule.rateOverTime = 0f;
 
-        startSizeFactor = 0.01f / sqrSpeedThreshold;
+        startSizeFactor = 0.01f / speedThreshold;
     }
 
 
     void Update()
     {
-        float velocitySqrMagnitude = playerRb.velocity.sqrMagnitude;
+        float airSpeed = airMovements.Speed;
 
-        //Debug.Log($"velocity square magnitude = {velocitySqrMagnitude}.");
+        //Debug.Log($"velocity square magnitude = {airSpeed}.");
 
-        if (velocitySqrMagnitude < sqrSpeedThreshold)
+        if (airSpeed < speedThreshold)
         {
             if (particle.isPlaying)
             {
@@ -61,16 +62,16 @@ public class SpeedParticles : MonoBehaviour
 
         //Debug.Log("Speed particules emission.");
 
-        Vector3 particleDirection = -playerRb.velocity.normalized;
+        Vector3 particleDirection = -airMovements.Direction;
         transform.forward = particleDirection;
         transform.position = transform.parent.position - particleDirection * particleSystemDistanceToCamera;
 
-        float startSpeedFactor = 0.05f;
-        mainModule.startSpeed = minParticleStartSpeed + velocitySqrMagnitude * startSpeedFactor;
+        float startSpeedFactor = 0.75f;
+        mainModule.startSpeed = minParticleStartSpeed + airSpeed * startSpeedFactor;
 
-        mainModule.startSize = Mathf.Clamp((velocitySqrMagnitude * startSizeFactor) - (sqrSpeedThreshold * startSizeFactor), 0, 0.1f);
+        mainModule.startSize = Mathf.Clamp((airSpeed * startSizeFactor) - (speedThreshold * startSizeFactor), 0, 0.1f);
 
-        float rateOverTimeFactor = 0.025f;
-        emissionModule.rateOverTime = velocitySqrMagnitude * rateOverTimeFactor;
+        float rateOverTimeFactor = 0.25f;
+        emissionModule.rateOverTime = airSpeed * rateOverTimeFactor;
     }
 }

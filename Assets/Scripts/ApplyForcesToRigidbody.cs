@@ -6,7 +6,12 @@ public class ApplyForcesToRigidbody : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Thruster leftThruster;
-    
+    [Space(20)]
+    [SerializeField] private float thrusterForceFactor = 700f;
+    [SerializeField] private float thrusterBoostForceFactor = 700f;
+    [Space(20)]
+    [SerializeField] private float windFactor = 100f;
+
     private Wind wind;
 
     private Vector3 leftThrustForce;
@@ -41,10 +46,19 @@ public class ApplyForcesToRigidbody : MonoBehaviour
 
         if (leftThrusterUpdated && rightThrusterUpdated)
         {
+            Vector3 finalLeftThrustForce = leftThrustForce * thrusterForceFactor;
+            Vector3 finalLeftBoostForce = leftBoostForce * thrusterBoostForceFactor;
+            
+            Vector3 finalRightThrustForce = rightThrustForce * thrusterForceFactor;
+            Vector3 finalRightBoostForce = rightBoostForce * thrusterBoostForceFactor;
+            
+            Vector3 finalWindForce = wind.Vector * windFactor;
+            
             float clamp = 1.75f;
-            Vector3 totalThrustVector = Vector3.ClampMagnitude(leftThrustForce + rightThrustForce, leftThruster.ThrusterBaseForceFactor * clamp);
-            Vector3 totalBoostVector = leftBoostForce + rightBoostForce;
-            Vector3 finalVector = wind == null ? totalThrustVector + totalBoostVector : totalThrustVector + totalBoostVector + wind.Vector;
+            Vector3 totalThrustVector = Vector3.ClampMagnitude(finalLeftThrustForce + finalRightThrustForce, thrusterForceFactor * clamp);            
+            Vector3 totalBoostVector = finalLeftBoostForce + finalRightBoostForce;
+            
+            Vector3 finalVector = wind == null ? totalThrustVector + totalBoostVector : totalThrustVector + totalBoostVector + finalWindForce;
 
             rb.AddForce(finalVector);
 

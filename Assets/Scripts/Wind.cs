@@ -7,7 +7,7 @@ public class Wind : MonoBehaviour
     [SerializeField] private float directionDelta = 100f;
     [Space(20)]
     [SerializeField] private float minimumSpeed = 0f;
-    [SerializeField] private float maximumSpeed = 1000f;
+    [SerializeField] private float maximumSpeed = 100f;
     [Space(20)]
     [SerializeField] private float speedChangeRate = 0.1f;
     [SerializeField] private float rotationChangeRate = 0.1f;
@@ -22,7 +22,6 @@ public class Wind : MonoBehaviour
     public Vector3 Vector { get { return windVector; } }
     public Vector3 Direction { get { return currentDirection; } }
     public float Magnitude { get { return currentSpeed; } }
-
     public float MinimumSpeed { get { return minimumSpeed; } }
     public float MaximumSpeed { get { return maximumSpeed; } }
 
