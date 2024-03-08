@@ -1,4 +1,4 @@
-using UnityEditor.Experimental.GraphView;
+using System.Collections;
 using UnityEngine;
 
 public class Wind : MonoBehaviour
@@ -6,18 +6,19 @@ public class Wind : MonoBehaviour
     [SerializeField] private Vector3 initialDirection = new Vector3(1, 0, 0);
     [SerializeField] private float directionDelta = 100f;
     [Space(20)]
-    [SerializeField] private float minimumSpeed = 0f;
+    [SerializeField] private float minimumSpeed = 10f;
     [SerializeField] private float maximumSpeed = 100f;
     [Space(20)]
     [SerializeField] private float speedChangeRate = 0.1f;
     [SerializeField] private float rotationChangeRate = 0.1f;
 
+
     private float perlinNoiseTimeSpeed = 0.0f;
     private float perlinNoiseTimeDirection = 0.0f;
 
-    private float currentSpeed;
-    private Vector3 currentDirection;
-    private Vector3 windVector;
+    private float currentSpeed = 0f;
+    private Vector3 currentDirection = Vector3.zero;
+    private Vector3 windVector = Vector3.zero;
 
     public Vector3 Vector { get { return windVector; } }
     public Vector3 Direction { get { return currentDirection; } }
@@ -33,13 +34,18 @@ public class Wind : MonoBehaviour
         initialDirection.y = 0.0f;  // The wind will only be horizontal
         initialDirection = initialDirection.normalized;
         currentDirection = initialDirection;
+
+        if (minimumSpeed > maximumSpeed)
+        {
+            minimumSpeed = maximumSpeed;
+        }
     }
 
 
     private void Update()
     {
         UpdateDirection();
-        UpdateSpeed();        
+        UpdateSpeed();
         windVector = currentDirection * currentSpeed;
     }
 
@@ -61,5 +67,5 @@ public class Wind : MonoBehaviour
         float perlinValue = Mathf.PerlinNoise(perlinNoiseTimeSpeed, 0.0f);
 
         currentSpeed = minimumSpeed + (perlinValue * (maximumSpeed - minimumSpeed));
-    }    
+    }
 }

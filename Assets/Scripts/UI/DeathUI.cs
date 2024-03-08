@@ -55,6 +55,6 @@ public class DeathUI : MonoBehaviour
             timer += Time.deltaTime;
         }
 
-        MainManager.Instance.MainMenu.Show();
+        MainManager.Instance.GameMenu.Show();
     }
 }

@@ -33,10 +33,10 @@ public class AirSpeedAudioSource : MonoBehaviour
         audioSource.transform.position = camTransform.position - (airMovements.Direction * distanceFromCam);
 
         float minPitch = 0.5f;
-        float pitchAirSpeedMultiplier = 0.005f;
+        float pitchAirSpeedMultiplier = 0.0075f;
         audioSource.pitch = minPitch + (airMovements.Speed * pitchAirSpeedMultiplier);
 
-        float volumeAirSpeedMultiplier = 0.01f;
+        float volumeAirSpeedMultiplier = 0.015f;
         audioSource.volume = (airMovements.Speed * volumeAirSpeedMultiplier) - Mathf.Max(leftThruster.ThrustValue, rightThruster.ThrustValue); // We don't ear wind if thrusters are in action.
     }
 }

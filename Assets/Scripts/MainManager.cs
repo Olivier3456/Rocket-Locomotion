@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class MainManager : MonoBehaviour
 {
     public static MainManager Instance { get; private set; }
-    public GameMenu MainMenu { get; private set; }
+    public GameMenu GameMenu { get; private set; }
     public bool IsPlayerAlive { get; private set; }
     public bool IsPaused { get; private set; }
 
@@ -29,7 +29,7 @@ public class MainManager : MonoBehaviour
             return;
         }
 
-        MainMenu = FindObjectOfType<GameMenu>();
+        GameMenu = FindObjectOfType<GameMenu>();
 
         SceneManager.sceneLoaded += SceneManager_sceneLoaded;
 
@@ -41,7 +41,7 @@ public class MainManager : MonoBehaviour
 
     private void SceneManager_sceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        MainMenu = FindObjectOfType<GameMenu>();
+        GameMenu = FindObjectOfType<GameMenu>();
         IsPlayerAlive = true;
     }
 

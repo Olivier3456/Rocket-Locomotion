@@ -20,7 +20,7 @@ public class Thruster : MonoBehaviour
     [SerializeField] private InputActionReference thrust;
     [SerializeField] private InputActionReference boost;
     [SerializeField] private InputActionReference rotate;
-    
+
     [Space(20)]
     [SerializeField] private AudioSource mainAudioSource;
     [SerializeField] private AudioSource rotateAudioSource;
@@ -136,7 +136,7 @@ public class Thruster : MonoBehaviour
         }
 
         UpdateThrustersValues();
-                
+
         Vector3 thrustVector;
         Vector3 boostVector;
 
