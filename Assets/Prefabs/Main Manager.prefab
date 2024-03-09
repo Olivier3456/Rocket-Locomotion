@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05144fcaa1f8df44ca8a44c5cc5f4635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mySceneManager: {fileID: 0}
   OnPauseStatusChanged:
     m_PersistentCalls:
       m_Calls: []

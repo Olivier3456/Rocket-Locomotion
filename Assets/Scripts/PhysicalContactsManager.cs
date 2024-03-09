@@ -9,48 +9,23 @@ public class PhysicalContactsManager : MonoBehaviour
     [SerializeField] private Transform playerFeetTransform;
     [SerializeField] private Camera cam;
     [SerializeField] private Transform xrOrigin;
-    //[SerializeField] private Rigidbody rb;
     [SerializeField] private LayerMask groundLayerMask;
     [Space(20)]
     public UnityEvent<bool> OnGrounded = new UnityEvent<bool>();
-    //public UnityEvent<float> OnPhysicalShock = new UnityEvent<float>();
-    public UnityEvent<GameObject, Vector3, Vector3> OnCollision = new UnityEvent<GameObject, Vector3, Vector3>();
+    public UnityEvent<float> OnCollision = new UnityEvent<float>();
 
 
     private bool isGrounded;
     public bool IsGrounded { get { return isGrounded; } }
 
-    //private float lastVelocitySqrtMagnitude = 0;
-
-    //private float dangerousVelocityDifference = 1000;
-
-
+   
     private void FixedUpdate()
     {
         UpdateCollider();
         UpdatePlayerFeetPosition();        
-        GroundCheck();
-        //VelocityCheck();
+        GroundCheck();        
     }
-
-
-    //private void VelocityCheck()
-    //{
-    //    Vector3 velocity = rb.velocity;
-    //    float velocitySqrtMagnitude = velocity.sqrMagnitude;
-
-    //    float velocityDifference = Mathf.Abs(velocitySqrtMagnitude - lastVelocitySqrtMagnitude);        
-
-    //    if (velocityDifference > dangerousVelocityDifference)
-    //    {
-    //        Debug.Log($"Violent shock detected: velocity difference = {velocityDifference}");
-    //        OnPhysicalShock.Invoke(velocityDifference);
-    //    }
-
-    //    lastVelocitySqrtMagnitude = velocitySqrtMagnitude;
-    //}
-
-    
+       
 
     private void UpdateCollider()
     {
@@ -101,18 +76,16 @@ public class PhysicalContactsManager : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Vector3 relativeVelocity = collision.relativeVelocity;
-        Vector3 collisionNormal = collision.contacts[0].normal;
-        Debug.Log($"Number of contact points of the collision: {collision.contacts.Length}. Collision's normal vector (for the first contact point): {collisionNormal}");
+        float magnitude = collision.relativeVelocity.magnitude;
+        Vector3 direction = collision.relativeVelocity.normalized;
+        Vector3 normal = collision.contacts[0].normal;
+        float dot = Vector3.Dot(normal, direction);
+        float collisionForce = magnitude * dot;
+
+        //Debug.Log($"Number of contact points of the collision: {collision.contacts.Length}. Collision's normal vector (for the first contact point): {normal}");
+        //Debug.Log($"Relative velocity magnitude: {magnitude}. Dot product of relative velocity direction and collisionNormal: {dot}. Collision force: {collisionForce}");
 
         //Vector3 contactNormal = collision.contacts[0].normal;
-        OnCollision.Invoke(collision.gameObject, relativeVelocity, collisionNormal);
+        OnCollision.Invoke(collisionForce);
     }
-
-
-
-    //public void SetDangerousVelocityDifference(float threshold)
-    //{
-    //    dangerousVelocityDifference = threshold;
-    //}
 }

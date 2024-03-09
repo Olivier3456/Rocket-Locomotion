@@ -20,14 +20,12 @@ public class PlayerLife : MonoBehaviour
     [SerializeField] private float minMaskAmount = 0.6f;
     [SerializeField] private float maxMaskAmount = 1f;
     [Space(20)]
-    //public UnityEvent OnDeath = new UnityEvent();
-    public UnityEvent<float, float> OnLifeLost = new UnityEvent<float, float>();
+    public UnityEvent<float, float, float> OnLifeLost = new UnityEvent<float, float, float>();
+
+    public float RelativeVelocityThresholdToLoseLife { get { return relativeVelocityThresholdToLoseLife; } }
 
 
     private float currentLife;
-
-    //private bool isAlive = true;
-    //public bool IsAlive { get { return isAlive; } }
 
 
     private void Awake()
@@ -68,25 +66,19 @@ public class PlayerLife : MonoBehaviour
     }
 
 
-    private void OnCollision(GameObject other, Vector3 relativeVelocity, Vector3 collisionNormal)
+    private void OnCollision(float collisionForce)
     {
         if (currentLife < 0)
         {
             return;
         }
 
-        float relativeVelocityMagnitude = relativeVelocity.magnitude;
-        Vector3 relativeVelocityDirection = relativeVelocity.normalized;
-        float dot = Vector3.Dot(collisionNormal, relativeVelocityDirection);
-        float collisionForce = relativeVelocityMagnitude * dot;
-
-        Debug.Log($"Relative velocity magnitude: {relativeVelocityMagnitude}. Dot product of relative velocity direction and collisionNormal: {dot}. Collision force: {collisionForce}");
 
         if (collisionForce > relativeVelocityThresholdToLoseLife)
         {
             float lifeLost = collisionForce * lifePointsLostPerCollisionForceUnit;
             currentLife -= lifeLost;
-            OnLifeLost.Invoke(lifeLost, currentLife);
+            OnLifeLost.Invoke(lifeLost, currentLife, startLife);
 
             UpdateRedCanvasGroupAlpha();
 

@@ -93,13 +93,11 @@ public class GameMenu : MonoBehaviour
 
     public void ReturnToMainMenuButton()
     {
-        //Hide();
         MainManager.Instance.LoadScene(MySceneManager.MAIN_MENU_SCENE_BUILD_INDEX);
     }
 
     public void RestartButton()
     {
-        //Hide();
         MainManager.Instance.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

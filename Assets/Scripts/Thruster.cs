@@ -49,6 +49,7 @@ public class Thruster : MonoBehaviour
     private Color boostColor = new Color(0.9f, 0.1f, 0, 0.75f);    //Red with a bit of orange.
 
     public float ThrustValue { get { return thrustValue; } }
+    public float BoostValue { get { return boostValue; } }
 
 
     void Start()
