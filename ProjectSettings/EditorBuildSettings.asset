@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/NY Block 2.unity
     guid: 2fb68d139be07bc43bbb7aa42fed8ecb
   - enabled: 0
-    path: Assets/Scenes/_Test VR Rig.unity
+    path: Assets/Scenes/_Test Race.unity
     guid: e122cf8f42061e04da83af7e534d4d25
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 3fbb26afabb65d3428bb3dce01ed0473,
