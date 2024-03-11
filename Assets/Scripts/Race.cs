@@ -221,11 +221,13 @@ public class Race : MonoBehaviour, IEvent
 
     IEnumerator RaceEndCoroutine()
     {
+        canPause = false;
         yield return waitOneSec;
         yield return waitOneSec;
         countdownText.gameObject.SetActive(false);
         timerText.gameObject.SetActive(false);
         canUnpause = false;
+        canPause = true;
         MainManager.Instance.GameMenu.Show();
     }
 

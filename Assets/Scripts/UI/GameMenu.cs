@@ -44,12 +44,13 @@ public class GameMenu : MonoBehaviour
 
     private void Start()
     {
-        Hide();
+        menuGameObject.SetActive(false);
     }
 
-    public void Show()
-    {
-        if (MainManager.Instance.Pause(true))
+
+    public void Show(bool withoutPause = false)
+    {        
+        if (withoutPause || MainManager.Instance.Pause(true))
         {
             Transform cameraTransform = Camera.main.transform;
 
@@ -65,9 +66,9 @@ public class GameMenu : MonoBehaviour
         }
     }
 
-    public void Hide()
+    public void Hide(bool withoutUnpause = false)
     {
-        if (MainManager.Instance.Pause(false))
+        if (withoutUnpause || MainManager.Instance.Pause(false))
         {
             menuGameObject.SetActive(false);
             OnHide.Invoke();

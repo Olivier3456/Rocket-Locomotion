@@ -9,14 +9,7 @@ public class MainManager : MonoBehaviour
     public static MainManager Instance { get; private set; }
     public GameMenu GameMenu { get; private set; }
     public bool IsPlayerAlive { get; private set; }
-    public bool isSimulationRunning
-    {
-        get
-        {
-            return ongoingEvent == null ? IsPlayerAlive && !IsPaused :
-                                          IsPlayerAlive && !IsPaused && ongoingEvent.IsEventStarted() && !ongoingEvent.IsEventFinished();
-        }
-    }
+    public bool isSimulationRunning { get { return ongoingEvent == null ? IsPlayerAlive && !IsPaused : IsPlayerAlive && !IsPaused && ongoingEvent.IsEventStarted() && !ongoingEvent.IsEventFinished(); } }
     public bool CanPause { get { return (!IsPlayerAlive || (ongoingEvent != null && !ongoingEvent.IsPauseAllowed())) ? false : true; } }
     public bool CanUnpause { get { return (!IsPlayerAlive || (ongoingEvent != null && !ongoingEvent.IsUnpauseAllowed())) ? false : true; } }
     public bool IsPaused { get; private set; }
