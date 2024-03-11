@@ -679,6 +679,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11371c26a15ce514fa42b88eb32065a5, type: 3}
+--- !u!1 &1853775399 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 70805772186119392, guid: 11371c26a15ce514fa42b88eb32065a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1853775398}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &326889788045344452
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -697,6 +703,11 @@ PrefabInstance:
       propertyPath: countdownText
       value: 
       objectReference: {fileID: 803910422}
+    - target: {fileID: 2529107642384335113, guid: 5b2486e7a63afad419552a2278d07724,
+        type: 3}
+      propertyPath: eventUiGameObject
+      value: 
+      objectReference: {fileID: 1853775399}
     - target: {fileID: 6234458516270749822, guid: 5b2486e7a63afad419552a2278d07724,
         type: 3}
       propertyPath: m_Name

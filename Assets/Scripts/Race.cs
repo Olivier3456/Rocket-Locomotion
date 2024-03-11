@@ -11,6 +11,7 @@ public class Race : MonoBehaviour, IEvent
     [SerializeField] private float startTime = 90;
     [SerializeField, Range(3, 5)] private int countdownLength = 5;
     [Space(20)]
+    [SerializeField, Tooltip("In Player HUD")] private GameObject eventUiGameObject;
     [SerializeField, Tooltip("In Player HUD")] private TextMeshProUGUI countdownText;
     [SerializeField, Tooltip("In Player HUD")] private TextMeshProUGUI timerText;
     [Space(20)]
@@ -86,6 +87,7 @@ public class Race : MonoBehaviour, IEvent
         }
 
         countdownText.text = string.Empty;
+        eventUiGameObject.SetActive(true);
 
         StartCoroutine(StartRaceCoroutine());
     }
