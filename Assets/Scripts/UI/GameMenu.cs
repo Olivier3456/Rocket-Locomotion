@@ -49,27 +49,29 @@ public class GameMenu : MonoBehaviour
 
     public void Show()
     {
-        MainManager.Instance.Pause(true);
+        if (MainManager.Instance.Pause(true))
+        {
+            Transform cameraTransform = Camera.main.transform;
 
-        Transform cameraTransform = Camera.main.transform;
+            menuRectTransform.position = cameraTransform.position + cameraTransform.forward * distanceFromCamera;
+            menuRectTransform.forward = cameraTransform.forward;
 
-        menuRectTransform.position = cameraTransform.position + cameraTransform.forward * distanceFromCamera;
-        menuRectTransform.forward = cameraTransform.forward;
+            menuRectTransform.localScale = Vector3.one * distanceFromCamera * menuSize;
+            menuGameObject.SetActive(true);
 
-        menuRectTransform.localScale = Vector3.one * distanceFromCamera * menuSize;
-        menuGameObject.SetActive(true);
+            continueButtonGameObject.SetActive(MainManager.Instance.CanUnpause);
 
-        continueButtonGameObject.SetActive(MainManager.Instance.IsPlayerAlive);
-
-        OnShow.Invoke();
+            OnShow.Invoke();
+        }
     }
 
     public void Hide()
     {
-        menuGameObject.SetActive(false);
-        MainManager.Instance.Pause(false);
-
-        OnHide.Invoke();
+        if (MainManager.Instance.Pause(false))
+        {
+            menuGameObject.SetActive(false);
+            OnHide.Invoke();
+        }
     }
 
     public void ToggleShowHide()
@@ -83,8 +85,7 @@ public class GameMenu : MonoBehaviour
             Show();
         }
     }
-
-
+    
     // ==================================== BUTTONS FUNCTIONS ====================================
     public void ContinueButton()
     {

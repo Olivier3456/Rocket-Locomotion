@@ -40,19 +40,21 @@ public class PhysicsWalk : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (moveInput == Vector2.zero || !physicalContactsManager.IsGrounded || MainManager.Instance.IsPaused || !MainManager.Instance.IsPlayerAlive)
+        if (moveInput == Vector2.zero ||
+            !physicalContactsManager.IsGrounded ||
+            !MainManager.Instance.isSimulationRunning)
         {
             return;
         }
 
         Vector3 horizontalHeadForward = new Vector3(head.forward.x, 0, head.forward.z);
         Vector3 horizontalHeadRight = new Vector3(head.right.x, 0, head.right.z);
-        
+
         Vector3 forwardMovement = horizontalHeadForward * moveInput.y * walkSpeed;
         Vector3 rightMovement = horizontalHeadRight * moveInput.x * walkSpeed;
 
         Vector3 movementVector = forwardMovement + rightMovement;
 
-        rb.velocity = movementVector;       
+        rb.velocity = movementVector;
     }
 }

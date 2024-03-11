@@ -9,12 +9,25 @@ public class MainManager : MonoBehaviour
     public static MainManager Instance { get; private set; }
     public GameMenu GameMenu { get; private set; }
     public bool IsPlayerAlive { get; private set; }
+    public bool isSimulationRunning
+    {
+        get
+        {
+            return ongoingEvent == null ? IsPlayerAlive && !IsPaused :
+                                          IsPlayerAlive && !IsPaused && ongoingEvent.IsEventStarted() && !ongoingEvent.IsEventFinished();
+        }
+    }
+    public bool CanPause { get { return (!IsPlayerAlive || (ongoingEvent != null && !ongoingEvent.IsPauseAllowed())) ? false : true; } }
+    public bool CanUnpause { get { return (!IsPlayerAlive || (ongoingEvent != null && !ongoingEvent.IsUnpauseAllowed())) ? false : true; } }
     public bool IsPaused { get; private set; }
 
     public UnityEvent<bool> OnPauseStatusChanged = new UnityEvent<bool>();
     public UnityEvent OnDeath = new UnityEvent();
 
     private MySceneManager mySceneManager;
+
+    private IEvent ongoingEvent;
+
 
     private void Awake()
     {
@@ -43,13 +56,24 @@ public class MainManager : MonoBehaviour
     {
         GameMenu = FindObjectOfType<GameMenu>();
         IsPlayerAlive = true;
+        IsPaused = false;
     }
 
 
-    public void Pause(bool pause)
+    public bool Pause(bool pause)
     {
+        if (pause && !CanPause)
+        {
+            return false;
+        }
+        if (!pause && !CanUnpause)
+        {
+            return false;
+        }
+
         IsPaused = pause;
         OnPauseStatusChanged.Invoke(pause);
+        return true;
     }
 
 
@@ -74,5 +98,33 @@ public class MainManager : MonoBehaviour
     }
 
 
+    public void RegisterOngoingEvent(IEvent IEvent)
+    {
+        if (ongoingEvent == null)
+        {
+            ongoingEvent = IEvent;
+            Debug.Log("OngoingEvent registered to MainManager.");
+        }
+        else
+        {
+            Debug.LogError("OngoingEvent is not null, can't register two at a time!");
+        }
+    }
 
+    public void UnregisterOngoingEvent(IEvent IEvent)
+    {
+        if (ongoingEvent == null)
+        {
+            Debug.LogError("Can't unregister ongoingEvent: it is already null!");
+        }
+        else if (ongoingEvent != IEvent)
+        {
+            Debug.Log("An ongoingEvent can't be unregistered by another ongoingEvent!");
+        }
+        else
+        {
+            ongoingEvent = null;
+            Debug.Log("OngoingEvent unregistered to MainManager.");
+        }
+    }
 }

@@ -6,9 +6,6 @@ public class WindIndicator : MonoBehaviour
     [SerializeField] private Transform windIndicatorVisual;
     [SerializeField] private TextMeshProUGUI speedText;
     [Space(20)]
-    [SerializeField] private bool changeScale;
-    [SerializeField, Tooltip("The length of the arrow when the wind is at its maximum value.")] private float maximumLocalScale = 2f;
-    [Space(20)]
     [SerializeField] private float indicatorYAngleOffset = 270f;
 
     private Wind wind;

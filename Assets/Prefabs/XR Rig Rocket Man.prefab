@@ -6768,8 +6768,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   windIndicatorVisual: {fileID: 7885873187968108652}
   speedText: {fileID: 3838234555750406837}
-  changeScale: 0
-  maximumLocalScale: 2
   indicatorYAngleOffset: 180
 --- !u!1 &2179843291372188961
 GameObject:
@@ -8713,7 +8711,7 @@ GameObject:
   - component: {fileID: 220074776400400211}
   m_Layer: 0
   m_Name: XR Rig Rocket Man
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

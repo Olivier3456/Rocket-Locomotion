@@ -131,11 +131,6 @@ public class Thruster : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (MainManager.Instance.IsPaused || !MainManager.Instance.IsPlayerAlive)
-        {
-            return;
-        }
-
         UpdateThrustersValues();
 
         Vector3 thrustVector;
@@ -156,7 +151,7 @@ public class Thruster : MonoBehaviour
 
     private void UpdateThrustersValues()
     {
-        if (MainManager.Instance.IsPaused || !MainManager.Instance.IsPlayerAlive)
+        if (!MainManager.Instance.isSimulationRunning)
         {
             thrustValue = 0f;
             boostValue = 0f;

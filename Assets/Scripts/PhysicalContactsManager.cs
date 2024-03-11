@@ -18,14 +18,17 @@ public class PhysicalContactsManager : MonoBehaviour
     private bool isGrounded;
     public bool IsGrounded { get { return isGrounded; } }
 
-   
+    private const string PLAYER_GROUNDED = "Player is grounded";
+    private const string PLAYER_NOT_GROUNDED = "Player is not grounded anymore";
+
+
     private void FixedUpdate()
     {
         UpdateCollider();
-        UpdatePlayerFeetPosition();        
-        GroundCheck();        
+        UpdatePlayerFeetPosition();
+        GroundCheck();
     }
-       
+
 
     private void UpdateCollider()
     {
@@ -43,7 +46,7 @@ public class PhysicalContactsManager : MonoBehaviour
 
     private void UpdatePlayerFeetPosition()
     {
-        float playerFeetYOffset = (playerCollider.height * 0.5f);
+        float playerFeetYOffset = playerCollider.height * 0.5f;
 
         Vector3 playerFeetPosition = new Vector3(playerCollider.center.x, playerCollider.center.y - playerFeetYOffset, playerCollider.center.z);
 
@@ -59,7 +62,7 @@ public class PhysicalContactsManager : MonoBehaviour
             {
                 isGrounded = true;
                 OnGrounded.Invoke(isGrounded);
-                Debug.Log("Player is grounded");
+                //Debug.Log(PLAYER_GROUNDED);
             }
         }
         else
@@ -68,7 +71,7 @@ public class PhysicalContactsManager : MonoBehaviour
             {
                 isGrounded = false;
                 OnGrounded.Invoke(isGrounded);
-                Debug.Log("Player is not grounded anymore.");
+                //Debug.Log(PLAYER_NOT_GROUNDED);
             }
         }
     }
@@ -85,7 +88,6 @@ public class PhysicalContactsManager : MonoBehaviour
         //Debug.Log($"Number of contact points of the collision: {collision.contacts.Length}. Collision's normal vector (for the first contact point): {normal}");
         //Debug.Log($"Relative velocity magnitude: {magnitude}. Dot product of relative velocity direction and collisionNormal: {dot}. Collision force: {collisionForce}");
 
-        //Vector3 contactNormal = collision.contacts[0].normal;
         OnCollision.Invoke(collisionForce);
     }
 }

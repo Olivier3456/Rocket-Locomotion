@@ -24,9 +24,9 @@ public class PlayerLife : MonoBehaviour
 
     public float RelativeVelocityThresholdToLoseLife { get { return relativeVelocityThresholdToLoseLife; } }
 
-
     private float currentLife;
 
+    private const string MASK_AMOUNT = "_MaskAmount";
 
     private void Awake()
     {
@@ -36,7 +36,7 @@ public class PlayerLife : MonoBehaviour
 
     private void OnDisable()
     {
-        redSpriteMaterial.SetFloat("_MaskAmount", maxMaskAmount);
+        redSpriteMaterial.SetFloat(MASK_AMOUNT, maxMaskAmount);
     }
 
     private void Start()
@@ -62,17 +62,16 @@ public class PlayerLife : MonoBehaviour
         maxMaskAmount = 1f;
         float difference = maxMaskAmount - minMaskAmount;
         float maskAmount = maxMaskAmount - (((startLife - currentLife) / startLife) * difference);
-        redSpriteMaterial.SetFloat("_MaskAmount", maskAmount);
+        redSpriteMaterial.SetFloat(MASK_AMOUNT, maskAmount);
     }
 
 
     private void OnCollision(float collisionForce)
     {
-        if (currentLife < 0)
+        if (!MainManager.Instance.isSimulationRunning)
         {
             return;
         }
-
 
         if (collisionForce > relativeVelocityThresholdToLoseLife)
         {
@@ -87,12 +86,12 @@ public class PlayerLife : MonoBehaviour
                 //isAlive = false;                
                 MainManager.Instance.PlayerDeath();
                 playerAudioSource.PlayOneShot(deathAudioClip);
-                Debug.Log($"Player is dead. Life lost: {lifeLost}. Current life: {currentLife}");
+                //Debug.Log($"Player is dead. Life lost: {lifeLost}. Current life: {currentLife}");
             }
             else
             {
                 playerAudioSource.PlayOneShot(injuryAudioClip);
-                Debug.Log($"Player is injured. Life lost: {lifeLost}. Current life: {currentLife}");
+                //Debug.Log($"Player is injured. Life lost: {lifeLost}. Current life: {currentLife}");
             }
         }
     }
