@@ -13,17 +13,13 @@ public class PhysicalContactsManager : MonoBehaviour
     [Space(20)]
     public UnityEvent<bool> OnGrounded = new UnityEvent<bool>();
     public UnityEvent<float> OnCollision = new UnityEvent<float>();
-    public UnityEvent OnBorderCollided = new UnityEvent();
 
 
     private bool isGrounded;
     public bool IsGrounded { get { return isGrounded; } }
 
-    private const string BORDER_TAG = "Border";
-
     private const string PLAYER_GROUNDED = "Player is grounded";
     private const string PLAYER_NOT_GROUNDED = "Player is not grounded anymore";
-
 
 
     private void FixedUpdate()
@@ -80,15 +76,9 @@ public class PhysicalContactsManager : MonoBehaviour
         }
     }
 
-    
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag(BORDER_TAG))
-        {
-            OnBorderCollided.Invoke();
-            return;
-        }
-
         float magnitude = collision.relativeVelocity.magnitude;
         Vector3 direction = collision.relativeVelocity.normalized;
         Vector3 normal = collision.contacts[0].normal;
