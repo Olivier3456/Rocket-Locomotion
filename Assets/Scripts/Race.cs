@@ -69,12 +69,12 @@ public class Race : MonoBehaviour, IEvent
     private void Awake()
     {
         time = startTime;
-        //RegisterToMainManager();  // Should be here but is in Start() for debug purpose, to prevent null ref exception (main manager instance not initalized yet)
+        //RegisterToMainManager();  // Should be here, but for now in Start() for debug purpose, to prevent null ref exception (main manager instance not initalized yet)
     }
 
     private void Start()
     {
-        RegisterToMainManager();    // Should be in Awake()
+        RegisterToMainManager();    // Will be in Awake()
 
         foreach (var point in checkPoints)
         {
@@ -90,6 +90,8 @@ public class Race : MonoBehaviour, IEvent
         eventUiGameObject.SetActive(true);
 
         StartCoroutine(StartRaceCoroutine());
+
+        checkPoints[0].YouAreNext();
     }
 
 
@@ -167,32 +169,33 @@ public class Race : MonoBehaviour, IEvent
 
     public void CheckpointReached(RaceCheckpoint checkpoint)
     {
-        Debug.Log("Player in checkpoint.");
-
         if (!MainManager.Instance.isSimulationRunning)
         {
             return;
         }
 
-        Debug.Log("Player in checkpoint. Simulation is running.");
-
         if (checkpoint == checkPoints[nextCheckpointIndex])
         {
             checkPoints[nextCheckpointIndex++].gameObject.SetActive(false);
 
-            if (nextCheckpointIndex == checkPoints.Length - 1)
+            if (nextCheckpointIndex == checkPoints.Length)
             {
                 RaceWon();
                 return;
             }
 
-            audioSource.clip = checkpointReachedClip;
-            audioSource.Play();
+            if (nextCheckpointIndex < checkPoints.Length)
+            {
+                checkPoints[nextCheckpointIndex].YouAreNext();
+            }
 
-            if (nextCheckpointIndex < checkPoints.Length - 2)
+            if (nextCheckpointIndex < checkPoints.Length - 1)
             {
                 checkPoints[nextCheckpointIndex + 1].gameObject.SetActive(true);
             }
+
+            audioSource.clip = checkpointReachedClip;
+            audioSource.Play();
         }
     }
 

@@ -100,7 +100,7 @@ public class MainManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("OngoingEvent is not null, can't register two at a time!");
+            Debug.Log("OngoingEvent is not null, can't register two at a time.");
         }
     }
 
@@ -108,11 +108,11 @@ public class MainManager : MonoBehaviour
     {
         if (ongoingEvent == null)
         {
-            Debug.LogError("Can't unregister ongoingEvent: it is already null!");
+            Debug.Log("Can't unregister ongoingEvent: it is already null.");
         }
         else if (ongoingEvent != IEvent)
         {
-            Debug.Log("An ongoingEvent can't be unregistered by another ongoingEvent!");
+            Debug.Log("An ongoingEvent can't be unregistered by another ongoingEvent.");
         }
         else
         {
