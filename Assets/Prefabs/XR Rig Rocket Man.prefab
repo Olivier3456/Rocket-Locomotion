@@ -5691,8 +5691,26 @@ LineRenderer:
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.5
+        value: 1
+        inSlope: 0.0031445052
+        outSlope: 0.0031445052
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.08078432
+        outWeight: 0.21411765
+      - serializedVersion: 3
+        time: 1
+        value: 0.5
+        inSlope: -2.7003186
+        outSlope: -2.7003186
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.047183514
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -6204,8 +6222,26 @@ LineRenderer:
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.5
+        value: 1
+        inSlope: 0.0031445052
+        outSlope: 0.0031445052
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.08078432
+        outWeight: 0.21411765
+      - serializedVersion: 3
+        time: 1
+        value: 0.5
+        inSlope: -2.7003186
+        outSlope: -2.7003186
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.047183514
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4

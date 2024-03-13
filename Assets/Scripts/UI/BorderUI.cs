@@ -44,7 +44,7 @@ public class BorderUI : MonoBehaviour
 
         while (isBorderEntered)
         {
-            if (MainManager.Instance.isSimulationRunning)
+            if (MainManager.Instance.IsSimulationRunning)
             {
                 playerAudioSource.PlayOneShot(borderColliderAudioClip);
                 borderColliderImageGameObject.SetActive(true);

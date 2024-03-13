@@ -19,6 +19,7 @@ public class GameMenu : MonoBehaviour
     public UnityEvent OnShow = new UnityEvent();
     public UnityEvent OnHide = new UnityEvent();
 
+    
     private void Awake()
     {
         showOrHideMenu.action.started += ShowOrHideMenu_Action_Started;
@@ -100,6 +101,7 @@ public class GameMenu : MonoBehaviour
 
     public void RestartButton()
     {
-        MainManager.Instance.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        MainManager.Instance.LoadScene(SceneManager.GetActiveScene().buildIndex, MainManager.Instance.EventToLoad);
+        //MainManager.Instance.RestartGameEvent();
     }
 }

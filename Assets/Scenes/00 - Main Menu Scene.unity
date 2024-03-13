@@ -3097,6 +3097,10 @@ MonoBehaviour:
   gameModesChoice: {fileID: 265804221}
   freeFlightLevelsChoice: {fileID: 1024618951}
   raceLevelsChoice: {fileID: 548057020}
+  eventNone_NY1_StrongWind: {fileID: 7203047963554200676, guid: cb38463bfadcec046a9b070deb3579e6,
+    type: 3}
+  eventRace1: {fileID: 862798414316666510, guid: a4b13029e6402bc408689c90ddbc23f9,
+    type: 3}
 --- !u!1 &1185985705
 GameObject:
   m_ObjectHideFlags: 0
@@ -3194,8 +3198,8 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1106012865}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 3
+        m_MethodName: RaceMenu_Race1Button
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

@@ -8,6 +8,8 @@ public class MySceneManager : MonoBehaviour
 {
     public const int MAIN_MENU_SCENE_BUILD_INDEX = 0;
     public const int LOADING_SCENE_BUILD_INDEX = 1;
+    public const int NY1_SCENE_BUILD_INDEX = 2;
+    public const int NY2_SCENE_BUILD_INDEX = 3;
 
     private bool isLoading;
 
@@ -15,7 +17,7 @@ public class MySceneManager : MonoBehaviour
     {
         if (sceneIndex == LOADING_SCENE_BUILD_INDEX)
         {
-            Debug.LogError($"Build index {LOADING_SCENE_BUILD_INDEX} is this index of the loading scene itself!");
+            Debug.LogError($"Build index {LOADING_SCENE_BUILD_INDEX} is the index of the loading scene itself!");
             return;
         }
 
@@ -44,7 +46,6 @@ public class MySceneManager : MonoBehaviour
             yield return null;
             float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
             loadProgressImage.fillAmount = progress;
-            //Debug.Log($"Scene loading progress: {progress}");
         }
 
         isLoading = false;

@@ -68,7 +68,7 @@ public class PlayerLife : MonoBehaviour
 
     private void OnCollision(float collisionForce)
     {
-        if (!MainManager.Instance.isSimulationRunning)
+        if (!MainManager.Instance.IsSimulationRunning)
         {
             return;
         }

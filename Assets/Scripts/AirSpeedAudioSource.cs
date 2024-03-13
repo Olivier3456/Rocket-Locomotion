@@ -20,18 +20,22 @@ public class AirSpeedAudioSource : MonoBehaviour
         camTransform = Camera.main.transform;
     }
 
+
     void Update()
     {
-        UpdateWindAudioSource();
+        UpdateWindAudioSourcePosition();
+        UpdateWindAudioSourceValues();
+    }
+
+    private void UpdateWindAudioSourcePosition()
+    {
+        float distanceFromCam = 1f;
+        audioSource.transform.position = camTransform.position - (airMovements.Direction * distanceFromCam);
     }
 
 
-    private void UpdateWindAudioSource()
+    private void UpdateWindAudioSourceValues()
     {
-        float distanceFromCam = 1f;        
-
-        audioSource.transform.position = camTransform.position - (airMovements.Direction * distanceFromCam);
-
         float minPitch = 0.5f;
         float pitchAirSpeedMultiplier = 0.0075f;
         audioSource.pitch = minPitch + (airMovements.Speed * pitchAirSpeedMultiplier);

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 public class Borders : MonoBehaviour
 {
@@ -12,7 +11,12 @@ public class Borders : MonoBehaviour
 
     public static UnityEvent OnBorderEntered = new UnityEvent();
     public static UnityEvent OnBorderExited = new UnityEvent();
-    
+
+    private void Start()
+    {
+        MainManager.Instance.OnGameEventRestarted.AddListener(OnGameEventRestarted);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(PLAYER_TAG))
@@ -40,6 +44,12 @@ public class Borders : MonoBehaviour
     }
 
     private void OnDestroy()
+    {
+        bordersEntered = 0;
+        MainManager.Instance.OnGameEventRestarted.RemoveListener(OnGameEventRestarted);
+    }
+
+    private void OnGameEventRestarted()
     {
         bordersEntered = 0;
     }

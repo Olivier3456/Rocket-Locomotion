@@ -45,7 +45,7 @@ public class ThrustersBoostManager : MonoBehaviour
             thrusterLeft.AuthoriseBoost(false);
             thrusterRight.AuthoriseBoost(false);
             OnDepleted.Invoke();
-            Debug.Log("Boost reserve depleted");
+            //Debug.Log("Boost reserve depleted");
         }
         else if (currentReserve > minimumReserveForNewBoost && isDepleted)
         {
@@ -53,7 +53,7 @@ public class ThrustersBoostManager : MonoBehaviour
             thrusterLeft.AuthoriseBoost(true);
             thrusterRight.AuthoriseBoost(true);
             OnCanBoostAgain.Invoke();
-            Debug.Log("Player can boost again");
+            //Debug.Log("Player can boost again");
         }
     }
 

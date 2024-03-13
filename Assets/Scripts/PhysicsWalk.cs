@@ -42,7 +42,7 @@ public class PhysicsWalk : MonoBehaviour
     {
         if (moveInput == Vector2.zero ||
             !physicalContactsManager.IsGrounded ||
-            !MainManager.Instance.isSimulationRunning)
+            !MainManager.Instance.IsSimulationRunning)
         {
             return;
         }

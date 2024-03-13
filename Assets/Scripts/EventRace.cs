@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EventRace : MonoBehaviour, IEvent
+public class EventRace : MonoBehaviour, IGameEvent
 {
     [SerializeField] private RaceCheckpoint[] checkPoints;
     [SerializeField] private float startTime = 90;
@@ -33,16 +33,16 @@ public class EventRace : MonoBehaviour, IEvent
     private WaitForSeconds waitOneSec = new WaitForSeconds(1);
 
 
-    // ================ IEvent implementation ================
-    public void RegisterToMainManager()
-    {
-        MainManager.Instance.RegisterOngoingEvent(this);
-    }
+    // ================ IGameEvent implementation ================
+    //public void RegisterToMainManager()
+    //{
+    //    MainManager.Instance.RegisterOngoingEvent(this);
+    //}
 
-    public void UnregisterToMainManager()
-    {
-        MainManager.Instance.UnregisterOngoingEvent(this);
-    }
+    //public void UnregisterToMainManager()
+    //{
+    //    MainManager.Instance.UnregisterOngoingEvent(this);
+    //}
 
     public bool IsPauseAllowed()
     {
@@ -74,7 +74,7 @@ public class EventRace : MonoBehaviour, IEvent
 
     private void Start()
     {
-        RegisterToMainManager();    // Will be in Awake()
+        //RegisterToMainManager();    // Will be in Awake()
 
         foreach (var point in checkPoints)
         {
@@ -153,7 +153,7 @@ public class EventRace : MonoBehaviour, IEvent
 
     private void Update()
     {
-        if (MainManager.Instance.isSimulationRunning)
+        if (MainManager.Instance.IsSimulationRunning)
         {
             time -= Time.deltaTime;
 
@@ -169,7 +169,7 @@ public class EventRace : MonoBehaviour, IEvent
 
     public void CheckpointReached(RaceCheckpoint checkpoint)
     {
-        if (!MainManager.Instance.isSimulationRunning)
+        if (!MainManager.Instance.IsSimulationRunning)
         {
             return;
         }
@@ -237,8 +237,8 @@ public class EventRace : MonoBehaviour, IEvent
     }
 
 
-    private void OnDestroy()
-    {
-        UnregisterToMainManager();
-    }
+    //private void OnDestroy()
+    //{
+    //    UnregisterToMainManager();
+    //}
 }

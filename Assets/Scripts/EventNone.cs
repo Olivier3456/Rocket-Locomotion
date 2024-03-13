@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventNone : MonoBehaviour, IEvent
+public class EventNone : MonoBehaviour, IGameEvent
 {
 
     public bool IsEventFinished()
@@ -25,13 +25,13 @@ public class EventNone : MonoBehaviour, IEvent
         return true;
     }
 
-    public void RegisterToMainManager()
-    {
-        MainManager.Instance.RegisterOngoingEvent(this);
-    }
+    //public void RegisterToMainManager()
+    //{
+    //    MainManager.Instance.RegisterOngoingEvent(this);
+    //}
 
-    public void UnregisterToMainManager()
-    {
-        MainManager.Instance.UnregisterOngoingEvent(this);
-    }    
+    //public void UnregisterToMainManager()
+    //{
+    //    MainManager.Instance.UnregisterOngoingEvent(this);
+    //}    
 }

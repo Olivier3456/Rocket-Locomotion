@@ -151,7 +151,7 @@ public class Thruster : MonoBehaviour
 
     private void UpdateThrustersValues()
     {
-        if (!MainManager.Instance.isSimulationRunning)
+        if (!MainManager.Instance.IsSimulationRunning)
         {
             thrustValue = 0f;
             boostValue = 0f;
