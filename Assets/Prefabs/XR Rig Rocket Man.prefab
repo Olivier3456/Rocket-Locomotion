@@ -6820,7 +6820,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   borderColliderImageGameObject: {fileID: 8755125570291650023}
-  physicalContactManager: {fileID: 2322934633570130993}
   playerAudioSource: {fileID: 220074776400400211}
   borderColliderAudioClip: {fileID: 8300000, guid: c0103da77fc85b94e8ceb11cd56a4c5b,
     type: 3}
@@ -8657,7 +8656,7 @@ GameObject:
   - component: {fileID: 3430533640821870298}
   - component: {fileID: 1199235385071922355}
   m_Layer: 0
-  m_Name: Event Countdown Text
+  m_Name: Event Big Central Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8999,9 +8998,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnCollision:
-    m_PersistentCalls:
-      m_Calls: []
-  OnBorderCollided:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &6187015796845280748
@@ -10611,7 +10607,7 @@ GameObject:
   - component: {fileID: 8701746491396629782}
   - component: {fileID: 4700066276593448104}
   m_Layer: 0
-  m_Name: Event Timer Text
+  m_Name: Event Up Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11328,7 +11324,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b13da72609e9ad34191aeecef029fdf0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2fc186faf4a0c8946bf53a325ff4222b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

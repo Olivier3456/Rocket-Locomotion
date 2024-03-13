@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RaceCheckpoint : MonoBehaviour
 {
-    [SerializeField] private Race race;
+    [SerializeField] private EventRace race;
     [Space(20)]
     [SerializeField] private Renderer[] renderers;
     [Space(20)]
