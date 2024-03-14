@@ -69,7 +69,6 @@ public class EventRace : MonoBehaviour, IGameEvent
     private void Awake()
     {
         time = startTime;
-        //RegisterToMainManager();  // Should be here, but for now in Start() for debug purpose, to prevent null ref exception (main manager instance not initalized yet)
     }
 
     private void Start()
@@ -105,13 +104,16 @@ public class EventRace : MonoBehaviour, IGameEvent
 
         if (minuts != lastMinuts || seconds != lastSeconds)
         {
-            StringBuilder stringBuilder = new StringBuilder();
-            if (minuts < 10) stringBuilder.Append("0");
-            stringBuilder.Append(minuts);
-            stringBuilder.Append(":");
-            if (seconds < 10) stringBuilder.Append("0");
-            stringBuilder.Append(seconds);
-            timerText.text = stringBuilder.ToString();
+            if (seconds > -1)
+            {
+                StringBuilder stringBuilder = new StringBuilder();
+                if (minuts < 10) stringBuilder.Append("0");
+                stringBuilder.Append(minuts);
+                stringBuilder.Append(":");
+                if (seconds < 10) stringBuilder.Append("0");
+                stringBuilder.Append(seconds);
+                timerText.text = stringBuilder.ToString();
+            }
         }
 
         lastMinuts = minuts;
@@ -155,8 +157,6 @@ public class EventRace : MonoBehaviour, IGameEvent
     {
         if (MainManager.Instance.IsSimulationRunning)
         {
-            time -= Time.deltaTime;
-
             if (time < 0f)
             {
                 NoMoreTime();

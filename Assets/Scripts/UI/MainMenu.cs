@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject raceLevelsChoice;
     [Space(20), Header("Game Event Prefabs")]
     [SerializeField] private EventNone eventNone_NY1_StrongWind;
+    [SerializeField] private EventNone eventNone_NY2_MediumWind;
     [SerializeField] private EventRace eventRace1;
 
 
@@ -66,7 +67,7 @@ public class MainMenu : MonoBehaviour
 
     public void FreeFlightMenu_NY2Button()
     {
-        //MainManager.Instance.LoadScene(3);
+        MainManager.Instance.LoadScene(MySceneManager.NY2_SCENE_BUILD_INDEX, eventNone_NY2_MediumWind);
     }
 
     public void FreeFlightMenu_BackButton()
