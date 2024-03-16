@@ -68,6 +68,8 @@ public class Thruster : MonoBehaviour
         particleMainModule = thrusterParticle.main;
 
         mainAudioSource.time = Random.Range(0, mainAudioSource.clip.length);
+
+        thrusterBoostManager.OnCanBoostStatusChange.AddListener(AuthoriseBoost);
     }
 
 

@@ -8,8 +8,9 @@ public class MySceneManager : MonoBehaviour
 {
     public const int MAIN_MENU_SCENE_BUILD_INDEX = 0;
     public const int LOADING_SCENE_BUILD_INDEX = 1;
-    public const int NY1_SCENE_BUILD_INDEX = 2;
-    public const int NY2_SCENE_BUILD_INDEX = 3;
+    public const int NEW_YORK_1_FREE_FLIGHT = 2;
+    public const int NEW_YORK_2_FREE_FLIGHT = 3;
+    public const int RACE_1 = 4;
 
     private bool isLoading;
 

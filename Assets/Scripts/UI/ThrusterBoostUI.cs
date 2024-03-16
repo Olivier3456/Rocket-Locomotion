@@ -15,47 +15,52 @@ public class ThrusterBoostUI : MonoBehaviour
 
     private void Awake()
     {
-        boostManager.OnDepleted.AddListener(BoostDepleted);
-        boostManager.OnCanBoostAgain.AddListener(CanBoostAgain);
+        boostManager.OnCanBoostStatusChange.AddListener(OnCanBoostStatusChange);
+        MainManager.Instance.OnDeath.AddListener(OnDeath);
     }
 
     private void OnDestroy()
     {
-        boostManager.OnDepleted.RemoveListener(BoostDepleted);
-        boostManager.OnCanBoostAgain.RemoveListener(CanBoostAgain);
+        boostManager.OnCanBoostStatusChange.RemoveListener(OnCanBoostStatusChange);
+        MainManager.Instance.OnDeath.RemoveListener(OnDeath);
     }
 
     void Update()
     {
-        float status = boostManager.CurrentReserve / boostManager.MaxReserve;
-        boostReserveImage.fillAmount = status;
-
-        if (!boostManager.IsDepleted)
+        if (MainManager.Instance.IsSimulationRunning)
         {
-            boostReserveImage.color = reserveGradient.Evaluate(status);
+            float status = boostManager.CurrentReserve / boostManager.MaxReserve;
+            boostReserveImage.fillAmount = status;
+
+            if (!boostManager.IsDepleted)
+            {
+                boostReserveImage.color = reserveGradient.Evaluate(status);
+            }
         }
     }
 
-    private void BoostDepleted()
+    private void OnCanBoostStatusChange(bool canBoost)
     {
-        audioSource.clip = depletedAudioClip;
-        audioSource.Play();
-
-        if (!isDepletedUICoroutineRunning)
+        if (canBoost)
         {
-            boostReserveImage.color = Color.gray;
-            StartCoroutine(DepletedUICoroutine());
+            audioSource.clip = boostAuthorizedAudioClip;
+            audioSource.Play();
+
+            if (!isBoostAuthorizedCoroutineRunning)
+            {
+                StartCoroutine(BoostAuthorizedCoroutine());
+            }
         }
-    }
-
-    private void CanBoostAgain()
-    {
-        audioSource.clip = boostAuthorizedAudioClip;
-        audioSource.Play();
-
-        if (!isBoostAuthorizedCoroutineRunning)
+        else
         {
-            StartCoroutine(BoostAuthorizedCoroutine());
+            audioSource.clip = depletedAudioClip;
+            audioSource.Play();
+
+            if (!isDepletedUICoroutineRunning)
+            {
+                boostReserveImage.color = Color.gray;
+                StartCoroutine(DepletedUICoroutine());
+            }
         }
     }
 
@@ -109,5 +114,10 @@ public class ThrusterBoostUI : MonoBehaviour
         boostMainRectTransform.localScale = normalScale;
 
         isBoostAuthorizedCoroutineRunning = false;
+    }
+
+    private void OnDeath()
+    {
+        boostMainRectTransform.gameObject.SetActive(false);
     }
 }

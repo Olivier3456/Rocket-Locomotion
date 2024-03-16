@@ -19,8 +19,7 @@ public class Rot_BoostManager : MonoBehaviour
 
     private float currentBoostValue = 0;
 
-    public UnityEvent OnDepleted = new UnityEvent();
-    public UnityEvent OnCanBoostAgain = new UnityEvent();
+    public UnityEvent<bool> OnCanBoostStatusChange = new UnityEvent<bool>();
 
     private bool isDepleted;
     public bool IsDepleted { get { return isDepleted; } }
@@ -43,7 +42,7 @@ public class Rot_BoostManager : MonoBehaviour
             isDepleted = true;
             thrusterLeft.AuthoriseBoost(false);
             thrusterRight.AuthoriseBoost(false);
-            OnDepleted.Invoke();
+            OnCanBoostStatusChange.Invoke(false);
             Debug.Log("Boost reserve depleted");
         }
         else if (currentReserve > minimumReserveForNewBoost && isDepleted)
@@ -51,7 +50,7 @@ public class Rot_BoostManager : MonoBehaviour
             isDepleted = false;
             thrusterLeft.AuthoriseBoost(true);
             thrusterRight.AuthoriseBoost(true);
-            OnCanBoostAgain.Invoke();
+            OnCanBoostStatusChange.Invoke(true);
             Debug.Log("Player can boost again");
         }
     }

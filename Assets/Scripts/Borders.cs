@@ -12,10 +12,10 @@ public class Borders : MonoBehaviour
     public static UnityEvent OnBorderEntered = new UnityEvent();
     public static UnityEvent OnBorderExited = new UnityEvent();
 
-    private void Start()
-    {
-        MainManager.Instance.OnGameEventRestarted.AddListener(OnGameEventRestarted);
-    }
+    //private void Start()
+    //{
+    //    MainManager.Instance.OnGameEventRestarted.AddListener(OnGameEventRestarted);
+    //}
 
     private void OnTriggerEnter(Collider other)
     {
@@ -46,11 +46,11 @@ public class Borders : MonoBehaviour
     private void OnDestroy()
     {
         bordersEntered = 0;
-        MainManager.Instance.OnGameEventRestarted.RemoveListener(OnGameEventRestarted);
+        //MainManager.Instance.OnGameEventRestarted.RemoveListener(OnGameEventRestarted);
     }
 
-    private void OnGameEventRestarted()
-    {
-        bordersEntered = 0;
-    }
+    //private void OnGameEventRestarted()
+    //{
+    //    bordersEntered = 0;
+    //}
 }

@@ -18,13 +18,13 @@ public class AirMovements : MonoBehaviour
     public float Speed { get { return airSpeed; } }
 
 
-    public TextMeshProUGUI DEBUG_Text1;
-    public TextMeshProUGUI DEBUG_Text2;
-    public TextMeshProUGUI DEBUG_Text3;
+    //public TextMeshProUGUI DEBUG_Text1;
+    //public TextMeshProUGUI DEBUG_Text2;
+    //public TextMeshProUGUI DEBUG_Text3;
 
 
 
-    private void Awake()
+    private void Start()
     {
         wind = FindObjectOfType<Wind>();
     }
@@ -38,8 +38,8 @@ public class AirMovements : MonoBehaviour
         airDirection = totalVelocity.normalized;
         airSpeed = totalVelocity.magnitude;
 
-        DEBUG_Text1.text = $"Wind speed km/h: {(windVelocity.magnitude * 3.6f).ToString("0")}";
-        DEBUG_Text2.text = $"Player speed km/h: {(playerVelocity.magnitude * 3.6f).ToString("0")}";
-        DEBUG_Text3.text = $"Air speed km/h: {(airSpeed * 3.6f).ToString("0")}";
+        //DEBUG_Text1.text = $"Wind speed km/h: {(windVelocity.magnitude * 3.6f).ToString("0")}";
+        //DEBUG_Text2.text = $"Player speed km/h: {(playerVelocity.magnitude * 3.6f).ToString("0")}";
+        //DEBUG_Text3.text = $"Air speed km/h: {(airSpeed * 3.6f).ToString("0")}";
     }
 }

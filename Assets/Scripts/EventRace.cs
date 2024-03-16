@@ -1,14 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Events;
+using static RaceResultsSaveLoad;
 
 public class EventRace : MonoBehaviour, IGameEvent
 {
+    [SerializeField] private GameEvent thisGameEvent;
     [SerializeField] private RaceCheckpoint[] checkPoints;
-    [SerializeField] private float startTime = 90;
+    //[SerializeField] private float startTime = 90;
     [SerializeField, Range(3, 5)] private int countdownLength = 5;
     [Space(20)]
     [SerializeField, Tooltip("In Player HUD")] private GameObject eventUiGameObject;
@@ -22,8 +23,9 @@ public class EventRace : MonoBehaviour, IGameEvent
     [SerializeField] private AudioClip raceWonClip;
     [SerializeField] private AudioClip raceLostClip;
 
-    private float time;
+    private float time = 0f;
     private int nextCheckpointIndex = 0;
+    private static EventRace instance;
 
     private bool isEventStarted = false;
     private bool isEventFinished = false;
@@ -31,18 +33,21 @@ public class EventRace : MonoBehaviour, IGameEvent
     private bool canUnpause = false;
 
     private WaitForSeconds waitOneSec = new WaitForSeconds(1);
+    private WaitForSeconds waitOneAndHalfSec = new WaitForSeconds(1.5f);
+
+    public UnityEvent<RaceScores> OnRaceOver = new UnityEvent<RaceScores>();
 
 
     // ================ IGameEvent implementation ================
-    //public void RegisterToMainManager()
-    //{
-    //    MainManager.Instance.RegisterOngoingEvent(this);
-    //}
+    public void RegisterToMainManager()
+    {
+        MainManager.Instance.RegisterOngoingEvent(this);
+    }
 
-    //public void UnregisterToMainManager()
-    //{
-    //    MainManager.Instance.UnregisterOngoingEvent(this);
-    //}
+    public void UnregisterToMainManager()
+    {
+        MainManager.Instance.UnregisterOngoingEvent(this);
+    }
 
     public bool IsPauseAllowed()
     {
@@ -68,13 +73,24 @@ public class EventRace : MonoBehaviour, IGameEvent
 
     private void Awake()
     {
-        time = startTime;
+        RegisterToMainManager();
+
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.LogError("Only one instance of EventRace is allowed! Destroying new one");
+            Destroy(gameObject);
+            return;
+        }
+
+        RaceCheckpoint.OnCheckpointReached.AddListener(CheckpointReached);
     }
 
     private void Start()
     {
-        //RegisterToMainManager();    // Will be in Awake()
-
         foreach (var point in checkPoints)
         {
             point.gameObject.SetActive(false);
@@ -94,8 +110,8 @@ public class EventRace : MonoBehaviour, IGameEvent
     }
 
 
-    private int lastMinuts = 0;
-    private int lastSeconds = 0;
+    private int lastMinuts = -1;
+    private int lastSeconds = -1;
     private void UpdateTimeDisplay(float timeInSec)
     {
         int totalSeconds = (int)Mathf.Floor(timeInSec);
@@ -104,16 +120,13 @@ public class EventRace : MonoBehaviour, IGameEvent
 
         if (minuts != lastMinuts || seconds != lastSeconds)
         {
-            if (seconds > -1)
-            {
-                StringBuilder stringBuilder = new StringBuilder();
-                if (minuts < 10) stringBuilder.Append("0");
-                stringBuilder.Append(minuts);
-                stringBuilder.Append(":");
-                if (seconds < 10) stringBuilder.Append("0");
-                stringBuilder.Append(seconds);
-                timerText.text = stringBuilder.ToString();
-            }
+            StringBuilder stringBuilder = new StringBuilder();
+            if (minuts < 10) stringBuilder.Append("0");
+            stringBuilder.Append(minuts);
+            stringBuilder.Append(":");
+            if (seconds < 10) stringBuilder.Append("0");
+            stringBuilder.Append(seconds);
+            timerText.text = stringBuilder.ToString();
         }
 
         lastMinuts = minuts;
@@ -147,7 +160,7 @@ public class EventRace : MonoBehaviour, IGameEvent
         canPause = true;
         canUnpause = true;
 
-        yield return waitOneSec;
+        yield return waitOneAndHalfSec;
 
         countdownText.gameObject.SetActive(false);
     }
@@ -157,17 +170,14 @@ public class EventRace : MonoBehaviour, IGameEvent
     {
         if (MainManager.Instance.IsSimulationRunning)
         {
-            if (time < 0f)
-            {
-                NoMoreTime();
-            }
+            time += Time.deltaTime;
         }
 
         UpdateTimeDisplay(time);
     }
 
 
-    public void CheckpointReached(RaceCheckpoint checkpoint)
+    private void CheckpointReached(RaceCheckpoint checkpoint)
     {
         if (!MainManager.Instance.IsSimulationRunning)
         {
@@ -178,7 +188,8 @@ public class EventRace : MonoBehaviour, IGameEvent
         {
             checkPoints[nextCheckpointIndex++].gameObject.SetActive(false);
 
-            if (nextCheckpointIndex == checkPoints.Length)
+            //if (nextCheckpointIndex == checkPoints.Length - 1)
+            if (nextCheckpointIndex == 2)   // DEBUG
             {
                 RaceWon();
                 return;
@@ -201,7 +212,7 @@ public class EventRace : MonoBehaviour, IGameEvent
 
 
     private void RaceWon()
-    {
+    {               
         Debug.Log("Last checkpoint reached! Race won!");
         isEventFinished = true;
         audioSource.clip = raceWonClip;
@@ -212,16 +223,16 @@ public class EventRace : MonoBehaviour, IGameEvent
     }
 
 
-    private void NoMoreTime()
-    {
-        Debug.Log("No more time! Race lost!");
-        isEventFinished = true;
-        audioSource.clip = raceLostClip;
-        audioSource.Play();
-        countdownText.text = "LOST";
-        countdownText.gameObject.SetActive(true);
-        StartCoroutine(RaceEndCoroutine());
-    }
+    //private void NoMoreTime()
+    //{
+    //    Debug.Log("No more time! Race lost!");
+    //    isEventFinished = true;
+    //    audioSource.clip = raceLostClip;
+    //    audioSource.Play();
+    //    countdownText.text = "LOST";
+    //    countdownText.gameObject.SetActive(true);
+    //    StartCoroutine(RaceEndCoroutine());
+    //}
 
 
     IEnumerator RaceEndCoroutine()
@@ -234,11 +245,15 @@ public class EventRace : MonoBehaviour, IGameEvent
         canUnpause = false;
         canPause = true;
         MainManager.Instance.GameMenu.Show();
+        RaceScores raceScores = AddRaceScore(thisGameEvent, time);
+        OnRaceOver.Invoke(raceScores);
     }
 
 
-    //private void OnDestroy()
-    //{
-    //    UnregisterToMainManager();
-    //}
+    private void OnDestroy()
+    {
+        instance = null;
+        RaceCheckpoint.OnCheckpointReached.RemoveListener(CheckpointReached);
+        UnregisterToMainManager();
+    }
 }

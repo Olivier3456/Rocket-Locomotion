@@ -41,9 +41,6 @@ public class ControllersManager : MonoBehaviour
     }
 
 
-
-
-
     private void ActivateRays(bool active)
     {
         rayInteractorLeft.SetActive(active);

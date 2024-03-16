@@ -101,7 +101,7 @@ public class GameMenu : MonoBehaviour
 
     public void RestartButton()
     {
-        MainManager.Instance.LoadScene(SceneManager.GetActiveScene().buildIndex, MainManager.Instance.EventToLoad);
+        MainManager.Instance.LoadScene(SceneManager.GetActiveScene().buildIndex);
         //MainManager.Instance.RestartGameEvent();
     }
 }

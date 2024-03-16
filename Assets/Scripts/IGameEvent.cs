@@ -4,8 +4,8 @@ using UnityEngine;
 
 public interface IGameEvent
 {
-    //void RegisterToMainManager();
-    //void UnregisterToMainManager();
+    void RegisterToMainManager();
+    void UnregisterToMainManager();
     bool IsPauseAllowed();
     bool IsUnpauseAllowed();
     bool IsEventStarted();

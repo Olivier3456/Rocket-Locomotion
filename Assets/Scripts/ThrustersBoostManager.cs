@@ -10,6 +10,7 @@ public class ThrustersBoostManager : MonoBehaviour
     [SerializeField, Tooltip("Total lenght of the boost when the player presses the button entirely (boostValue = 1)")] private float boostLenght = 3f;
     [SerializeField, Range(0, 1)] private float reserveGainPerSec = 0.1f;
     [SerializeField, Range(0, 1)] private float minimumReserveForNewBoost = 0.5f;
+    [SerializeField] private bool raceCheckpointsRechargeBoost = true;
 
 
     private const float maxReserve = 1f;
@@ -20,8 +21,7 @@ public class ThrustersBoostManager : MonoBehaviour
     private float currentBoostValueLeft = 0;
     private float currentBoostValueRight = 0;
 
-    public UnityEvent OnDepleted = new UnityEvent();
-    public UnityEvent OnCanBoostAgain = new UnityEvent();
+    public UnityEvent<bool> OnCanBoostStatusChange = new UnityEvent<bool>();
 
     private bool isDepleted;
     public bool IsDepleted { get { return isDepleted; } }
@@ -29,31 +29,42 @@ public class ThrustersBoostManager : MonoBehaviour
     private void Awake()
     {
         currentReserve = maxReserve;
+
+        if (raceCheckpointsRechargeBoost)
+        {
+            RaceCheckpoint.OnCheckpointReached.AddListener(OnRaceCheckpointReached);
+        }
+    }
+
+    private void OnRaceCheckpointReached(RaceCheckpoint raceCheckpoint)
+    {
+        currentReserve = MaxReserve;
+        isDepleted = false;
+        OnCanBoostStatusChange.Invoke(true);
     }
 
 
     private void Update()
     {
-        if (currentReserve < maxReserve && currentBoostValueLeft == 0 && currentBoostValueRight == 0)
+        if (MainManager.Instance.IsSimulationRunning)
         {
-            currentReserve += Time.deltaTime * reserveGainPerSec;
-        }
+            if (currentReserve < maxReserve && currentBoostValueLeft == 0 && currentBoostValueRight == 0)
+            {
+                currentReserve += Time.deltaTime * reserveGainPerSec;
+            }
 
-        if (currentReserve <= 0 && !isDepleted)
-        {
-            isDepleted = true;
-            thrusterLeft.AuthoriseBoost(false);
-            thrusterRight.AuthoriseBoost(false);
-            OnDepleted.Invoke();
-            //Debug.Log("Boost reserve depleted");
-        }
-        else if (currentReserve > minimumReserveForNewBoost && isDepleted)
-        {
-            isDepleted = false;
-            thrusterLeft.AuthoriseBoost(true);
-            thrusterRight.AuthoriseBoost(true);
-            OnCanBoostAgain.Invoke();
-            //Debug.Log("Player can boost again");
+            if (currentReserve <= 0 && !isDepleted)
+            {
+                //Debug.Log("Boost reserve depleted");
+                isDepleted = true;
+                OnCanBoostStatusChange.Invoke(false);
+            }
+            else if (currentReserve > minimumReserveForNewBoost && isDepleted)
+            {
+                //Debug.Log("Player can boost again");
+                isDepleted = false;
+                OnCanBoostStatusChange.Invoke(true);
+            }
         }
     }
 
@@ -69,5 +80,13 @@ public class ThrustersBoostManager : MonoBehaviour
         }
 
         currentReserve -= (Time.deltaTime / boostLenght) * boostValue * 0.5f;
+    }
+
+    private void OnDestroy()
+    {
+        if (raceCheckpointsRechargeBoost)
+        {
+            RaceCheckpoint.OnCheckpointReached.RemoveListener(OnRaceCheckpointReached);
+        }
     }
 }

@@ -3097,12 +3097,6 @@ MonoBehaviour:
   gameModesChoice: {fileID: 265804221}
   freeFlightLevelsChoice: {fileID: 1024618951}
   raceLevelsChoice: {fileID: 548057020}
-  eventNone_NY1_StrongWind: {fileID: 7203047963554200676, guid: cb38463bfadcec046a9b070deb3579e6,
-    type: 3}
-  eventNone_NY2_MediumWind: {fileID: 781585924917610906, guid: 78f016bc448696844a04e828f3527da9,
-    type: 3}
-  eventRace1: {fileID: 1526527793266873165, guid: 39c6f9200e30c5d428dddd44a66be619,
-    type: 3}
 --- !u!1 &1185985705
 GameObject:
   m_ObjectHideFlags: 0

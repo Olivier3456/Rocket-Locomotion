@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,10 +17,10 @@ public class MainManager : MonoBehaviour
 
     public UnityEvent<bool> OnPauseStatusChanged = new UnityEvent<bool>();
     public UnityEvent OnDeath = new UnityEvent();
-    public UnityEvent OnGameEventRestarted = new UnityEvent();
+    //public UnityEvent OnGameEventRestarted = new UnityEvent();
 
     public IGameEvent OngoingEvent { get; private set; }
-    public IGameEvent EventToLoad { get; private set; }
+    //public IGameEvent EventToLoad { get; private set; }
 
     private MySceneManager mySceneManager;
 
@@ -45,45 +46,60 @@ public class MainManager : MonoBehaviour
 
         // =============== DEBUG ===============
         IsPlayerAlive = true;
+
+        //TestRaceResults();
     }
+
+
+
+    //private void TestRaceResults()
+    //{
+    //    for (int i = 0; i < 20; i++)
+    //    {
+    //        RaceResultsSaveLoad.AddRaceScore(GameEvent.Race1, UnityEngine.Random.Range(0f, 100f));
+    //    }
+    //}
 
 
     private void SceneManager_sceneLoaded(Scene scene, LoadSceneMode mode)
     {
         IsPlayerAlive = true;
         IsPaused = false;
-        OngoingEvent = null;
-
-        if (scene.buildIndex == MySceneManager.LOADING_SCENE_BUILD_INDEX)
-        {
-            return;
-        }
-        else if (scene.buildIndex == MySceneManager.MAIN_MENU_SCENE_BUILD_INDEX)
-        {
-            EventToLoad = null;
-            return;
-        }
-
-        StartGameEvent();
-    }
-
-    private void StartGameEvent()
-    {
-        if (EventToLoad != null)
-        {
-            switch (EventToLoad)
-            {
-                case EventRace:
-                    OngoingEvent = Instantiate(EventToLoad as EventRace);
-                    break;
-                case EventNone:
-                    OngoingEvent = Instantiate(EventToLoad as EventNone);
-                    break;
-            }
-        }
 
         GameMenu = FindObjectOfType<GameMenu>();
+
+        //OngoingEvent = null;
+
+        //if (scene.buildIndex == MySceneManager.LOADING_SCENE_BUILD_INDEX)
+        //{
+        //    return;
+        //}
+        //else if (scene.buildIndex == MySceneManager.MAIN_MENU_SCENE_BUILD_INDEX)
+        //{
+        //    EventToLoad = null;
+        //    return;
+        //}
+
+        //StartGameEvent();
     }
+
+    //private void StartGameEvent()
+    //{
+    //    if (EventToLoad != null)
+    //    {
+    //        switch (EventToLoad)
+    //        {
+    //            case EventRace:
+    //                OngoingEvent = Instantiate(EventToLoad as EventRace);
+    //                break;
+    //            case EventNone:
+    //                OngoingEvent = Instantiate(EventToLoad as EventNone);
+    //                break;
+    //        }
+    //    }
+
+    //    GameMenu = FindObjectOfType<GameMenu>();
+    //}
 
     //public void RestartGameEvent()
     //{
@@ -139,16 +155,26 @@ public class MainManager : MonoBehaviour
 
 
 
-    public void LoadScene(int buildIndex, IGameEvent gameEvent = null)
+    //public void LoadScene(int buildIndex, IGameEvent gameEvent = null)
+    //{
+    //    EventToLoad = gameEvent;
+
+    //    if (EventToLoad == null && buildIndex != MySceneManager.MAIN_MENU_SCENE_BUILD_INDEX)
+    //    {
+    //        Debug.LogError("Only the Main Menu Scene can be loaded without a Game Event!");
+    //        return;
+    //    }
+
+    //    if (mySceneManager == null)
+    //    {
+    //        mySceneManager = gameObject.AddComponent<MySceneManager>();
+    //    }
+
+    //    mySceneManager.LoadScene(buildIndex);
+    //}
+
+    public void LoadScene(int buildIndex)
     {
-        EventToLoad = gameEvent;
-
-        if (EventToLoad == null && buildIndex != MySceneManager.MAIN_MENU_SCENE_BUILD_INDEX)
-        {
-            Debug.LogError("Only the Main Menu Scene can be loaded without a Game Event!");
-            return;
-        }
-
         if (mySceneManager == null)
         {
             mySceneManager = gameObject.AddComponent<MySceneManager>();
@@ -158,33 +184,33 @@ public class MainManager : MonoBehaviour
     }
 
 
-    //public void RegisterOngoingEvent(IGameEvent IEvent)
-    //{
-    //    if (OngoingEvent == null)
-    //    {
-    //        OngoingEvent = IEvent;
-    //        Debug.Log("OngoingEvent registered to MainManager.");
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("OngoingEvent is not null, can't register two at a time.");
-    //    }
-    //}
+    public void RegisterOngoingEvent(IGameEvent IEvent)
+    {
+        if (OngoingEvent == null)
+        {
+            OngoingEvent = IEvent;
+            Debug.Log("OngoingEvent registered to MainManager.");
+        }
+        else
+        {
+            Debug.Log("OngoingEvent is not null, can't register two at a time.");
+        }
+    }
 
-    //public void UnregisterOngoingEvent(IGameEvent IEvent)
-    //{
-    //    if (OngoingEvent == null)
-    //    {
-    //        Debug.Log("Can't unregister OngoingEvent: it is already null.");
-    //    }
-    //    else if (OngoingEvent != IEvent)
-    //    {
-    //        Debug.Log("An OngoingEvent can't be unregistered by another OngoingEvent.");
-    //    }
-    //    else
-    //    {
-    //        OngoingEvent = null;
-    //        Debug.Log("OngoingEvent unregistered to MainManager.");
-    //    }
-    //}
+    public void UnregisterOngoingEvent(IGameEvent IEvent)
+    {
+        if (OngoingEvent == null)
+        {
+            Debug.Log("Can't unregister OngoingEvent: it is already null.");
+        }
+        else if (OngoingEvent != IEvent)
+        {
+            Debug.Log("An OngoingEvent can't be unregistered by another OngoingEvent.");
+        }
+        else
+        {
+            OngoingEvent = null;
+            Debug.Log("OngoingEvent unregistered to MainManager.");
+        }
+    }
 }

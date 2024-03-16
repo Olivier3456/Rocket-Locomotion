@@ -12,32 +12,32 @@ public class ControllersVibrations : MonoBehaviour
     [SerializeField] private PlayerLife playerLife;
     [SerializeField] private PhysicalContactsManager physicalContactsManager;
 
-    public enum Controller { Left, Right, Both }
+    private WaitForSeconds waitForNextVibration = new WaitForSeconds(0.18f);
+
 
     private void Awake()
     {
         physicalContactsManager.OnCollision.AddListener(OnCollision);
-
-        thrustersBoostManager.OnDepleted.AddListener(OnBoostReserveDepleted);
-        thrustersBoostManager.OnCanBoostAgain.AddListener(OnCanBoostAgain);
+        thrustersBoostManager.OnCanBoostStatusChange.AddListener(OnCanBoostAgain);
     }
 
 
-    private void OnCanBoostAgain()
+    private void OnCanBoostAgain(bool canBoost)
     {
-        float amplitude = 1f;
-        float duration = 0.33f;
-
-        leftController.SendHapticImpulse(amplitude, duration);
-        rightController.SendHapticImpulse(amplitude, duration);
+        if (canBoost)
+        {
+            StartCoroutine(CanBoostAgainVibrationCoroutine());
+        }
+        else
+        {
+            float amplitude = 1f;
+            float duration = 0.33f;
+            leftController.SendHapticImpulse(amplitude, duration);
+            rightController.SendHapticImpulse(amplitude, duration);
+        }
     }
 
 
-    private void OnBoostReserveDepleted()
-    {
-        StartCoroutine(CanBoostAgainVibrationCoroutine());
-    }
-    private WaitForSeconds waitForNextVibration = new WaitForSeconds(0.18f);
     private IEnumerator CanBoostAgainVibrationCoroutine()
     {
         float amplitude = 1f;
@@ -66,7 +66,6 @@ public class ControllersVibrations : MonoBehaviour
     private void OnDestroy()
     {
         physicalContactsManager.OnCollision.RemoveListener(OnCollision);
-        thrustersBoostManager.OnDepleted.RemoveListener(OnBoostReserveDepleted);
-        thrustersBoostManager.OnCanBoostAgain.RemoveListener(OnCanBoostAgain);
+        thrustersBoostManager.OnCanBoostStatusChange.RemoveListener(OnCanBoostAgain);
     }
 }

@@ -9,10 +9,10 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject gameModesChoice;
     [SerializeField] private GameObject freeFlightLevelsChoice;
     [SerializeField] private GameObject raceLevelsChoice;
-    [Space(20), Header("Game Event Prefabs")]
-    [SerializeField] private EventNone eventNone_NY1_StrongWind;
-    [SerializeField] private EventNone eventNone_NY2_MediumWind;
-    [SerializeField] private EventRace eventRace1;
+    //[Space(20), Header("Game Event Prefabs")]
+    //[SerializeField] private EventNone eventNone_NY1_StrongWind;
+    //[SerializeField] private EventNone eventNone_NY2_MediumWind;
+    //[SerializeField] private EventRace eventRace1;
 
 
 
@@ -62,12 +62,12 @@ public class MainMenu : MonoBehaviour
     // FREE FLIGHT MENU BUTTONS
     public void FreeFlightMenu_NY1Button()
     {
-        MainManager.Instance.LoadScene(MySceneManager.NY1_SCENE_BUILD_INDEX, eventNone_NY1_StrongWind);
+        MainManager.Instance.LoadScene(MySceneManager.NEW_YORK_1_FREE_FLIGHT);
     }
 
     public void FreeFlightMenu_NY2Button()
     {
-        MainManager.Instance.LoadScene(MySceneManager.NY2_SCENE_BUILD_INDEX, eventNone_NY2_MediumWind);
+        MainManager.Instance.LoadScene(MySceneManager.NEW_YORK_2_FREE_FLIGHT);
     }
 
     public void FreeFlightMenu_BackButton()
@@ -81,7 +81,7 @@ public class MainMenu : MonoBehaviour
     // RACE MENU BUTTONS
     public void RaceMenu_Race1Button()
     {
-        MainManager.Instance.LoadScene(MySceneManager.NY1_SCENE_BUILD_INDEX, eventRace1);
+        MainManager.Instance.LoadScene(MySceneManager.RACE_1);
     }
     public void RaceMenu_Race2Button()
     {
