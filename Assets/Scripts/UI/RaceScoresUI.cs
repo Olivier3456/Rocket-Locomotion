@@ -1,3 +1,5 @@
+using System;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using static RaceResultsSaveLoad;
@@ -12,16 +14,18 @@ public class RaceScoresUI : MonoBehaviour
     private float distanceFromCamera = 2f;
 
 
-    private void Awake()
-    {
-        race.OnRaceOver.AddListener(OnRaceOver);
-        raceScoresRectTransform.gameObject.SetActive(false);
-    }
     private void Start()
     {
+        raceScoresRectTransform.gameObject.SetActive(false);
+
         if (race == null)
         {
             race = FindObjectOfType<EventRace>();
+        }
+
+        if (race != null)
+        {
+            race.OnRaceOver.AddListener(OnRaceOver);
         }
     }
 
@@ -31,7 +35,7 @@ public class RaceScoresUI : MonoBehaviour
         foreach (var raceScore in raceScores.scores)
         {
             TextMeshProUGUI newScoreText = Instantiate(scoreTextTemplate, scoreTextTemplate.transform.parent);
-            newScoreText.text = raceScore.date + " --- " + raceScore.time.ToString("0.00");
+            newScoreText.text = raceScore.date + " --- " + MakeTimeDisplay(raceScore.time);
 
             if (raceScore == ScoreAdded)
             {
@@ -47,13 +51,25 @@ public class RaceScoresUI : MonoBehaviour
         {
             TextMeshProUGUI newScoreText = Instantiate(scoreTextTemplate, scoreTextTemplate.transform.parent);
             RaceScore scoreAdded = ScoreAdded;
-            newScoreText.text = scoreAdded.date + " --- " + scoreAdded.time.ToString("0.00");
+            newScoreText.text = scoreAdded.date + " --- " + MakeTimeDisplay(scoreAdded.time);
             newScoreText.color = Color.red;
             newScoreText.fontSize *= 1.25f;
             newScoreText.gameObject.SetActive(true);
         }
 
         Show();
+    }
+
+
+
+    private string MakeTimeDisplay(float timeInSec)
+    {
+        int totalSeconds = (int)Math.Floor(timeInSec);
+        int minutes = totalSeconds / 60;
+        int seconds = totalSeconds % 60;
+        int milliseconds = (int)((timeInSec - totalSeconds) * 1000);
+
+        return $"{minutes}:{seconds:D2}:{milliseconds:D2}";
     }
 
 
@@ -68,6 +84,9 @@ public class RaceScoresUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        race.OnRaceOver.RemoveListener(OnRaceOver);
+        if (race != null)
+        {
+            race.OnRaceOver.RemoveListener(OnRaceOver);
+        }
     }
 }

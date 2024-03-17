@@ -38,7 +38,7 @@ public class MySceneManager : MonoBehaviour
 
         yield return SceneManager.LoadSceneAsync(LOADING_SCENE_BUILD_INDEX);
 
-        Image loadProgressImage = FindObjectOfType<Image>();
+        Image loadProgressImage = GameObject.Find("Loading Bar").GetComponent<Image>();
 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneIndex);
 

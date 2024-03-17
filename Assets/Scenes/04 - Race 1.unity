@@ -7125,15 +7125,75 @@ PrefabInstance:
       propertyPath: race
       value: 
       objectReference: {fileID: 4954352903739535823}
+    - target: {fileID: 1421160220748984997, guid: 11371c26a15ce514fa42b88eb32065a5,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1421160220748984997, guid: 11371c26a15ce514fa42b88eb32065a5,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1421160220748984997, guid: 11371c26a15ce514fa42b88eb32065a5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1421160220748984997, guid: 11371c26a15ce514fa42b88eb32065a5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4678887908120963039, guid: 11371c26a15ce514fa42b88eb32065a5,
         type: 3}
       propertyPath: m_Name
       value: XR Rig Rocket Man
       objectReference: {fileID: 0}
+    - target: {fileID: 6639466274386988473, guid: 11371c26a15ce514fa42b88eb32065a5,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6639466274386988473, guid: 11371c26a15ce514fa42b88eb32065a5,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6639466274386988473, guid: 11371c26a15ce514fa42b88eb32065a5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6639466274386988473, guid: 11371c26a15ce514fa42b88eb32065a5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7920992530866458539, guid: 11371c26a15ce514fa42b88eb32065a5,
         type: 3}
       propertyPath: raceCheckpointsRechargeBoost
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956377822812966296, guid: 11371c26a15ce514fa42b88eb32065a5,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956377822812966296, guid: 11371c26a15ce514fa42b88eb32065a5,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956377822812966296, guid: 11371c26a15ce514fa42b88eb32065a5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956377822812966296, guid: 11371c26a15ce514fa42b88eb32065a5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9214336484023828279, guid: 11371c26a15ce514fa42b88eb32065a5,
         type: 3}
@@ -7315,17 +7375,17 @@ PrefabInstance:
     - target: {fileID: 8786761195536468033, guid: b73c7b5462f9cf74692cf5f7ffac6ab5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -195.72
+      value: -195.68
       objectReference: {fileID: 0}
     - target: {fileID: 8786761195536468033, guid: b73c7b5462f9cf74692cf5f7ffac6ab5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.04
+      value: 24.25
       objectReference: {fileID: 0}
     - target: {fileID: 8786761195536468033, guid: b73c7b5462f9cf74692cf5f7ffac6ab5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 521.35
+      value: 521.3
       objectReference: {fileID: 0}
     - target: {fileID: 8786761195536468033, guid: b73c7b5462f9cf74692cf5f7ffac6ab5,
         type: 3}
