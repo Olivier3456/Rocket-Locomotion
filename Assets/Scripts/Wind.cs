@@ -4,10 +4,10 @@ using UnityEngine;
 public class Wind : MonoBehaviour
 {
     [SerializeField] private Vector3 initialDirection = new Vector3(1, 0, 0);
-    [SerializeField] private float directionDelta = 100f;
+    [SerializeField, Range(0f, 180f)] private float directionDelta = 100f;
     [Space(20)]
-    [SerializeField] private float minimumSpeed = 10f;
-    [SerializeField] private float maximumSpeed = 100f;
+    [SerializeField, Range(0f, 100f)] private float minimumSpeed = 10f;
+    [SerializeField, Range(0f, 100f)] private float maximumSpeed = 50f;
     [Space(20)]
     [SerializeField] private float speedChangeRate = 0.1f;
     [SerializeField] private float rotationChangeRate = 0.1f;
@@ -27,18 +27,35 @@ public class Wind : MonoBehaviour
     public float MaximumSpeed { get { return maximumSpeed; } }
 
 
+
     private void Awake()
     {
-        currentSpeed = minimumSpeed;
-
         initialDirection.y = 0.0f;  // The wind will only be horizontal
         initialDirection = initialDirection.normalized;
         currentDirection = initialDirection;
 
-        if (minimumSpeed > maximumSpeed)
+        if (MainManager.Instance.windParameters != null)
         {
-            minimumSpeed = maximumSpeed;
+            WindParameters windParameters = MainManager.Instance.windParameters;
+            minimumSpeed = windParameters.windForceMin * 100f;
+            maximumSpeed = windParameters.windForceMax * 100f;
+            directionDelta = windParameters.windDirectionChangeDelta * 180f;
+
+            if (maximumSpeed == 0f)
+            {
+                Destroy(gameObject);
+                return;
+            }
         }
+        else
+        {
+            if (minimumSpeed > maximumSpeed)
+            {
+                minimumSpeed = maximumSpeed;
+            }
+        }
+
+        currentSpeed = minimumSpeed;
     }
 
 

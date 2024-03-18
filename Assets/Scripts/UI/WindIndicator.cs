@@ -18,7 +18,7 @@ public class WindIndicator : MonoBehaviour
     {
         wind = FindObjectOfType<Wind>();
 
-        if (wind == null)
+        if (wind == null || wind.MaximumSpeed == 0f)
         {
             Debug.Log("No wind in the scene. Destroying all objects related to wind indications");
             Destroy(windIndicatorVisual.gameObject);

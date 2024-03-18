@@ -19,7 +19,7 @@ public class GameMenu : MonoBehaviour
     public UnityEvent OnShow = new UnityEvent();
     public UnityEvent OnHide = new UnityEvent();
 
-    
+
     private void Awake()
     {
         showOrHideMenu.action.started += ShowOrHideMenu_Action_Started;
@@ -36,7 +36,7 @@ public class GameMenu : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex > MySceneManager.LOADING_SCENE_BUILD_INDEX)  // No effect if we are in Main Menu Scene or Loading scene
         {
-            if (MainManager.Instance.IsPlayerAlive) // It must not be possible to deactivate this menu after player death
+            if (MainManager.Instance.CanPause) // It must not be possible to deactivate this menu after player death
             {
                 ToggleShowHide();
             }
@@ -50,7 +50,7 @@ public class GameMenu : MonoBehaviour
 
 
     public void Show(bool withoutPause = false)
-    {        
+    {
         if (withoutPause || MainManager.Instance.Pause(true))
         {
             Transform cameraTransform = Camera.main.transform;
@@ -87,7 +87,7 @@ public class GameMenu : MonoBehaviour
             Show();
         }
     }
-    
+
     // ==================================== BUTTONS FUNCTIONS ====================================
     public void ContinueButton()
     {

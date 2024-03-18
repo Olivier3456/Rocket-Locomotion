@@ -25,8 +25,11 @@ public class ControllersManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        MainManager.Instance.GameMenu.OnShow.RemoveListener(OnMenuShow);
-        MainManager.Instance.GameMenu.OnHide.RemoveListener(OnMenuHide);
+        if (MainManager.Instance.GameMenu != null)
+        {
+            MainManager.Instance.GameMenu.OnShow.RemoveListener(OnMenuShow);
+            MainManager.Instance.GameMenu.OnHide.RemoveListener(OnMenuHide);
+        }
     }
 
     private void OnMenuShow()

@@ -9,7 +9,6 @@ public class EventRace : MonoBehaviour, IGameEvent
 {
     [SerializeField] private GameEvent thisGameEvent;
     [SerializeField] private RaceCheckpoint[] checkPoints;
-    //[SerializeField] private float startTime = 90;
     [SerializeField, Range(3, 5)] private int countdownLength = 5;
     [Space(20)]
     [SerializeField, Tooltip("In Player HUD")] private GameObject eventUiGameObject;
@@ -73,8 +72,6 @@ public class EventRace : MonoBehaviour, IGameEvent
 
     private void Awake()
     {
-        RegisterToMainManager();
-
         if (instance == null)
         {
             instance = this;
@@ -86,6 +83,7 @@ public class EventRace : MonoBehaviour, IGameEvent
             return;
         }
 
+        RegisterToMainManager();
         RaceCheckpoint.OnCheckpointReached.AddListener(CheckpointReached);
     }
 
@@ -188,8 +186,8 @@ public class EventRace : MonoBehaviour, IGameEvent
         {
             checkPoints[nextCheckpointIndex++].gameObject.SetActive(false);
 
-            //if (nextCheckpointIndex == checkPoints.Length - 1)
-            if (nextCheckpointIndex == 2)   // DEBUG
+            //if (nextCheckpointIndex == 2)   // DEBUG
+            if (nextCheckpointIndex == checkPoints.Length - 1)
             {
                 RaceWon();
                 return;
@@ -212,7 +210,7 @@ public class EventRace : MonoBehaviour, IGameEvent
 
 
     private void RaceWon()
-    {               
+    {
         Debug.Log("Last checkpoint reached! Race won!");
         isEventFinished = true;
         audioSource.clip = raceWonClip;
@@ -221,18 +219,6 @@ public class EventRace : MonoBehaviour, IGameEvent
         countdownText.gameObject.SetActive(true);
         StartCoroutine(RaceEndCoroutine());
     }
-
-
-    //private void NoMoreTime()
-    //{
-    //    Debug.Log("No more time! Race lost!");
-    //    isEventFinished = true;
-    //    audioSource.clip = raceLostClip;
-    //    audioSource.Play();
-    //    countdownText.text = "LOST";
-    //    countdownText.gameObject.SetActive(true);
-    //    StartCoroutine(RaceEndCoroutine());
-    //}
 
 
     IEnumerator RaceEndCoroutine()
@@ -244,6 +230,7 @@ public class EventRace : MonoBehaviour, IGameEvent
         timerText.gameObject.SetActive(false);
         canUnpause = false;
         canPause = true;
+        MainManager.Instance.ImmobilizePlayer(true);
         MainManager.Instance.GameMenu.Show();
         RaceScores raceScores = AddRaceScore(thisGameEvent, time);
         OnRaceOver.Invoke(raceScores);

@@ -17,13 +17,15 @@ public class MainManager : MonoBehaviour
 
     public UnityEvent<bool> OnPauseStatusChanged = new UnityEvent<bool>();
     public UnityEvent OnDeath = new UnityEvent();
-    //public UnityEvent OnGameEventRestarted = new UnityEvent();
-
     public IGameEvent OngoingEvent { get; private set; }
-    //public IGameEvent EventToLoad { get; private set; }
+    
+    public WindParameters windParameters = null;
 
     private MySceneManager mySceneManager;
 
+    private Rigidbody playerRb;
+
+    private Vector3 playerVelocityBeforeImmobilisation = Vector3.zero;
 
 
     private void Awake()
@@ -46,85 +48,25 @@ public class MainManager : MonoBehaviour
 
         // =============== DEBUG ===============
         IsPlayerAlive = true;
-
-        //TestRaceResults();
     }
-
-
-
-    //private void TestRaceResults()
-    //{
-    //    for (int i = 0; i < 20; i++)
-    //    {
-    //        RaceResultsSaveLoad.AddRaceScore(GameEvent.Race1, UnityEngine.Random.Range(0f, 100f));
-    //    }
-    //}
 
 
     private void SceneManager_sceneLoaded(Scene scene, LoadSceneMode mode)
     {
         IsPlayerAlive = true;
         IsPaused = false;
+    }
+    
 
-        GameMenu = FindObjectOfType<GameMenu>();
-
-        //OngoingEvent = null;
-
-        //if (scene.buildIndex == MySceneManager.LOADING_SCENE_BUILD_INDEX)
-        //{
-        //    return;
-        //}
-        //else if (scene.buildIndex == MySceneManager.MAIN_MENU_SCENE_BUILD_INDEX)
-        //{
-        //    EventToLoad = null;
-        //    return;
-        //}
-
-        //StartGameEvent();
+    public void SetPlayerRigidbody(Rigidbody playerRb)
+    {
+        this.playerRb = playerRb;
+    }
+    public void SetGameMenu(GameMenu gameMenu)
+    {
+        GameMenu = gameMenu;
     }
 
-    //private void StartGameEvent()
-    //{
-    //    if (EventToLoad != null)
-    //    {
-    //        switch (EventToLoad)
-    //        {
-    //            case EventRace:
-    //                OngoingEvent = Instantiate(EventToLoad as EventRace);
-    //                break;
-    //            case EventNone:
-    //                OngoingEvent = Instantiate(EventToLoad as EventNone);
-    //                break;
-    //        }
-    //    }
-
-    //    GameMenu = FindObjectOfType<GameMenu>();
-    //}
-
-    //public void RestartGameEvent()
-    //{
-    //    IsPlayerAlive = true;
-    //    IsPaused = false;
-    //    DestroyOnGoingEvent();
-    //    StartGameEvent();
-    //    OnGameEventRestarted.Invoke();
-    //}
-
-    //private void DestroyOnGoingEvent()
-    //{
-    //    if (OngoingEvent != null)
-    //    {
-    //        switch (OngoingEvent)
-    //        {
-    //            case EventRace:
-    //                Destroy((OngoingEvent as EventRace).gameObject);
-    //                break;
-    //            case EventNone:
-    //                Destroy((OngoingEvent as EventNone).gameObject);
-    //                break;
-    //        }
-    //    }
-    //}
 
     public bool Pause(bool pause)
     {
@@ -138,10 +80,27 @@ public class MainManager : MonoBehaviour
         }
 
         IsPaused = pause;
+
+        ImmobilizePlayer(IsPaused);
+
         OnPauseStatusChanged.Invoke(pause);
         return true;
     }
 
+
+    public void ImmobilizePlayer(bool immobilize)
+    {
+        if (immobilize)
+        {
+            playerVelocityBeforeImmobilisation = playerRb.velocity;
+            playerRb.isKinematic = true;
+        }
+        else
+        {
+            playerRb.isKinematic = false;
+            playerRb.velocity = playerVelocityBeforeImmobilisation;
+        }
+    }
 
 
     public void PlayerDeath()
@@ -149,29 +108,11 @@ public class MainManager : MonoBehaviour
         if (IsPlayerAlive)
         {
             IsPlayerAlive = false;
+            ImmobilizePlayer(true);
             OnDeath.Invoke();
         }
     }
 
-
-
-    //public void LoadScene(int buildIndex, IGameEvent gameEvent = null)
-    //{
-    //    EventToLoad = gameEvent;
-
-    //    if (EventToLoad == null && buildIndex != MySceneManager.MAIN_MENU_SCENE_BUILD_INDEX)
-    //    {
-    //        Debug.LogError("Only the Main Menu Scene can be loaded without a Game Event!");
-    //        return;
-    //    }
-
-    //    if (mySceneManager == null)
-    //    {
-    //        mySceneManager = gameObject.AddComponent<MySceneManager>();
-    //    }
-
-    //    mySceneManager.LoadScene(buildIndex);
-    //}
 
     public void LoadScene(int buildIndex)
     {

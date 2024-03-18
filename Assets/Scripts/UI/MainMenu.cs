@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -9,12 +10,13 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject gameModesChoice;
     [SerializeField] private GameObject freeFlightLevelsChoice;
     [SerializeField] private GameObject raceLevelsChoice;
-    //[Space(20), Header("Game Event Prefabs")]
-    //[SerializeField] private EventNone eventNone_NY1_StrongWind;
-    //[SerializeField] private EventNone eventNone_NY2_MediumWind;
-    //[SerializeField] private EventRace eventRace1;
+    [SerializeField] private GameObject windChoice;
+    [Space(20)]
+    [SerializeField] private Slider windForceMinSlider;
+    [SerializeField] private Slider windForceMaxSlider;
+    [SerializeField] private Slider windDirectionChangeSlider;
 
-
+    
 
     private void Start()
     {
@@ -60,20 +62,60 @@ public class MainMenu : MonoBehaviour
 
 
     // FREE FLIGHT MENU BUTTONS
+    private int freeFlightMapChosen;
     public void FreeFlightMenu_NY1Button()
     {
-        MainManager.Instance.LoadScene(MySceneManager.NEW_YORK_1_FREE_FLIGHT);
+        //MainManager.Instance.LoadScene(MySceneManager.NEW_YORK_1_FREE_FLIGHT);
+        freeFlightMapChosen = MySceneManager.NEW_YORK_1_FREE_FLIGHT;
+        MainManager.Instance.windParameters = new WindParameters(0f, 0f, 0f);
+        windChoice.SetActive(true);
     }
 
     public void FreeFlightMenu_NY2Button()
     {
-        MainManager.Instance.LoadScene(MySceneManager.NEW_YORK_2_FREE_FLIGHT);
+        //MainManager.Instance.LoadScene(MySceneManager.NEW_YORK_2_FREE_FLIGHT);
+        freeFlightMapChosen = MySceneManager.NEW_YORK_2_FREE_FLIGHT;
+        MainManager.Instance.windParameters = new WindParameters(0f, 0f, 0f);
+        windChoice.SetActive(true);
     }
 
     public void FreeFlightMenu_BackButton()
     {
         freeFlightLevelsChoice.SetActive(false);
         gameModesChoice.SetActive(true);
+    }
+
+
+
+    // WIND CHOICE MENU   
+    public void WindChoiceMenu_StartButton()
+    {
+        MainManager.Instance.LoadScene(freeFlightMapChosen);
+    }
+
+    public void WindChoiceMenu_BackButton()
+    {
+        MainManager.Instance.windParameters = null;
+        windChoice.SetActive(false);
+    }
+
+    public void WindChoiceMenu_WindForceMinSlider(float value)
+    {
+        MainManager.Instance.windParameters.windForceMin = value;
+        MainManager.Instance.windParameters.windForceMax = MainManager.Instance.windParameters.windForceMax < MainManager.Instance.windParameters.windForceMin ? MainManager.Instance.windParameters.windForceMin : MainManager.Instance.windParameters.windForceMax;
+        windForceMaxSlider.value = MainManager.Instance.windParameters.windForceMax;
+    }
+
+    public void WindChoiceMenu_WindForceMaxSlider(float value)
+    {
+        MainManager.Instance.windParameters.windForceMax = value;
+        MainManager.Instance.windParameters.windForceMin = MainManager.Instance.windParameters.windForceMin > MainManager.Instance.windParameters.windForceMax ? MainManager.Instance.windParameters.windForceMax : MainManager.Instance.windParameters.windForceMin;
+        windForceMinSlider.value = MainManager.Instance.windParameters.windForceMin;
+    }
+
+    public void WindChoiceMenu_WindDirectionChangeSlider(float value)
+    {
+        MainManager.Instance.windParameters.windDirectionChangeDelta = value;
     }
 
 

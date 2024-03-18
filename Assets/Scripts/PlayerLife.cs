@@ -37,6 +37,7 @@ public class PlayerLife : MonoBehaviour
     private void OnDisable()
     {
         redSpriteMaterial.SetFloat(MASK_AMOUNT, maxMaskAmount);
+        physicalContactsManager.OnCollision.RemoveListener(OnCollision);
     }
 
     private void Start()
