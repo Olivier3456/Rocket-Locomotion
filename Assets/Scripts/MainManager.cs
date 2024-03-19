@@ -18,7 +18,7 @@ public class MainManager : MonoBehaviour
     public UnityEvent<bool> OnPauseStatusChanged = new UnityEvent<bool>();
     public UnityEvent OnDeath = new UnityEvent();
     public IGameEvent OngoingEvent { get; private set; }
-    
+
     public WindParameters windParameters = null;
 
     private MySceneManager mySceneManager;
@@ -56,7 +56,7 @@ public class MainManager : MonoBehaviour
         IsPlayerAlive = true;
         IsPaused = false;
     }
-    
+
 
     public void SetPlayerRigidbody(Rigidbody playerRb)
     {
@@ -107,6 +107,7 @@ public class MainManager : MonoBehaviour
     {
         if (IsPlayerAlive)
         {
+            GameObject.FindWithTag("Environment").SetActive(false);
             IsPlayerAlive = false;
             ImmobilizePlayer(true);
             OnDeath.Invoke();

@@ -127,7 +127,7 @@ public class MainMenu : MonoBehaviour
     }
     public void RaceMenu_Race2Button()
     {
-
+        MainManager.Instance.LoadScene(MySceneManager.RACE_2);
     }
     public void RaceMenu_BackButton()
     {
