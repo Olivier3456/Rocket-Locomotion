@@ -255,11 +255,11 @@ public class Rot2_Thruster : MonoBehaviour
     //        return;
     //    }
 
-    //    //boostValue = canThrust && canBoost ? boostInput : 0f;
+    //    //boostValue = isRotating && canBoost ? boostInput : 0f;
 
     //    //if (boostValue == 0)
     //    //{
-    //    thrustValue = canThrust ? thrustInput : 0f;
+    //    thrustValue = isRotating ? thrustInput : 0f;
     //    //}
     //    //else // If the thruster boosts, even a little, its base force vector is at max.
     //    //{

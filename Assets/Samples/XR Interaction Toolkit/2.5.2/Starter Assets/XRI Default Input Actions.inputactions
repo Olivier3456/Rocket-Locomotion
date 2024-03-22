@@ -2615,6 +2615,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Y Button",
+                    "type": "Button",
+                    "id": "47007e0c-f827-4c31-8103-c184d03d83ec",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Yaw",
                     "type": "Value",
                     "id": "0319e6dd-056f-49e2-86bc-87f7862e84d1",
@@ -2666,6 +2675,17 @@
                     "action": "ToggleShowHideGameMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6f833173-e8d8-448a-9354-2f4092dc8cfa",
+                    "path": "<XRController>{LeftHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "Y Button",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -2677,6 +2697,15 @@
                     "name": "A Button",
                     "type": "Button",
                     "id": "9f63816a-fd57-4ed8-afdf-39ba5f7c2bba",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "B Button",
+                    "type": "Button",
+                    "id": "b94d4ff7-48fb-4bf3-869f-9d5b66a640dd",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -2712,6 +2741,17 @@
                     "processors": "StickDeadzone",
                     "groups": "Continuous Move;Generic XR Controller",
                     "action": "PitchRoll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d0449172-87d1-4eb2-a8c5-d91b586cd71a",
+                    "path": "<XRController>{RightHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "B Button",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

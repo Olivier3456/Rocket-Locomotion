@@ -7,11 +7,11 @@ using UnityEngine.InputSystem;
 
 public class Thruster : MonoBehaviour
 {
-    //[SerializeField] private PlayerLife playerLife;
-    //[Space(20)]
     [SerializeField] private ApplyForcesToRigidbody applyForcesToRigidbody;
     [Space(20)]
     [SerializeField] private ThrustersBoostManager thrusterBoostManager;
+    [Space(20)]
+    [SerializeField] private ControllerManager controllerManager;
     [Space(20)]
     [SerializeField] private Transform controllerTransform;
     [Space(20)]
@@ -38,7 +38,7 @@ public class Thruster : MonoBehaviour
     private float thrustValue = 0;
     private float boostValue = 0;
 
-    private bool canThrust = true;
+    private bool isRotating = false;
     private bool canBoost = true;
 
     private ParticleSystem.MainModule particleMainModule;
@@ -54,6 +54,15 @@ public class Thruster : MonoBehaviour
 
     void Start()
     {
+        particleMainModule = thrusterParticle.main;
+
+        mainAudioSource.time = Random.Range(0, mainAudioSource.clip.length);
+
+        thrusterBoostManager.OnCanBoostStatusChange.AddListener(AuthoriseBoost);
+    }
+
+    private void OnEnable()
+    {
         thrust.action.performed += Thrust_Action_performed;
         thrust.action.canceled += Thrust_Action_canceled;
         thrust.action.Enable();
@@ -64,16 +73,10 @@ public class Thruster : MonoBehaviour
         boost.action.performed += Boost_Action_performed;
         boost.action.canceled += Boost_Action_canceled;
         boost.action.Enable();
-
-        particleMainModule = thrusterParticle.main;
-
-        mainAudioSource.time = Random.Range(0, mainAudioSource.clip.length);
-
-        thrusterBoostManager.OnCanBoostStatusChange.AddListener(AuthoriseBoost);
     }
 
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         thrust.action.Disable();
         thrust.action.performed -= Thrust_Action_performed;
@@ -100,7 +103,9 @@ public class Thruster : MonoBehaviour
 
     private void Rotate_Action_started(InputAction.CallbackContext obj)
     {
-        if (canThrust)
+        bool isThrusterInHand = controllerManager.ObjectInHand == ControllerManager.HandObject.Thruster;
+
+        if (!isRotating && isThrusterInHand)
         {
             isForward = !isForward;
             StartCoroutine(Rotate());
@@ -153,18 +158,20 @@ public class Thruster : MonoBehaviour
 
     private void UpdateThrustersValues()
     {
-        if (!MainManager.Instance.IsSimulationRunning)
+        bool isThrusterInHand = controllerManager.ObjectInHand == ControllerManager.HandObject.Thruster;
+
+        if (!MainManager.Instance.IsSimulationRunning || !isThrusterInHand)
         {
             thrustValue = 0f;
             boostValue = 0f;
             return;
         }
 
-        boostValue = canThrust && canBoost ? boostInput : 0f;
+        boostValue = !isRotating && canBoost ? boostInput : 0f;
 
         if (boostValue == 0)
         {
-            thrustValue = canThrust ? thrustInput : 0f;
+            thrustValue = !isRotating ? thrustInput : 0f;
         }
         else // If the thruster boosts, even a little, its base force vector is at max.
         {
@@ -175,7 +182,7 @@ public class Thruster : MonoBehaviour
 
     private IEnumerator Rotate()
     {
-        canThrust = false;
+        isRotating = true;
         rotateAudioSource.Play();
 
         float rotationTime = 0.5f;
@@ -193,7 +200,7 @@ public class Thruster : MonoBehaviour
 
         thrusterVisual.forward = isForward ? controllerTransform.forward : -controllerTransform.forward;
 
-        canThrust = true;
+        isRotating = false;
         rotateAudioSource.Stop();
     }
 
