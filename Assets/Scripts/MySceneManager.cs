@@ -12,6 +12,7 @@ public class MySceneManager : MonoBehaviour
     public const int NEW_YORK_2_FREE_FLIGHT = 3;
     public const int RACE_1 = 4;
     public const int RACE_2 = 5;
+    public const int RACE_3 = 6;
 
     private bool isLoading;
 

@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b297652310b307f4886158e88c6f8bd5, type: 2}
+  - {fileID: 2100000, guid: ce9e4bc038225174e91ab97497eb485f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 2643307762795266142}
   - component: {fileID: 6234770595681461179}
   m_Layer: 0
-  m_Name: Checkpoint FINAL Disc
+  m_Name: Checkpoint Disc FINAL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,7 +133,7 @@ MonoBehaviour:
   race: {fileID: 0}
   renderers:
   - {fileID: 4704990498571384069}
-  nextCheckpointMat: {fileID: 2100000, guid: 47031d8b1eb872647bf51eb42575a94f, type: 2}
+  nextCheckpointMat: {fileID: 2100000, guid: ae9ab7b1bd35a3548996b574fb55aeba, type: 2}
   particles: {fileID: 1369301872272203487}
 --- !u!65 &6234770595681461179
 BoxCollider:

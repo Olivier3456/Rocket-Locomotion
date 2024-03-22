@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-public enum GameEvent { Race1, Race2 };
+public enum GameEvent { Race1, Race2, Race3 };
 
 public static class RaceResultsSaveLoad
 {
@@ -57,6 +57,10 @@ public static class RaceResultsSaveLoad
         else if (gameEvent == GameEvent.Race2)
         {
             path = Application.persistentDataPath + "/Race2Score.json";
+        }
+        else if (gameEvent == GameEvent.Race2)
+        {
+            path = Application.persistentDataPath + "/Race3Score.json";
         }
 
 

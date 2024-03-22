@@ -9,8 +9,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject main;
     [SerializeField] private GameObject gameModesChoice;
     [SerializeField] private GameObject freeFlightLevelsChoice;
-    [SerializeField] private GameObject raceLevelsChoice;
     [SerializeField] private GameObject windChoice;
+    [SerializeField] private GameObject raceLevelsChoice;
     [Space(20)]
     [SerializeField] private Slider windForceMinSlider;
     [SerializeField] private Slider windForceMaxSlider;
@@ -21,7 +21,10 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         main.SetActive(true);
+        gameModesChoice.SetActive(false);
         freeFlightLevelsChoice.SetActive(false);
+        windChoice.SetActive(false);
+        raceLevelsChoice.SetActive(false);
     }
 
 
@@ -43,6 +46,7 @@ public class MainMenu : MonoBehaviour
     // GAME MODE CHOICE MENU BUTTONS
     public void GameModeChoiceMenu_FreeFlightButton()
     {
+        MainManager.Instance.windParameters = new WindParameters(0f, 0f, 0f);
         gameModesChoice.SetActive(false);
         freeFlightLevelsChoice.SetActive(true);
     }
@@ -62,25 +66,24 @@ public class MainMenu : MonoBehaviour
 
 
     // FREE FLIGHT MENU BUTTONS
-    private int freeFlightMapChosen;
+    private int freeFlightMapIndex;
     public void FreeFlightMenu_NY1Button()
     {
         //MainManager.Instance.LoadScene(MySceneManager.NEW_YORK_1_FREE_FLIGHT);
-        freeFlightMapChosen = MySceneManager.NEW_YORK_1_FREE_FLIGHT;
-        MainManager.Instance.windParameters = new WindParameters(0f, 0f, 0f);
+        freeFlightMapIndex = MySceneManager.NEW_YORK_1_FREE_FLIGHT;
         windChoice.SetActive(true);
     }
 
     public void FreeFlightMenu_NY2Button()
     {
         //MainManager.Instance.LoadScene(MySceneManager.NEW_YORK_2_FREE_FLIGHT);
-        freeFlightMapChosen = MySceneManager.NEW_YORK_2_FREE_FLIGHT;
-        MainManager.Instance.windParameters = new WindParameters(0f, 0f, 0f);
+        freeFlightMapIndex = MySceneManager.NEW_YORK_2_FREE_FLIGHT;
         windChoice.SetActive(true);
     }
 
     public void FreeFlightMenu_BackButton()
     {
+        MainManager.Instance.windParameters = null;
         freeFlightLevelsChoice.SetActive(false);
         gameModesChoice.SetActive(true);
     }
@@ -90,12 +93,11 @@ public class MainMenu : MonoBehaviour
     // WIND CHOICE MENU   
     public void WindChoiceMenu_StartButton()
     {
-        MainManager.Instance.LoadScene(freeFlightMapChosen);
+        MainManager.Instance.LoadScene(freeFlightMapIndex);
     }
 
     public void WindChoiceMenu_BackButton()
     {
-        MainManager.Instance.windParameters = null;
         windChoice.SetActive(false);
     }
 
@@ -128,6 +130,10 @@ public class MainMenu : MonoBehaviour
     public void RaceMenu_Race2Button()
     {
         MainManager.Instance.LoadScene(MySceneManager.RACE_2);
+    }
+    public void RaceMenu_Race3Button()
+    {
+        MainManager.Instance.LoadScene(MySceneManager.RACE_3);
     }
     public void RaceMenu_BackButton()
     {

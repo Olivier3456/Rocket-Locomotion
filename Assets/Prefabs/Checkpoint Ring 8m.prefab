@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5651228177256024021}
   - component: {fileID: 3832703409755631109}
   m_Layer: 0
-  m_Name: Checkpoint Ring (1)
+  m_Name: Checkpoint Ring 8m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
   race: {fileID: 0}
   renderers:
   - {fileID: 6804722786351754848}
-  nextCheckpointMat: {fileID: 2100000, guid: 47031d8b1eb872647bf51eb42575a94f, type: 2}
+  nextCheckpointMat: {fileID: 2100000, guid: e2f6fb84750a9c34bafdadcc71656cab, type: 2}
   particles: {fileID: 5763837518191385963}
 --- !u!65 &3832703409755631109
 BoxCollider:
@@ -4549,7 +4549,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b297652310b307f4886158e88c6f8bd5, type: 2}
+  - {fileID: 2100000, guid: 835dc12e94a953941abf6ecf04aa6ca0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

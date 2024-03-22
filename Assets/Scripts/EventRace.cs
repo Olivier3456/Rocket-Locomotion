@@ -187,7 +187,7 @@ public class EventRace : MonoBehaviour, IGameEvent
             checkPoints[nextCheckpointIndex++].gameObject.SetActive(false);
 
             //if (nextCheckpointIndex == 2)   // DEBUG
-            if (nextCheckpointIndex == checkPoints.Length - 1)
+            if (nextCheckpointIndex == checkPoints.Length)
             {
                 RaceWon();
                 return;
