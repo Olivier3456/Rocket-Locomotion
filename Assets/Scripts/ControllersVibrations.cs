@@ -11,6 +11,10 @@ public class ControllersVibrations : MonoBehaviour
     [SerializeField] private ThrustersBoostManager thrustersBoostManager;
     [SerializeField] private PlayerLife playerLife;
     [SerializeField] private PhysicalContactsManager physicalContactsManager;
+    [Space(20)]
+    [SerializeField] private Gun leftGun;
+    [SerializeField] private Gun rightGun;
+
 
     private WaitForSeconds waitForNextVibration = new WaitForSeconds(0.18f);
 
@@ -19,6 +23,30 @@ public class ControllersVibrations : MonoBehaviour
     {
         physicalContactsManager.OnCollision.AddListener(OnCollision);
         thrustersBoostManager.OnCanBoostStatusChange.AddListener(OnCanBoostAgain);
+
+        if (leftGun != null)
+        {
+            leftGun.OnShot.AddListener(OnLeftGunShot);
+        }
+
+        if (rightGun != null)
+        {
+            rightGun.OnShot.AddListener(OnRightGunShot);
+        }
+    }
+
+
+    private void OnLeftGunShot()
+    {
+        float amplitude = 1f;
+        float duration = 0.15f;
+        leftController.SendHapticImpulse(amplitude, duration);
+    }
+    private void OnRightGunShot()
+    {
+        float amplitude = 1f;
+        float duration = 0.15f;
+        rightController.SendHapticImpulse(amplitude, duration);
     }
 
 
@@ -67,5 +95,8 @@ public class ControllersVibrations : MonoBehaviour
     {
         physicalContactsManager.OnCollision.RemoveListener(OnCollision);
         thrustersBoostManager.OnCanBoostStatusChange.RemoveListener(OnCanBoostAgain);
+
+        leftGun.OnShot.RemoveListener(OnLeftGunShot);
+        rightGun.OnShot.RemoveListener(OnRightGunShot);
     }
 }

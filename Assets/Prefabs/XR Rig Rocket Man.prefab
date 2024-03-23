@@ -10946,6 +10946,8 @@ MonoBehaviour:
   thrustersBoostManager: {fileID: 7920992530866458539}
   playerLife: {fileID: 4126628068372180587}
   physicalContactsManager: {fileID: 2322934633570130993}
+  leftGun: {fileID: 6655439120658690738}
+  rightGun: {fileID: 2789107918014723973}
 --- !u!114 &7314240771556424712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12094,6 +12096,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1640050851827201604}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2789107918014723973 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3492056972977734081, guid: 760fd012e6c2f2145b7e682e0e3c95ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 1640050851827201604}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2307674146658519743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e2a54b73e5e8ab439f7bc8337fe840e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &3362701472794816015 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4064523553693931595, guid: 760fd012e6c2f2145b7e682e0e3c95ad,
@@ -12796,6 +12810,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7794211219234812787}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6655439120658690738 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3492056972977734081, guid: 760fd012e6c2f2145b7e682e0e3c95ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 7794211219234812787}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6552378095469940616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e2a54b73e5e8ab439f7bc8337fe840e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8958449020953378659
 PrefabInstance:
   m_ObjectHideFlags: 0

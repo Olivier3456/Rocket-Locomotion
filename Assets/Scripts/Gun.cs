@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class Gun : MonoBehaviour
@@ -20,6 +21,9 @@ public class Gun : MonoBehaviour
     [Space(20)]
     [SerializeField] private Transform impactParticlePrefab;
     [SerializeField] private int impactParticleInPool = 10;
+
+
+    public UnityEvent OnShot = new UnityEvent();
 
 
     private Queue<GunImpactEffect> gunImpactEffect_In_Pool = new Queue<GunImpactEffect>();
@@ -87,15 +91,13 @@ public class Gun : MonoBehaviour
             audioSource.pitch = pitch;
             audioSource.Play();
             animator.SetTrigger(ANIMATOR_SHOT_TRIGGER);
-
+            OnShot.Invoke();
 
             if (Physics.Raycast(raycastOrigin.position, raycastOrigin.forward, out RaycastHit hit, maxRaycastDistance))
             {
-                if (gunImpactEffect_In_Pool.Count > 0)
-                {
-                    GunImpactEffect gie = gunImpactEffect_In_Pool.Dequeue();
-                    gie.DoYourEffect(hit.point, hit.normal);
-                }
+                float bulletSpeed = 700f;
+                float delay = hit.distance / bulletSpeed;
+                StartCoroutine(WaitForImpactCoroutine(hit.point, hit.normal, delay));
             }
         }
 
@@ -107,6 +109,23 @@ public class Gun : MonoBehaviour
             {
                 isShooting = false;
             }
+        }
+    }
+
+
+    private IEnumerator WaitForImpactCoroutine(Vector3 hitPoint, Vector3 hitNormal, float delay)
+    {
+        float timer = 0f;
+        while (timer < delay) 
+        {
+            yield return null;
+            timer += Time.deltaTime;
+        }
+
+        if (gunImpactEffect_In_Pool.Count > 0)
+        {
+            GunImpactEffect gie = gunImpactEffect_In_Pool.Dequeue();
+            gie.DoYourEffect(hitPoint, hitNormal);
         }
     }
 }
