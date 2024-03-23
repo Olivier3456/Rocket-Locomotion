@@ -5,6 +5,7 @@ using UnityEngine;
 public class GunImpactEffect : MonoBehaviour
 {
     [SerializeField] private ParticleSystem particle;
+    [SerializeField] private AudioSource audioSource;
 
     private Queue<GunImpactEffect> queue;
 
@@ -23,6 +24,12 @@ public class GunImpactEffect : MonoBehaviour
 
         gameObject.SetActive(true);
         particle.Play();
+
+        float pitchDelta = 0.4f;
+        float audioSourceRandomPitch = Random.Range(1 - (pitchDelta * 0.5f), 1 + (pitchDelta * 0.5f));
+        audioSource.pitch = audioSourceRandomPitch;
+        audioSource.Play();
+
         StartCoroutine(WaitForParticleEnd_Coroutine());
     }
 
