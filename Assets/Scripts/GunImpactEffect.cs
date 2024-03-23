@@ -17,18 +17,21 @@ public class GunImpactEffect : MonoBehaviour
     }
 
 
-    public void DoYourEffect(Vector3 position, Vector3 up)
+    public void DoYourEffect(Vector3 position, Vector3 forward, float distance)
     {
         transform.position = position;
-        transform.forward = up;
+        transform.forward = forward;
 
         gameObject.SetActive(true);
         particle.Play();
 
-        float pitchDelta = 0.4f;
-        float audioSourceRandomPitch = Random.Range(1 - (pitchDelta * 0.5f), 1 + (pitchDelta * 0.5f));
-        audioSource.pitch = audioSourceRandomPitch;
-        audioSource.Play();
+        if (distance < 100f)
+        {
+            float pitchDelta = 0.4f;
+            float audioSourceRandomPitch = Random.Range(1 - (pitchDelta * 0.5f), 1 + (pitchDelta * 0.5f));
+            audioSource.pitch = audioSourceRandomPitch;
+            audioSource.Play();
+        }
 
         StartCoroutine(WaitForParticleEnd_Coroutine());
     }

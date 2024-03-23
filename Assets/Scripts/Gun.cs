@@ -93,11 +93,13 @@ public class Gun : MonoBehaviour
             animator.SetTrigger(ANIMATOR_SHOT_TRIGGER);
             OnShot.Invoke();
 
-            if (Physics.Raycast(raycastOrigin.position, raycastOrigin.forward, out RaycastHit hit, maxRaycastDistance))
+
+
+            Vector3 bulletDirection = GetApproximatedDirection(raycastOrigin.forward);
+
+            if (Physics.Raycast(raycastOrigin.position, bulletDirection, out RaycastHit hit, maxRaycastDistance))
             {
-                float bulletSpeed = 700f;
-                float delay = hit.distance / bulletSpeed;
-                StartCoroutine(WaitForImpactCoroutine(hit.point, hit.normal, delay));
+                StartCoroutine(WaitForImpactCoroutine(hit.point, hit.normal, hit.distance));
             }
         }
 
@@ -113,10 +115,30 @@ public class Gun : MonoBehaviour
     }
 
 
-    private IEnumerator WaitForImpactCoroutine(Vector3 hitPoint, Vector3 hitNormal, float delay)
+    private Vector3 GetApproximatedDirection(Vector3 initialDirection)
     {
+        float maxAngleDeviation = 0.25f;
+        float randomX = Random.Range(-maxAngleDeviation, maxAngleDeviation);
+        float randomY = Random.Range(-maxAngleDeviation, maxAngleDeviation);
+        float randomZ = Random.Range(-maxAngleDeviation, maxAngleDeviation);
+
+        Quaternion randomRotation = Quaternion.Euler(randomX, randomY, randomZ);
+
+        Vector3 adjustedDirection = randomRotation * initialDirection;
+
+        return adjustedDirection.normalized;
+    }
+
+
+
+
+    private IEnumerator WaitForImpactCoroutine(Vector3 hitPoint, Vector3 hitNormal, float hitDistance)
+    {
+        float bulletSpeed = 700f;
+        float delay = hitDistance / bulletSpeed;
+
         float timer = 0f;
-        while (timer < delay) 
+        while (timer < delay)
         {
             yield return null;
             timer += Time.deltaTime;
@@ -125,7 +147,7 @@ public class Gun : MonoBehaviour
         if (gunImpactEffect_In_Pool.Count > 0)
         {
             GunImpactEffect gie = gunImpactEffect_In_Pool.Dequeue();
-            gie.DoYourEffect(hitPoint, hitNormal);
+            gie.DoYourEffect(hitPoint, hitNormal, hitDistance);
         }
     }
 }
