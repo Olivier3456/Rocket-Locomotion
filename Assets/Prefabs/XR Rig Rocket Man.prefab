@@ -12023,6 +12023,11 @@ PrefabInstance:
       propertyPath: controllerManager
       value: 
       objectReference: {fileID: 5717121765613437155}
+    - target: {fileID: 3492056972977734081, guid: 760fd012e6c2f2145b7e682e0e3c95ad,
+        type: 3}
+      propertyPath: impactParticlePrefab
+      value: 
+      objectReference: {fileID: 400002, guid: 87cc2c83f7105674184d085fe04774cf, type: 3}
     - target: {fileID: 3946315352615664891, guid: 760fd012e6c2f2145b7e682e0e3c95ad,
         type: 3}
       propertyPath: m_Name
@@ -12705,6 +12710,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3492056972977734081, guid: 760fd012e6c2f2145b7e682e0e3c95ad,
         type: 3}
+      propertyPath: raycastOrigin
+      value: 
+      objectReference: {fileID: 2304198381787643975}
+    - target: {fileID: 3492056972977734081, guid: 760fd012e6c2f2145b7e682e0e3c95ad,
+        type: 3}
       propertyPath: controllerManager
       value: 
       objectReference: {fileID: 5943159400120091607}
@@ -12768,6 +12778,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 760fd012e6c2f2145b7e682e0e3c95ad, type: 3}
+--- !u!4 &2304198381787643975 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8345365782399644468, guid: 760fd012e6c2f2145b7e682e0e3c95ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 7794211219234812787}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6071572949552884536 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4064523553693931595, guid: 760fd012e6c2f2145b7e682e0e3c95ad,

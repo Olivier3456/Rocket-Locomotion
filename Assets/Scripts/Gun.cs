@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,9 +12,17 @@ public class Gun : MonoBehaviour
     [SerializeField] private float shotLength = 0.25f;
     [Space(20)]
     [SerializeField] private Transform raycastOrigin;
-    [SerializeField] private float maxRaycastDistance = 200f;
-    [SerializeField] private Transform laserPoint;
+    [SerializeField] private float maxRaycastDistance = 250f;
+    //[SerializeField] private Transform laserPoint;
+    //[Space(20)]
+    //[SerializeField] private LineRenderer lineRenderer;
+    //[SerializeField] private float laserLength = 2f;
+    [Space(20)]
+    [SerializeField] private Transform impactParticlePrefab;
+    [SerializeField] private int impactParticleInPool = 10;
 
+
+    private Queue<GunImpactEffect> gunImpactEffect_In_Pool = new Queue<GunImpactEffect>();
 
 
     private float shotTimer = 0f;
@@ -48,31 +55,27 @@ public class Gun : MonoBehaviour
     }
 
 
+    private void Start()
+    {
+        for (int i = 0; i < impactParticleInPool; i++)
+        {
+            GunImpactEffect gunImpactEffect = Instantiate(impactParticlePrefab.GetComponent<GunImpactEffect>());
+            gunImpactEffect.Initialize(gunImpactEffect_In_Pool);
+            gunImpactEffect.gameObject.SetActive(false);
+            gunImpactEffect_In_Pool.Enqueue(gunImpactEffect);
+        }
+    }
+
+
+
     private void Update()
     {
-        // DEBUG
-        //if (Input.GetKeyDown(KeyCode.Space)) { hasNewShotInput = true; }
-        //else if (Input.GetKeyUp(KeyCode.Space)) { hasNewShotInput = false; }
-
-
+        //===================================================================>> COMMENTé POUR LE DEBUG
         if (!MainManager.Instance.IsSimulationRunning)
         {
             return;
         }
-
-        if (Physics.Raycast(raycastOrigin.position, raycastOrigin.forward, out RaycastHit hit, maxRaycastDistance))
-        {
-            laserPoint.position = hit.point;
-            float scale = 1 + (hit.distance / (maxRaycastDistance * 0.5f));
-            Vector3 newLocalScale = new Vector3(scale, scale, scale);
-            laserPoint.localScale = newLocalScale;
-            laserPoint.forward = hit.normal;
-            laserPoint.gameObject.SetActive(true);
-        }
-        else
-        {
-            laserPoint.gameObject.SetActive(false);
-        }
+        //===================================================================<<
 
 
         if (hasNewShotInput && !isShooting)
@@ -84,6 +87,16 @@ public class Gun : MonoBehaviour
             audioSource.pitch = pitch;
             audioSource.Play();
             animator.SetTrigger(ANIMATOR_SHOT_TRIGGER);
+
+
+            if (Physics.Raycast(raycastOrigin.position, raycastOrigin.forward, out RaycastHit hit, maxRaycastDistance))
+            {
+                if (gunImpactEffect_In_Pool.Count > 0)
+                {
+                    GunImpactEffect gie = gunImpactEffect_In_Pool.Dequeue();
+                    gie.DoYourEffect(hit.point, hit.normal);
+                }
+            }
         }
 
         if (isShooting)
