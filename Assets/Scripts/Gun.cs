@@ -14,10 +14,6 @@ public class Gun : MonoBehaviour
     [Space(20)]
     [SerializeField] private Transform raycastOrigin;
     [SerializeField] private float maxRaycastDistance = 250f;
-    //[SerializeField] private Transform laserPoint;
-    //[Space(20)]
-    //[SerializeField] private LineRenderer lineRenderer;
-    //[SerializeField] private float laserLength = 2f;
     [Space(20)]
     [SerializeField] private Transform impactParticlePrefab;
     [SerializeField] private int impactParticleInPool = 10;

@@ -96,7 +96,14 @@ public class ControllersVibrations : MonoBehaviour
         physicalContactsManager.OnCollision.RemoveListener(OnCollision);
         thrustersBoostManager.OnCanBoostStatusChange.RemoveListener(OnCanBoostAgain);
 
-        leftGun.OnShot.RemoveListener(OnLeftGunShot);
-        rightGun.OnShot.RemoveListener(OnRightGunShot);
+        if (leftGun != null)
+        {
+            leftGun.OnShot.RemoveListener(OnLeftGunShot);
+        }
+
+        if (rightGun != null)
+        {
+            rightGun.OnShot.RemoveListener(OnRightGunShot);
+        }
     }
 }

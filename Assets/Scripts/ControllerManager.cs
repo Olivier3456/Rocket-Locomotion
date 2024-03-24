@@ -23,14 +23,20 @@ public class ControllerManager : MonoBehaviour
 
     private void OnEnable()
     {
-        switchThrusterGun.action.started += SwitchThrusterGun_Action_started;
-        switchThrusterGun.action.Enable();
+        if (gun != null)
+        {
+            switchThrusterGun.action.started += SwitchThrusterGun_Action_started;
+            switchThrusterGun.action.Enable();
+        }
     }
 
     private void OnDisable()
     {
-        switchThrusterGun.action.Disable();
-        switchThrusterGun.action.started -= SwitchThrusterGun_Action_started;
+        if (gun != null)
+        {
+            switchThrusterGun.action.Disable();
+            switchThrusterGun.action.started -= SwitchThrusterGun_Action_started;
+        }
 
         if (MainManager.Instance.GameMenu != null)
         {
@@ -41,15 +47,14 @@ public class ControllerManager : MonoBehaviour
 
     private void Start()
     {
-        handObject = HandObject.Thruster;
-
         MainManager.Instance.GameMenu.OnShow.AddListener(OnMenuShow);
         MainManager.Instance.GameMenu.OnHide.AddListener(OnMenuHide);
 
-        if (SceneManager.GetActiveScene().buildIndex != MySceneManager.MAIN_MENU_SCENE_BUILD_INDEX)
-        {
-            SwitchHandObject(HandObject.Thruster);
-        }
+        //if (SceneManager.GetActiveScene().buildIndex != MySceneManager.MAIN_MENU_SCENE_BUILD_INDEX ||
+        //    SceneManager.GetActiveScene().buildIndex != MySceneManager.LOADING_SCENE_BUILD_INDEX)
+        //{
+        SwitchHandObject(HandObject.Thruster);
+        //}
     }
 
 
@@ -98,6 +103,10 @@ public class ControllerManager : MonoBehaviour
 
         rayInteractor.SetActive(handObject == HandObject.RayInteractor);
         thruster.SetActive(handObject == HandObject.Thruster);
-        gun.SetActive(handObject == HandObject.Gun);
+
+        if (gun != null)
+        {
+            gun.SetActive(handObject == HandObject.Gun);
+        }
     }
 }

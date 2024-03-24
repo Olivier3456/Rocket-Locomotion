@@ -684,7 +684,7 @@ PrefabInstance:
     - target: {fileID: 4678887908120963039, guid: 11371c26a15ce514fa42b88eb32065a5,
         type: 3}
       propertyPath: m_Name
-      value: XR Rig Rocket Man
+      value: XR Rig Rocket Man - GUNS
       objectReference: {fileID: 0}
     - target: {fileID: 9214336484023828279, guid: 11371c26a15ce514fa42b88eb32065a5,
         type: 3}

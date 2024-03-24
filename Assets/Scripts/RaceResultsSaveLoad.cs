@@ -58,7 +58,7 @@ public static class RaceResultsSaveLoad
         {
             path = Application.persistentDataPath + "/Race2Score.json";
         }
-        else if (gameEvent == GameEvent.Race2)
+        else if (gameEvent == GameEvent.Race3)
         {
             path = Application.persistentDataPath + "/Race3Score.json";
         }
