@@ -17,15 +17,15 @@ public class GunImpactEffect : MonoBehaviour
     }
 
 
-    public void DoYourEffect(Vector3 position, Vector3 forward, float distance)
+    public void DoYourEffect(RaycastHit hit)
     {
-        transform.position = position;
-        transform.forward = forward;
+        transform.position = hit.point;
+        transform.forward = hit.normal;
 
         gameObject.SetActive(true);
         particle.Play();
 
-        if (distance < 100f)
+        if (hit.distance < 100f)
         {
             float pitchDelta = 0.4f;
             float audioSourceRandomPitch = Random.Range(1 - (pitchDelta * 0.5f), 1 + (pitchDelta * 0.5f));

@@ -95,7 +95,7 @@ public class Gun : MonoBehaviour
 
             if (Physics.Raycast(raycastOrigin.position, bulletDirection, out RaycastHit hit, maxRaycastDistance))
             {
-                StartCoroutine(WaitForImpactCoroutine(hit.point, hit.normal, hit.distance));
+                StartCoroutine(WaitForImpactCoroutine(hit));
             }
         }
 
@@ -128,10 +128,10 @@ public class Gun : MonoBehaviour
 
 
 
-    private IEnumerator WaitForImpactCoroutine(Vector3 hitPoint, Vector3 hitNormal, float hitDistance)
+    private IEnumerator WaitForImpactCoroutine(RaycastHit hit)
     {
         float bulletSpeed = 700f;
-        float delay = hitDistance / bulletSpeed;
+        float delay = hit.distance / bulletSpeed;
 
         float timer = 0f;
         while (timer < delay)
@@ -140,10 +140,14 @@ public class Gun : MonoBehaviour
             timer += Time.deltaTime;
         }
 
-        if (gunImpactEffect_In_Pool.Count > 0)
+        if (hit.transform.TryGetComponent(out IBreakableByGun breakableByGun))
+        {
+            breakableByGun.TakeDamage(hit, 1f);
+        }
+        else if (gunImpactEffect_In_Pool.Count > 0)
         {
             GunImpactEffect gie = gunImpactEffect_In_Pool.Dequeue();
-            gie.DoYourEffect(hitPoint, hitNormal, hitDistance);
+            gie.DoYourEffect(hit);
         }
     }
 }
