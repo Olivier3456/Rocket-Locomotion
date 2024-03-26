@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6104532394749645732}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Gravity Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8599873263920011708}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Events UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 4325678910984571820}
   - component: {fileID: 4463542981607087136}
   - component: {fileID: 4928994463915742758}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Race Scores Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 207129812809918131}
   - component: {fileID: 1563392157771538073}
   - component: {fileID: 2036420442278143135}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Return To Main Menu Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 8956377822812966296}
   - component: {fileID: 5631806607561969409}
   - component: {fileID: 6747275619632839160}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Result Text Template
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -482,7 +482,7 @@ GameObject:
   - component: {fileID: 8717792131920098696}
   - component: {fileID: 4147941915063794303}
   - component: {fileID: 5334245399624860048}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Continue Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -627,7 +627,7 @@ GameObject:
   - component: {fileID: 8887137467184407977}
   - component: {fileID: 6194920765882475265}
   - component: {fileID: 2214548660853881877}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Speed Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5474,7 +5474,7 @@ GameObject:
   - component: {fileID: 7626023633825467097}
   - component: {fileID: 4066900197838219573}
   - component: {fileID: 6456755159056710983}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5549,7 +5549,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7271438962385067231}
   - component: {fileID: 2430195067175283346}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right Thruster Main Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5678,7 +5678,7 @@ GameObject:
   - component: {fileID: 4898694397924841805}
   - component: {fileID: 1239432726595671805}
   - component: {fileID: 7033293254009806972}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Dead Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5814,7 +5814,7 @@ GameObject:
   - component: {fileID: 6535778588153193158}
   - component: {fileID: 6605991929133041731}
   - component: {fileID: 1340270974507837022}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ray Interactor Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6268,7 +6268,7 @@ GameObject:
   - component: {fileID: 4208272647946618361}
   - component: {fileID: 1534854644863964682}
   - component: {fileID: 7808678915176461926}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6345,7 +6345,7 @@ GameObject:
   - component: {fileID: 5889752501573325984}
   - component: {fileID: 8550916678320227148}
   - component: {fileID: 4495148266171953392}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ray Interactor Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6798,7 +6798,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7927644041471670666}
   - component: {fileID: 2878700906723067106}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left Thruster Main Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6926,7 +6926,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3418990269876623721}
   - component: {fileID: 4987328331777322275}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Boost Reserve Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7058,7 +7058,7 @@ GameObject:
   - component: {fileID: 4222569755798583484}
   - component: {fileID: 7856075785880439418}
   - component: {fileID: 4716816969513347651}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7204,7 +7204,7 @@ GameObject:
   - component: {fileID: 4691627769415798630}
   - component: {fileID: 5334174767225694040}
   - component: {fileID: 5440111134611408503}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Locomotion System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7332,7 +7332,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4237352399608845183}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Thruster Visual Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7369,7 +7369,7 @@ GameObject:
   - component: {fileID: 32740225990229202}
   - component: {fileID: 4206399574517787620}
   - component: {fileID: 4945640744115794855}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -7618,7 +7618,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6572843294653183438}
   - component: {fileID: 7740046777562344116}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Result text Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7682,7 +7682,7 @@ GameObject:
   - component: {fileID: 3362280386430741713}
   - component: {fileID: 3232338046158510276}
   - component: {fileID: 3228448945934299482}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Text 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7816,7 +7816,7 @@ GameObject:
   - component: {fileID: 1706357142210090438}
   - component: {fileID: 4653983658764012880}
   - component: {fileID: 3838234555750406837}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wind Speed Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7948,7 +7948,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7628161195979884494}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Scale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7980,7 +7980,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9133692153050485915}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Camera Offset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8016,7 +8016,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2911683583127634428}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8056,7 +8056,7 @@ GameObject:
   - component: {fileID: 2111123202161881497}
   - component: {fileID: 4671229126401105934}
   - component: {fileID: 6562463184356082429}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Air Speed Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8199,7 +8199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2623399764294560927}
   - component: {fileID: 4852957977256068065}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right Thruster Rotate Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8326,7 +8326,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1586055734345264831}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Thruster Visual Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8361,7 +8361,7 @@ GameObject:
   - component: {fileID: 5379899397610213627}
   - component: {fileID: 8657536319821464041}
   - component: {fileID: 5676184196348278936}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hud Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8450,7 +8450,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 668672669723474321}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player Feet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8485,7 +8485,7 @@ GameObject:
   - component: {fileID: 5543336971592886851}
   - component: {fileID: 5717121765613437155}
   - component: {fileID: 9132470021220051716}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8871,7 +8871,7 @@ GameObject:
   - component: {fileID: 1527580979909981768}
   - component: {fileID: 1808188614776961127}
   - component: {fileID: 821769502325357328}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Speed Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9004,7 +9004,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1301760010405350709}
   - component: {fileID: 7873344921831788183}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left Controller Stabilized
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9054,7 +9054,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5271249568741225922}
   - component: {fileID: 4435468976008199542}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right Controller Stabilized
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9105,7 +9105,7 @@ GameObject:
   - component: {fileID: 1559865875576349582}
   - component: {fileID: 3430533640821870298}
   - component: {fileID: 1199235385071922355}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Event Big Central Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9240,7 +9240,7 @@ GameObject:
   - component: {fileID: 4161275553039825562}
   - component: {fileID: 6264222359583854031}
   - component: {fileID: 4532424037465107081}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Debug Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9350,7 +9350,7 @@ GameObject:
   - component: {fileID: 660103253728975676}
   - component: {fileID: 3586522624754680044}
   - component: {fileID: 220074776400400211}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: XR Rig Rocket Man - NO GUNS
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -9641,7 +9641,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 924828382512041464}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left Controller Stabilized Attach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9677,7 +9677,7 @@ GameObject:
   - component: {fileID: 5862904142830394808}
   - component: {fileID: 8689812153759451249}
   - component: {fileID: 5013624273281946145}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Game Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9822,7 +9822,7 @@ GameObject:
   - component: {fileID: 7654257346015838852}
   - component: {fileID: 8676068301226339631}
   - component: {fileID: 6058252436994486938}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9957,7 +9957,7 @@ GameObject:
   - component: {fileID: 5878472791528683394}
   - component: {fileID: 5568171558780616777}
   - component: {fileID: 8417990751096302915}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Text 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10091,7 +10091,7 @@ GameObject:
   - component: {fileID: 6929270192557536931}
   - component: {fileID: 5957870115472067646}
   - component: {fileID: 7462691538724733205}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DEBUG Visual Marker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10173,7 +10173,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3272679193179585562}
   - component: {fileID: 5551847557519928473}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left Thruster Rotate Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10303,7 +10303,7 @@ GameObject:
   - component: {fileID: 2786034107684536770}
   - component: {fileID: 5943159400120091607}
   - component: {fileID: 359657898334839473}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10690,7 +10690,7 @@ GameObject:
   - component: {fileID: 5163993193507266445}
   - component: {fileID: 7707911554415172619}
   - component: {fileID: 1702033220863165042}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DEBUG - FPS Counter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10836,7 +10836,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4998229048766612294}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right Controller Stabilized Attach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10872,7 +10872,7 @@ GameObject:
   - component: {fileID: 3319591469004640665}
   - component: {fileID: 7314240771556424712}
   - component: {fileID: 4126628068372180587}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: XR Origin (XR Rig)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11002,7 +11002,7 @@ GameObject:
   - component: {fileID: 5584143877988676474}
   - component: {fileID: 4220110389650248852}
   - component: {fileID: 7757097575071819016}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Text 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11136,7 +11136,7 @@ GameObject:
   - component: {fileID: 5517361799398447494}
   - component: {fileID: 8701746491396629782}
   - component: {fileID: 4700066276593448104}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Event Up Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11268,7 +11268,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7885873187968108652}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wind Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11302,7 +11302,7 @@ GameObject:
   - component: {fileID: 2298527067238806676}
   - component: {fileID: 1881055170356936544}
   - component: {fileID: 4562437600489426105}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Red Injury Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11376,7 +11376,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5437579470583381938}
   - component: {fileID: 1288547766861530}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Scores Display
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11425,7 +11425,7 @@ GameObject:
   - component: {fileID: 2529809200883973747}
   - component: {fileID: 3496142688063225838}
   - component: {fileID: 2338457876609477335}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11561,7 +11561,7 @@ GameObject:
   - component: {fileID: 512054192122515109}
   - component: {fileID: 10327685235425574}
   - component: {fileID: 5151708108584429078}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Restart Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11705,7 +11705,7 @@ GameObject:
   - component: {fileID: 5526441743330897723}
   - component: {fileID: 7601216022339622852}
   - component: {fileID: 5375030300310935242}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11840,7 +11840,7 @@ GameObject:
   - component: {fileID: 2356782906849983862}
   - component: {fileID: 6762620122662541826}
   - component: {fileID: 8487752184749630630}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Border Collided Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11924,6 +11924,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2922074002634289897, guid: 485d99b1399d5fc4c9e05c49255cc2c0,
         type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922074002634289897, guid: 485d99b1399d5fc4c9e05c49255cc2c0,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -11987,6 +11992,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Thruster Particle Right
       objectReference: {fileID: 0}
+    - target: {fileID: 8549277745638972879, guid: 485d99b1399d5fc4c9e05c49255cc2c0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12031,6 +12041,11 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startRotationY.minScalar
       value: 6.283185
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922074002634289897, guid: 485d99b1399d5fc4c9e05c49255cc2c0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3064964148478694732, guid: 485d99b1399d5fc4c9e05c49255cc2c0,
         type: 3}
@@ -12092,6 +12107,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Thruster Particle Left
       objectReference: {fileID: 0}
+    - target: {fileID: 8549277745638972879, guid: 485d99b1399d5fc4c9e05c49255cc2c0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12121,6 +12141,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Reserve Circle
+      objectReference: {fileID: 0}
+    - target: {fileID: 1244687450522156909, guid: 5dc0a53e771ce7c41b4af05df9fdd53b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1345391667770947056, guid: 5dc0a53e771ce7c41b4af05df9fdd53b,
         type: 3}
@@ -12237,6 +12262,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Boost Reserve
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801728286402972701, guid: 5dc0a53e771ce7c41b4af05df9fdd53b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5141427055761725380, guid: 5dc0a53e771ce7c41b4af05df9fdd53b,
         type: 3}
@@ -12386,6 +12416,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8425678385426049902, guid: 5dc0a53e771ce7c41b4af05df9fdd53b,
         type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8425678385426049902, guid: 5dc0a53e771ce7c41b4af05df9fdd53b,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -12454,6 +12489,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4237352399608845183}
     m_Modifications:
+    - target: {fileID: 3145346951867186246, guid: 53850f149f4c47f4eb34834911348a29,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5191587440727814654, guid: 53850f149f4c47f4eb34834911348a29,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7559823450776763684, guid: 53850f149f4c47f4eb34834911348a29,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12508,6 +12553,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Thruster Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125874197339136948, guid: 53850f149f4c47f4eb34834911348a29,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 9125874197339136948, guid: 53850f149f4c47f4eb34834911348a29,
         type: 3}
@@ -12593,6 +12643,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: uploads_files_1842272_arrow+pointer
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 89d4564cda0961947ac4575787e705a5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12612,6 +12667,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1586055734345264831}
     m_Modifications:
+    - target: {fileID: 3145346951867186246, guid: 53850f149f4c47f4eb34834911348a29,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5191587440727814654, guid: 53850f149f4c47f4eb34834911348a29,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7559823450776763684, guid: 53850f149f4c47f4eb34834911348a29,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12666,6 +12731,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Thruster Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125874197339136948, guid: 53850f149f4c47f4eb34834911348a29,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 9125874197339136948, guid: 53850f149f4c47f4eb34834911348a29,
         type: 3}

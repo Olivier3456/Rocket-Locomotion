@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Drone : MonoBehaviour, IBreakableByGun
 {
-    [SerializeField] private Transform[] checkpoints;
-    [SerializeField] private float speed = 1f;
+    [SerializeField] private float speed = 2f;
     [SerializeField] private float minDistanceToChangeCheckpoint = 2f;
     [Space(20)]
     [SerializeField] bool movementRandomFluctuations;
@@ -19,8 +18,9 @@ public class Drone : MonoBehaviour, IBreakableByGun
     [SerializeField] private AudioSource damageAudioSource;
     [SerializeField] private AudioClip[] bulletImpactClips;
     [SerializeField] private AudioClip explosionClip;
-    [Space(20)]
-    [SerializeField, Range(1, 10)] private int startLife = 5;
+
+
+    private Transform[] checkpoints;
 
     private float perlin_X = 0f;
 
@@ -32,26 +32,30 @@ public class Drone : MonoBehaviour, IBreakableByGun
 
     private bool isDead;
 
+    private const string ENEMY_TARGET_TAG = "EnemyTarget";
 
-    private void Start()
+    public void Initialize(Transform[] checkpoints, int startLife, float speed)
     {
+        this.checkpoints = checkpoints;
+        this.speed = speed;
+
         targetPosition = checkpoints[0].position;
         currentLife = startLife;
     }
 
+
     private void Update()
     {
-        // DEBUG
-        //if (Input.GetKeyDown(KeyCode.Space)) { Explode(); }
+        if (!isDead)
+        {
+            Vector3 nextCheckpointPosition = checkpoints[currentCheckpointIndex].position;
 
+            UpdateTargetPosition(nextCheckpointPosition);
 
-        Vector3 nextCheckpointPosition = checkpoints[currentCheckpointIndex].position;
+            UpdateDronePositionRotation();
 
-        UpdateTargetPosition(nextCheckpointPosition);
-
-        UpdateDronePositionRotation();
-
-        ChangeNextCheckpointIfNeeded(nextCheckpointPosition);
+            ChangeNextCheckpointIfNeeded(nextCheckpointPosition);
+        }
     }
 
     private void UpdateTargetPosition(Vector3 nextCheckpointPosition)
@@ -152,5 +156,15 @@ public class Drone : MonoBehaviour, IBreakableByGun
 
         //gameObject.SetActive(false);
         Destroy(gameObject);
+    }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag(ENEMY_TARGET_TAG))
+        {
+            //Debug.Log("Collision With target!");
+            Explode();
+        }
     }
 }

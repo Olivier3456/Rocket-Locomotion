@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-public enum GameEvent { Race1, Race2, Race3 };
+public enum GameEvent { Race1, Race2, Race3, ProtectTheSkyLord1 };
 
 public static class RaceResultsSaveLoad
 {

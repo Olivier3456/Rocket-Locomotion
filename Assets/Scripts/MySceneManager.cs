@@ -13,6 +13,7 @@ public class MySceneManager : MonoBehaviour
     public const int RACE_1 = 4;
     public const int RACE_2 = 5;
     public const int RACE_3 = 6;
+    public const int PROTECT_THE_SKYLORD_1 = 7;
 
     private bool isLoading;
 

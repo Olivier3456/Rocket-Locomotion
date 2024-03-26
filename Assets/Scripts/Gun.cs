@@ -17,6 +17,12 @@ public class Gun : MonoBehaviour
     [Space(20)]
     [SerializeField] private Transform impactParticlePrefab;
     [SerializeField] private int impactParticleInPool = 10;
+    [Space(20)]
+    [SerializeField] private LineRenderer lineRenderer;
+    //[SerializeField] private Transform lineOrigin;
+    [SerializeField] private float lineLength = 5f;
+
+
 
 
     public UnityEvent OnShot = new UnityEvent();
@@ -76,6 +82,8 @@ public class Gun : MonoBehaviour
             return;
         }
         //===================================================================<<
+
+        //lineRenderer.SetPositions(new Vector3[] { lineOrigin.position, lineOrigin.position + (lineOrigin.forward * lineLength) });
 
 
         if (hasNewShotInput && !isShooting)

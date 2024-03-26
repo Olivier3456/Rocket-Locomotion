@@ -11,12 +11,13 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject freeFlightLevelsChoice;
     [SerializeField] private GameObject windChoice;
     [SerializeField] private GameObject raceLevelsChoice;
+    [SerializeField] private GameObject protectChoice;
     [Space(20)]
     [SerializeField] private Slider windForceMinSlider;
     [SerializeField] private Slider windForceMaxSlider;
     [SerializeField] private Slider windDirectionChangeSlider;
 
-    
+
 
     private void Start()
     {
@@ -25,6 +26,7 @@ public class MainMenu : MonoBehaviour
         freeFlightLevelsChoice.SetActive(false);
         windChoice.SetActive(false);
         raceLevelsChoice.SetActive(false);
+        protectChoice.SetActive(false);
     }
 
 
@@ -55,6 +57,12 @@ public class MainMenu : MonoBehaviour
     {
         gameModesChoice.SetActive(false);
         raceLevelsChoice.SetActive(true);
+    }
+
+    public void GameModeChoiceMenu_ProtectButton()
+    {
+        gameModesChoice.SetActive(false);
+        protectChoice.SetActive(true);
     }
 
     public void GameModeChoiceMenu_BackButton()
@@ -90,7 +98,7 @@ public class MainMenu : MonoBehaviour
 
 
 
-    // WIND CHOICE MENU   
+    // WIND CHOICE MENU BUTTONS
     public void WindChoiceMenu_StartButton()
     {
         MainManager.Instance.LoadScene(freeFlightMapIndex);
@@ -138,6 +146,19 @@ public class MainMenu : MonoBehaviour
     public void RaceMenu_BackButton()
     {
         raceLevelsChoice.SetActive(false);
+        gameModesChoice.SetActive(true);
+    }
+
+
+
+    // PROTECT THE SKY LORD BUTTONS
+    public void ProtectMenu_Protect1Button()
+    {
+        MainManager.Instance.LoadScene(MySceneManager.PROTECT_THE_SKYLORD_1);
+    }
+    public void ProtectMenu_BackButton()
+    {
+        protectChoice.SetActive(false);
         gameModesChoice.SetActive(true);
     }
 }
