@@ -25,6 +25,8 @@ public class DroneSeeker : MonoBehaviour, IBreakableByGun
     [SerializeField] private AudioClip explosionClip;
 
 
+    private float droneRadius = 1f;
+
     private float perlin_X = 0f;
 
     private int currentLife;
@@ -38,6 +40,8 @@ public class DroneSeeker : MonoBehaviour, IBreakableByGun
     private Vector3 currentDestination;
 
     private bool isWaitingForDestination = true;
+
+    private bool isMovingTowardsRandomDestination = true;
 
 
     public void Initialize(Transform target, int startLife, float speedTargetFound, float speedNoTarget)
@@ -56,17 +60,17 @@ public class DroneSeeker : MonoBehaviour, IBreakableByGun
         {
             if (target != null)
             {
-                Vector3 rayDirection = (target.position - transform.position).normalized;
-                float rayLength = Vector3.Distance(transform.position, target.position);
+                Vector3 direction = (target.position - transform.position).normalized;
+                float maxDistance = Vector3.Distance(transform.position, target.position);
+                //Debug.DrawLine(transform.position, transform.position + (direction * maxDistance), Color.blue);
 
-                //Debug.DrawLine(transform.position, transform.position + (rayDirection * rayLength), Color.blue);
-
-                if (Physics.Raycast(transform.position, rayDirection, out RaycastHit hit, rayLength))
+                if (Physics.SphereCast(transform.position, droneRadius, direction, out RaycastHit hit, maxDistance))
                 {
                     if (hit.transform == target)
                     {
                         isTargetInSight = true;
                         isWaitingForDestination = false;
+                        isMovingTowardsRandomDestination = false;
                         currentDestination = hit.point;
                     }
                     else
@@ -88,7 +92,6 @@ public class DroneSeeker : MonoBehaviour, IBreakableByGun
                     if (!isTargetInSight)
                     {
                         float distanceToCurrentDestination = Vector3.Distance(transform.position, currentDestination);
-                        float droneRadius = 1f;
                         if (distanceToCurrentDestination < droneRadius)
                         {
                             //Debug.Log("Drone arrived at its actual random destination. Trying to find another one");
@@ -101,8 +104,8 @@ public class DroneSeeker : MonoBehaviour, IBreakableByGun
                     Debug.Log("There is a problem: sphere cast should have found the target or another collider.");
                 }
 
-                UpdateAudioSourcesValues(rayLength);
-            }           
+                UpdateAudioSourcesValues(maxDistance);
+            }
         }
         else
         {
@@ -112,36 +115,9 @@ public class DroneSeeker : MonoBehaviour, IBreakableByGun
     }
 
 
-    private void UpdateAudioSourcesValues(float rayLength)
-    {
-        float baseRotorPitch = 1.5f;
-        float pitchSpeedFactor = 0.1f;
-        float currentSpeed = isTargetInSight ? speedTargetFound : speedNoTarget;
-        float rotorPitch = baseRotorPitch + (currentSpeed * pitchSpeedFactor);
-        rotorsAudioSource.pitch = rotorPitch;
-
-        if (isTargetInSight)
-        {
-            float distanceToTarget = rayLength;
-            float minPitch = 1f;
-            float maxPitch = 3f;
-            float alarmPitch = Mathf.Clamp(maxPitch - (distanceToTarget * 0.05f), minPitch, maxPitch);
-            alarmAudioSource.pitch = alarmPitch;
-            if (!alarmAudioSource.isPlaying)
-            {
-                alarmAudioSource.Play();
-            }
-        }
-        else
-        {
-            alarmAudioSource.Stop();
-        }
-    }
-
-
     private void MoveTowardsDestination(Vector3 destination)
     {
-        float currentSpeed = isTargetInSight ? speedTargetFound : speedNoTarget;
+        float currentSpeed = !isMovingTowardsRandomDestination ? speedTargetFound : speedNoTarget;
 
         Vector3 direction = (destination - transform.position).normalized;
 
@@ -158,10 +134,10 @@ public class DroneSeeker : MonoBehaviour, IBreakableByGun
         float randomY = Random.Range(-0.1f, 0.1f);
         float randomZ = Random.Range(-1f, 1f);
         Vector3 randomDirection = new Vector3(randomX, randomY, randomZ).normalized;
-        float radius = 0.5f;
         float distance = 20f;
+        isMovingTowardsRandomDestination = true;
 
-        if (!Physics.SphereCast(transform.position, radius, randomDirection, out RaycastHit hit, distance))
+        if (!Physics.SphereCast(transform.position, droneRadius, randomDirection, out RaycastHit hit, distance))
         {
             //Debug.Log("Target Location is OK: no obstacle on the way.");
             destination = transform.position + (randomDirection * distance);
@@ -239,7 +215,6 @@ public class DroneSeeker : MonoBehaviour, IBreakableByGun
         droneVisual.SetActive(false);
         StartCoroutine(ExplodeCoroutine());
     }
-
     private IEnumerator ExplodeCoroutine()
     {
         explosionParticles.Play();
@@ -255,6 +230,33 @@ public class DroneSeeker : MonoBehaviour, IBreakableByGun
     }
 
 
+    private void UpdateAudioSourcesValues(float rayLength)
+    {
+        float baseRotorPitch = 1.5f;
+        float pitchSpeedFactor = 0.1f;
+        float currentSpeed = !isMovingTowardsRandomDestination ? speedTargetFound : speedNoTarget;
+        float rotorPitch = baseRotorPitch + (currentSpeed * pitchSpeedFactor);
+        rotorsAudioSource.pitch = rotorPitch;
+
+        if (isTargetInSight)
+        {
+            float distanceToTarget = rayLength;
+            float minPitch = 1f;
+            float maxPitch = 3f;
+            float alarmPitch = Mathf.Clamp(maxPitch - (distanceToTarget * 0.05f), minPitch, maxPitch);
+            alarmAudioSource.pitch = alarmPitch;
+            if (!alarmAudioSource.isPlaying)
+            {
+                alarmAudioSource.Play();
+            }
+        }
+        else
+        {
+            alarmAudioSource.Stop();
+        }
+    }
+
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag(ENEMY_TARGET_TAG))
@@ -264,13 +266,13 @@ public class DroneSeeker : MonoBehaviour, IBreakableByGun
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag(ENEMY_TARGET_TAG))
-        {
-            return;
-        }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag(ENEMY_TARGET_TAG))
+    //    {
+    //        return;
+    //    }
 
-        isWaitingForDestination = !FindRandomDestination(out currentDestination);
-    }
+    //    isWaitingForDestination = !FindRandomDestination(out currentDestination);
+    //}
 }
