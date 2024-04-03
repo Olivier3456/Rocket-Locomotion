@@ -7,8 +7,8 @@ public class DroneSeeker : MonoBehaviour, IBreakableByGun
 {
     [SerializeField] private float speedTargetFound = 10f;
     [SerializeField] private float speedNoTarget = 5f;
+    [SerializeField] private float droneRadius = 2f;
     [SerializeField] private Transform target;
-    //[SerializeField] private float minDistanceToChangeCheckpoint = 2f;
     [Space(20)]
     [SerializeField] bool movementRandomFluctuations;
     [SerializeField] float fluctuationAmplitude = 0.1f;
@@ -25,7 +25,6 @@ public class DroneSeeker : MonoBehaviour, IBreakableByGun
     [SerializeField] private AudioClip explosionClip;
 
 
-    private float droneRadius = 1f;
 
     private float perlin_X = 0f;
 
@@ -34,8 +33,6 @@ public class DroneSeeker : MonoBehaviour, IBreakableByGun
     private bool isDead;
 
     private bool isTargetInSight;
-
-    private const string ENEMY_TARGET_TAG = "EnemyTarget";
 
     private Vector3 currentDestination;
 
@@ -62,7 +59,6 @@ public class DroneSeeker : MonoBehaviour, IBreakableByGun
             {
                 Vector3 direction = (target.position - transform.position).normalized;
                 float maxDistance = Vector3.Distance(transform.position, target.position);
-                //Debug.DrawLine(transform.position, transform.position + (direction * maxDistance), Color.blue);
 
                 if (Physics.SphereCast(transform.position, droneRadius, direction, out RaycastHit hit, maxDistance))
                 {
@@ -86,26 +82,30 @@ public class DroneSeeker : MonoBehaviour, IBreakableByGun
                     if (!isWaitingForDestination)
                     {
                         MoveTowardsDestination(currentDestination);
-
                     }
 
-                    if (!isTargetInSight)
+                    float distanceToCurrentDestination = Vector3.Distance(transform.position, currentDestination);
+
+                    if (distanceToCurrentDestination < droneRadius)
                     {
-                        float distanceToCurrentDestination = Vector3.Distance(transform.position, currentDestination);
-                        if (distanceToCurrentDestination < droneRadius)
+                        if (!isTargetInSight)
                         {
                             //Debug.Log("Drone arrived at its actual random destination. Trying to find another one");
                             isWaitingForDestination = !FindRandomDestination(out currentDestination);
                         }
+                        else
+                        {
+                            Explode();
+                        }
                     }
-                }
-                else
-                {
-                    Debug.Log("There is a problem: sphere cast should have found the target or another collider.");
-                }
+                    //else
+                    //{
+                    //    Debug.Log("There is a problem: sphere cast should have found the target or another collider.");
+                    //}
 
-                UpdateAudioSourcesValues(maxDistance);
-            }
+                    UpdateAudioSourcesValues(maxDistance);
+                }
+            }            
         }
         else
         {
@@ -155,7 +155,7 @@ public class DroneSeeker : MonoBehaviour, IBreakableByGun
     private void UpdateDroneVisualDirection(Vector3 movementDirection)
     {
         Vector3 targetDirection = new Vector3(movementDirection.x, 0, movementDirection.z).normalized;    // y = 0 because the drone is always horizontal, even when it goes up or down.
-        //transform.forward = targetDirection;
+                                                                                                          //transform.forward = targetDirection;
         transform.forward = Vector3.Slerp(transform.forward, targetDirection, Time.deltaTime);
     }
 
@@ -255,24 +255,4 @@ public class DroneSeeker : MonoBehaviour, IBreakableByGun
             alarmAudioSource.Stop();
         }
     }
-
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag(ENEMY_TARGET_TAG))
-        {
-            //Debug.Log("Collision With target!");
-            Explode();
-        }
-    }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag(ENEMY_TARGET_TAG))
-    //    {
-    //        return;
-    //    }
-
-    //    isWaitingForDestination = !FindRandomDestination(out currentDestination);
-    //}
 }

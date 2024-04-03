@@ -11,7 +11,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject freeFlightLevelsChoice;
     [SerializeField] private GameObject windChoice;
     [SerializeField] private GameObject raceLevelsChoice;
-    [SerializeField] private GameObject protectChoice;
+    [SerializeField] private GameObject combatMissionsChoice;
     [Space(20)]
     [SerializeField] private Slider windForceMinSlider;
     [SerializeField] private Slider windForceMaxSlider;
@@ -26,7 +26,7 @@ public class MainMenu : MonoBehaviour
         freeFlightLevelsChoice.SetActive(false);
         windChoice.SetActive(false);
         raceLevelsChoice.SetActive(false);
-        protectChoice.SetActive(false);
+        combatMissionsChoice.SetActive(false);
     }
 
 
@@ -62,7 +62,7 @@ public class MainMenu : MonoBehaviour
     public void GameModeChoiceMenu_ProtectButton()
     {
         gameModesChoice.SetActive(false);
-        protectChoice.SetActive(true);
+        combatMissionsChoice.SetActive(true);
     }
 
     public void GameModeChoiceMenu_BackButton()
@@ -151,14 +151,18 @@ public class MainMenu : MonoBehaviour
 
 
 
-    // PROTECT THE SKY LORD BUTTONS
-    public void ProtectMenu_Protect1Button()
+    // COMBAT MISSIONS MENU BUTTONS
+    public void CombatMissionsMenu_Protect1Button()
     {
         MainManager.Instance.LoadScene(MySceneManager.PROTECT_THE_SKYLORD_1);
     }
-    public void ProtectMenu_BackButton()
+    public void CombatMissionsMenu_SurviveDroneAttackButton()
     {
-        protectChoice.SetActive(false);
+        MainManager.Instance.LoadScene(MySceneManager.SURVIVE_DRONE_ATTACK);
+    }
+    public void CombatMissionsMenu_BackButton()
+    {
+        combatMissionsChoice.SetActive(false);
         gameModesChoice.SetActive(true);
     }
 }

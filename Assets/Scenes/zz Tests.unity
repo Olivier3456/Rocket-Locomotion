@@ -691,9 +691,9 @@ GameObject:
   - component: {fileID: 1510594472}
   - component: {fileID: 1510594471}
   - component: {fileID: 1510594470}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Drone Target
-  m_TagString: EnemyTarget
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

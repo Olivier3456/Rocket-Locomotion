@@ -47,17 +47,22 @@ public class EventSurviveDroneAttack : MonoBehaviour, IGameEvent
     [Space(20)]
     [SerializeField] private Transform player;
 
+    [SerializeField] private DroneSeekerSpawnPoint[] droneSeekerSpawnPoints;
+
 
     private float currentIntervaleBetweenTwoDronesSpawn;
     private float droneSpawnTimer = 0f;
-
-
 
 
     void Start()
     {
         currentIntervaleBetweenTwoDronesSpawn = startDronesSpawnInterval;
         droneSpawnTimer += startDronesSpawnInterval - (startDronesSpawnInterval - initialDroneSpawnDelay);
+
+        for (int i = 0; i < 10; i++)
+        {
+            InstantiateNewDrone();
+        }
     }
 
     private void Update()
@@ -68,30 +73,49 @@ public class EventSurviveDroneAttack : MonoBehaviour, IGameEvent
 
             if (droneSpawnTimer > currentIntervaleBetweenTwoDronesSpawn)
             {
-                droneSpawnTimer = 0f;
-                InstantiateNewDrone();
-
-                if (currentIntervaleBetweenTwoDronesSpawn > minDronesSpawnInterval)
+                if (InstantiateNewDrone())
                 {
-                    currentIntervaleBetweenTwoDronesSpawn -= dronesSpawnIntervalReduction;
+                    droneSpawnTimer = 0f;
+
+                    if (currentIntervaleBetweenTwoDronesSpawn > minDronesSpawnInterval)
+                    {
+                        currentIntervaleBetweenTwoDronesSpawn -= dronesSpawnIntervalReduction;
+                    }
                 }
-
-
             }
-
-
-
         }
     }
+       
 
-
-    private void InstantiateNewDrone()
+    private bool InstantiateNewDrone()
     {
-        DroneSeeker ds = Instantiate(droneSeekerPrefab).GetComponent<DroneSeeker>();
-        ds.Initialize(player, 3, 50f, 20f);
+        int randomIndex = Random.Range(0, droneSeekerSpawnPoints.Length);
+        Vector3 spawnPosition = droneSeekerSpawnPoints[randomIndex].transform.position;
+
+        DroneSeeker ds = Instantiate(droneSeekerPrefab, spawnPosition, Quaternion.identity).GetComponent<DroneSeeker>();
+        ds.Initialize(player, 3, 30f, 20f);
+
+        return true;
     }
 
 
+    // For instantiating the drones near the player
+    //private bool InstantiateNewDrone()
+    //{
+    //    int number_Of_Spawn_Points_In_Player_Range = DroneSeekerSpawnPoint.DroneSeekerSpawnPointsInPlayerRange.Count;
 
+    //    if (number_Of_Spawn_Points_In_Player_Range < 1)
+    //    {
+    //        //Debug.Log("No drone seeker spawn point in player range. Can't instantiate a drone.");
+    //        return false;
+    //    }
 
+    //    int randomIndex = Random.Range(0, number_Of_Spawn_Points_In_Player_Range);
+    //    Vector3 spawnPosition = DroneSeekerSpawnPoint.DroneSeekerSpawnPointsInPlayerRange[randomIndex].transform.position;
+
+    //    DroneSeeker ds = Instantiate(droneSeekerPrefab, spawnPosition, Quaternion.identity).GetComponent<DroneSeeker>();
+    //    ds.Initialize(player, 2, 40f, 20f);
+
+    //    return true;
+    //}
 }
