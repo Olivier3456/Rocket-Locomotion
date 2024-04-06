@@ -46,9 +46,13 @@ public class EventSurviveDroneAttack : MonoBehaviour, IGameEvent
     [SerializeField] private GameObject droneSeekerPrefab;
     [Space(20)]
     [SerializeField] private Transform player;
-
-    [SerializeField] private DroneSeekerSpawnPoint[] droneSeekerSpawnPoints;
-
+    [Space(20)]
+    [SerializeField] private Transform[] droneSeekerSpawnPoints;
+    [Space(20)]
+    [SerializeField] private int dronesStartLife = 3;
+    [SerializeField] private float dronesSpeedWhenTargetFound = 30f;
+    [SerializeField] private float dronesSpeedWhenNoTargetFound = 10f;
+    [SerializeField] private float dronesExplosionForce = 50f;
 
     private float currentIntervaleBetweenTwoDronesSpawn;
     private float droneSpawnTimer = 0f;
@@ -90,10 +94,10 @@ public class EventSurviveDroneAttack : MonoBehaviour, IGameEvent
     private bool InstantiateNewDrone()
     {
         int randomIndex = Random.Range(0, droneSeekerSpawnPoints.Length);
-        Vector3 spawnPosition = droneSeekerSpawnPoints[randomIndex].transform.position;
+        Vector3 spawnPosition = droneSeekerSpawnPoints[randomIndex].position;
 
         DroneSeeker ds = Instantiate(droneSeekerPrefab, spawnPosition, Quaternion.identity).GetComponent<DroneSeeker>();
-        ds.Initialize(player, 3, 30f, 20f);
+        ds.Initialize(player, dronesStartLife, dronesSpeedWhenTargetFound, dronesSpeedWhenNoTargetFound, dronesExplosionForce);
 
         return true;
     }

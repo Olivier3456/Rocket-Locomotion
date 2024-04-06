@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class Gun : MonoBehaviour
 {
-    [SerializeField] private ControllerManager controllerManager;
+    //[SerializeField] private ControllerManager controllerManager;
     [SerializeField] private Animator animator;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] InputActionReference shotInputAction;
@@ -18,9 +18,9 @@ public class Gun : MonoBehaviour
     [SerializeField] private Transform impactParticlePrefab;
     [SerializeField] private int impactParticleInPool = 10;
     [Space(20)]
-    [SerializeField] private LineRenderer lineRenderer;
+    //[SerializeField] private LineRenderer lineRenderer;
     //[SerializeField] private Transform lineOrigin;
-    [SerializeField] private float lineLength = 5f;
+    //[SerializeField] private float lineLength = 5f;
 
 
 
@@ -77,13 +77,16 @@ public class Gun : MonoBehaviour
     private void Update()
     {
         //===================================================================>> COMMENTé POUR LE DEBUG
-        if (!MainManager.Instance.IsSimulationRunning)
-        {
-            return;
-        }
+        //if (!MainManager.Instance.IsSimulationRunning)
+        //{
+        //    return;
+        //}
         //===================================================================<<
 
-        //lineRenderer.SetPositions(new Vector3[] { lineOrigin.position, lineOrigin.position + (lineOrigin.forward * lineLength) });
+
+        // DEBUG
+        if (Input.GetKeyDown(KeyCode.Space)) { hasNewShotInput = true; }
+        if (Input.GetKeyUp(KeyCode.Space)) { hasNewShotInput = false; }
 
 
         if (hasNewShotInput && !isShooting)

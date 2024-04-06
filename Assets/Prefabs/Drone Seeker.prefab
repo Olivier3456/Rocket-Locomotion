@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedTargetFound: 5
-  speedNoTarget: 2.5
+  speedNoTarget: 1.5
   droneRadius: 3
   target: {fileID: 0}
   movementRandomFluctuations: 0

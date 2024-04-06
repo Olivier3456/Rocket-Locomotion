@@ -23,7 +23,8 @@ public class DroneSeeker : MonoBehaviour, IBreakableByGun
     [SerializeField] private AudioSource damageAudioSource;
     [SerializeField] private AudioClip[] bulletImpactClips;
     [SerializeField] private AudioClip explosionClip;
-
+    [Space(20)]
+    [SerializeField] private float explosionForce = 50f;
 
 
     private float perlin_X = 0f;
@@ -41,11 +42,12 @@ public class DroneSeeker : MonoBehaviour, IBreakableByGun
     private bool isMovingTowardsRandomDestination = true;
 
 
-    public void Initialize(Transform target, int startLife, float speedTargetFound, float speedNoTarget)
+    public void Initialize(Transform target, int startLife, float speedTargetFound, float speedNoTarget, float explosionForce)
     {
         this.target = target;
         this.speedTargetFound = speedTargetFound;
         this.speedNoTarget = speedNoTarget;
+        this.explosionForce = explosionForce;
 
         currentLife = startLife;
     }
@@ -95,6 +97,12 @@ public class DroneSeeker : MonoBehaviour, IBreakableByGun
                         }
                         else
                         {
+                            IBreakableByDrone bbd = target.GetComponentInChildren<IBreakableByDrone>();
+                            if (bbd != null)
+                            {
+                                bbd.TakeDamage(explosionForce);
+                            }
+
                             Explode();
                         }
                     }

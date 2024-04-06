@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerLife : MonoBehaviour
+public class PlayerLife : MonoBehaviour, IBreakableByDrone
 {
     [SerializeField] private PhysicalContactsManager physicalContactsManager;
     [Space(20)]
@@ -77,23 +77,29 @@ public class PlayerLife : MonoBehaviour
         if (collisionForce > relativeVelocityThresholdToLoseLife)
         {
             float lifeLost = collisionForce * lifePointsLostPerCollisionForceUnit;
-            currentLife -= lifeLost;
-            OnLifeLost.Invoke(lifeLost, currentLife, startLife);
+            TakeDamage(lifeLost);
+        }
+    }
 
-            UpdateRedCanvasGroupAlpha();
 
-            if (currentLife <= 0)
-            {
-                //isAlive = false;                
-                MainManager.Instance.PlayerDeath();
-                playerAudioSource.PlayOneShot(deathAudioClip);
-                //Debug.Log($"Player is dead. Life lost: {lifeLost}. Current life: {currentLife}");
-            }
-            else
-            {
-                playerAudioSource.PlayOneShot(injuryAudioClip);
-                //Debug.Log($"Player is injured. Life lost: {lifeLost}. Current life: {currentLife}");
-            }
+    public void TakeDamage(float damage)
+    {
+        currentLife -= damage;
+        OnLifeLost.Invoke(damage, currentLife, startLife);
+
+        UpdateRedCanvasGroupAlpha();
+
+        if (currentLife <= 0)
+        {
+            //isAlive = false;                
+            MainManager.Instance.PlayerDeath();
+            playerAudioSource.PlayOneShot(deathAudioClip);
+            //Debug.Log($"Player is dead. Life lost: {lifeLost}. Current life: {currentLife}");
+        }
+        else
+        {
+            playerAudioSource.PlayOneShot(injuryAudioClip);
+            //Debug.Log($"Player is injured. Life lost: {lifeLost}. Current life: {currentLife}");
         }
     }
 }
