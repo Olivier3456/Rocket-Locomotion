@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using TMPro;
 using UnityEngine;
-using static RaceResultsSaveLoad;
+using static GameEventResultsManager;
 
 public class RaceScoresUI : MonoBehaviour
 {
@@ -37,7 +37,7 @@ public class RaceScoresUI : MonoBehaviour
             TextMeshProUGUI newScoreText = Instantiate(scoreTextTemplate, scoreTextTemplate.transform.parent);
             newScoreText.text = raceScore.date + " --- " + MakeTimeDisplay(raceScore.time);
 
-            if (raceScore == ScoreAdded)
+            if (raceScore == RaceScoreAdded)
             {
                 isScoreAddedToBoard = true;
                 newScoreText.color = Color.red;
@@ -50,7 +50,7 @@ public class RaceScoresUI : MonoBehaviour
         if (!isScoreAddedToBoard)
         {
             TextMeshProUGUI newScoreText = Instantiate(scoreTextTemplate, scoreTextTemplate.transform.parent);
-            RaceScore scoreAdded = ScoreAdded;
+            RaceScore scoreAdded = RaceScoreAdded;
             newScoreText.text = scoreAdded.date + " --- " + MakeTimeDisplay(scoreAdded.time);
             newScoreText.color = Color.red;
             newScoreText.fontSize *= 1.25f;

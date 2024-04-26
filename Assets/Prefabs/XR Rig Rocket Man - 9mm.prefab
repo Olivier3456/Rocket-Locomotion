@@ -10635,7 +10635,7 @@ GameObject:
   - component: {fileID: 2271442942896048339}
   - component: {fileID: 2346276571134782696}
   m_Layer: 8
-  m_Name: Race Scores Canvas
+  m_Name: Scores Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

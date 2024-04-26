@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DroneSeeker : MonoBehaviour, IBreakableByGun
 {
@@ -40,6 +41,10 @@ public class DroneSeeker : MonoBehaviour, IBreakableByGun
     private bool isWaitingForDestination = true;
 
     private bool isMovingTowardsRandomDestination = true;
+
+
+
+    public static UnityEvent OnKilled = new UnityEvent();
 
 
     public void Initialize(Transform target, int startLife, float speedTargetFound, float speedNoTarget, float explosionForce)
@@ -193,6 +198,7 @@ public class DroneSeeker : MonoBehaviour, IBreakableByGun
         {
             if (!isDead)
             {
+                OnKilled.Invoke();
                 Explode();
             }
         }

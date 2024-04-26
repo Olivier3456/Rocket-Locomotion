@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
+using static GameEventResultsManager;
 
 public class EventSurviveDroneAttack : MonoBehaviour, IGameEvent
 {
@@ -12,7 +15,7 @@ public class EventSurviveDroneAttack : MonoBehaviour, IGameEvent
 
     public bool IsEventFinished()
     {
-        return false;
+        return !MainManager.Instance.IsPlayerAlive;
     }
 
     public bool IsPauseAllowed()
@@ -22,7 +25,7 @@ public class EventSurviveDroneAttack : MonoBehaviour, IGameEvent
 
     public bool IsUnpauseAllowed()
     {
-        return true;
+        return MainManager.Instance.IsPlayerAlive;
     }
 
     public void RegisterToMainManager()
@@ -34,11 +37,10 @@ public class EventSurviveDroneAttack : MonoBehaviour, IGameEvent
     {
         MainManager.Instance.UnregisterOngoingEvent(this);
     }
-    // ==================== End IGameEvent interface implementation ====================
+    // ==================== End of IGameEvent interface implementation ====================
 
-
-    [SerializeField]
-    private float initialDroneSpawnDelay = 0f;
+    [SerializeField] private GameEvent thisGameEvent;
+    [SerializeField] private float initialDroneSpawnDelay = 0f;
     [SerializeField] private float startDronesSpawnInterval = 10f;
     [SerializeField] private float minDronesSpawnInterval = 5f;
     [SerializeField] private float dronesSpawnIntervalReduction = 0.1f;
@@ -53,9 +55,17 @@ public class EventSurviveDroneAttack : MonoBehaviour, IGameEvent
     [SerializeField] private float dronesSpeedWhenTargetFound = 30f;
     [SerializeField] private float dronesSpeedWhenNoTargetFound = 10f;
     [SerializeField] private float dronesExplosionForce = 50f;
+    [Space(20)]
+    [SerializeField, Tooltip("In Player HUD")] private GameObject eventUiGameObject;
+    //[SerializeField, Tooltip("In Player HUD")] private TextMeshProUGUI countdownText;
+    [SerializeField, Tooltip("In Player HUD")] private TextMeshProUGUI scoreText;
 
     private float currentIntervaleBetweenTwoDronesSpawn;
     private float droneSpawnTimer = 0f;
+
+    public UnityEvent<SurviveDroneAttackScores> OnSurviveEventOver = new UnityEvent<SurviveDroneAttackScores>();
+
+    private int score = 0;
 
 
     void Start()
@@ -67,7 +77,31 @@ public class EventSurviveDroneAttack : MonoBehaviour, IGameEvent
         {
             InstantiateNewDrone();
         }
+
+        eventUiGameObject.SetActive(true);
+        scoreText.text = $"killed: {score}";
+
+        DroneSeeker.OnKilled.AddListener(OnDroneSeekerKilled);
+        MainManager.Instance.OnDeath.AddListener(PlayerIsDead);
+
+        RegisterToMainManager();
     }
+
+
+    private void OnDisable()
+    {
+        DroneSeeker.OnKilled.RemoveListener(OnDroneSeekerKilled);
+        MainManager.Instance.OnDeath.RemoveListener(PlayerIsDead);
+    }
+
+
+    private void OnDroneSeekerKilled()
+    {
+        ++score;
+        scoreText.text = $"killed: {score}";
+    }
+
+
 
     private void Update()
     {
@@ -87,9 +121,18 @@ public class EventSurviveDroneAttack : MonoBehaviour, IGameEvent
                     }
                 }
             }
-        }
+        }        
     }
-       
+
+
+    private void PlayerIsDead()
+    {
+        MainManager.Instance.GameMenu.Show();
+        SurviveDroneAttackScores scores = AddDroneAttackScore(thisGameEvent, score);
+
+        OnSurviveEventOver.Invoke(scores);
+    }
+
 
     private bool InstantiateNewDrone()
     {
@@ -101,6 +144,16 @@ public class EventSurviveDroneAttack : MonoBehaviour, IGameEvent
 
         return true;
     }
+
+
+
+    private void OnDestroy()
+    {
+        UnregisterToMainManager();
+    }
+
+
+
 
 
     // For instantiating the drones near the player

@@ -3,7 +3,7 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using static RaceResultsSaveLoad;
+using static GameEventResultsManager;
 
 public class EventRace : MonoBehaviour, IGameEvent
 {

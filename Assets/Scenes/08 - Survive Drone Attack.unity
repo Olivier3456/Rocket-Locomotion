@@ -1221,11 +1221,39 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Rig Rocket Man - 9mm
       objectReference: {fileID: 0}
+    - target: {fileID: 2945058418437877986, guid: ee3e0da1d5a150340ba0306c8ff4331a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8028644603875258032, guid: ee3e0da1d5a150340ba0306c8ff4331a,
+        type: 3}
+      propertyPath: m_Name
+      value: Scores Canvas
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee3e0da1d5a150340ba0306c8ff4331a, type: 3}
+--- !u!114 &7434273481733694176 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3357535332969460451, guid: ee3e0da1d5a150340ba0306c8ff4331a,
+    type: 3}
+  m_PrefabInstance: {fileID: 7434273481733694175}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &7434273481733694177 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2945058418437877986, guid: ee3e0da1d5a150340ba0306c8ff4331a,
+    type: 3}
+  m_PrefabInstance: {fileID: 7434273481733694175}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8227886879195716073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1294,6 +1322,21 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 9214336484079317718}
+    - target: {fileID: 8823222087669228887, guid: 9804061018be56140a63e6b67656c7ea,
+        type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 7434273481733694176}
+    - target: {fileID: 8823222087669228887, guid: 9804061018be56140a63e6b67656c7ea,
+        type: 3}
+      propertyPath: thisGameEvent
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8823222087669228887, guid: 9804061018be56140a63e6b67656c7ea,
+        type: 3}
+      propertyPath: eventUiGameObject
+      value: 
+      objectReference: {fileID: 7434273481733694177}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

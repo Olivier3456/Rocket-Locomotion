@@ -77,16 +77,16 @@ public class Gun : MonoBehaviour
     private void Update()
     {
         //===================================================================>> COMMENTé POUR LE DEBUG
-        //if (!MainManager.Instance.IsSimulationRunning)
-        //{
-        //    return;
-        //}
+        if (!MainManager.Instance.IsSimulationRunning)
+        {
+            return;
+        }
         //===================================================================<<
 
 
         // DEBUG
-        if (Input.GetKeyDown(KeyCode.Space)) { hasNewShotInput = true; }
-        if (Input.GetKeyUp(KeyCode.Space)) { hasNewShotInput = false; }
+        //if (Input.GetKeyDown(KeyCode.Space)) { hasNewShotInput = true; }
+        //if (Input.GetKeyUp(KeyCode.Space)) { hasNewShotInput = false; }
 
 
         if (hasNewShotInput && !isShooting)

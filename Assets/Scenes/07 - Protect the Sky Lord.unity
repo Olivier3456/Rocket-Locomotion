@@ -638,6 +638,98 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 290228427}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &294033090
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1749766734319952734, guid: ee3e0da1d5a150340ba0306c8ff4331a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -462.51657
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749766734319952734, guid: ee3e0da1d5a150340ba0306c8ff4331a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 158.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749766734319952734, guid: ee3e0da1d5a150340ba0306c8ff4331a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 873.1433
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749766734319952734, guid: ee3e0da1d5a150340ba0306c8ff4331a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7796046
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749766734319952734, guid: ee3e0da1d5a150340ba0306c8ff4331a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749766734319952734, guid: ee3e0da1d5a150340ba0306c8ff4331a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.6262721
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749766734319952734, guid: ee3e0da1d5a150340ba0306c8ff4331a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749766734319952734, guid: ee3e0da1d5a150340ba0306c8ff4331a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749766734319952734, guid: ee3e0da1d5a150340ba0306c8ff4331a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -77.551
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749766734319952734, guid: ee3e0da1d5a150340ba0306c8ff4331a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1996666017985128070, guid: ee3e0da1d5a150340ba0306c8ff4331a,
+        type: 3}
+      propertyPath: m_Name
+      value: XR Rig Rocket Man - 9mm
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ee3e0da1d5a150340ba0306c8ff4331a, type: 3}
+--- !u!114 &294033091 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2144617599813308218, guid: ee3e0da1d5a150340ba0306c8ff4331a,
+    type: 3}
+  m_PrefabInstance: {fileID: 294033090}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14e5daf68065b814195befe8167aa2a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &294033092 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3340844149479311346, guid: ee3e0da1d5a150340ba0306c8ff4331a,
+    type: 3}
+  m_PrefabInstance: {fileID: 294033090}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14e5daf68065b814195befe8167aa2a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &372348694
 GameObject:
   m_ObjectHideFlags: 0
@@ -1103,8 +1195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1742acea90d4ca47944025ddb0dd2a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftThruster: {fileID: 1055326892}
-  rightThruster: {fileID: 1055326891}
+  leftThruster: {fileID: 294033092}
+  rightThruster: {fileID: 294033091}
 --- !u!82 &736214637
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1405,98 +1497,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 54374601}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1055326890
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4678887908120963039, guid: 11371c26a15ce514fa42b88eb32065a5,
-        type: 3}
-      propertyPath: m_Name
-      value: XR Rig Rocket Man - GUNS
-      objectReference: {fileID: 0}
-    - target: {fileID: 9214336484023828279, guid: 11371c26a15ce514fa42b88eb32065a5,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -462.51657
-      objectReference: {fileID: 0}
-    - target: {fileID: 9214336484023828279, guid: 11371c26a15ce514fa42b88eb32065a5,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 158.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 9214336484023828279, guid: 11371c26a15ce514fa42b88eb32065a5,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 873.1433
-      objectReference: {fileID: 0}
-    - target: {fileID: 9214336484023828279, guid: 11371c26a15ce514fa42b88eb32065a5,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7796046
-      objectReference: {fileID: 0}
-    - target: {fileID: 9214336484023828279, guid: 11371c26a15ce514fa42b88eb32065a5,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9214336484023828279, guid: 11371c26a15ce514fa42b88eb32065a5,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.6262721
-      objectReference: {fileID: 0}
-    - target: {fileID: 9214336484023828279, guid: 11371c26a15ce514fa42b88eb32065a5,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9214336484023828279, guid: 11371c26a15ce514fa42b88eb32065a5,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9214336484023828279, guid: 11371c26a15ce514fa42b88eb32065a5,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -77.551
-      objectReference: {fileID: 0}
-    - target: {fileID: 9214336484023828279, guid: 11371c26a15ce514fa42b88eb32065a5,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 11371c26a15ce514fa42b88eb32065a5, type: 3}
---- !u!114 &1055326891 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9132470021220051716, guid: 11371c26a15ce514fa42b88eb32065a5,
-    type: 3}
-  m_PrefabInstance: {fileID: 1055326890}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14e5daf68065b814195befe8167aa2a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1055326892 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 359657898334839473, guid: 11371c26a15ce514fa42b88eb32065a5,
-    type: 3}
-  m_PrefabInstance: {fileID: 1055326890}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14e5daf68065b814195befe8167aa2a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1126402687
 GameObject:
   m_ObjectHideFlags: 0
@@ -2656,4 +2656,4 @@ SceneRoots:
   - {fileID: 736214638}
   - {fileID: 290228427}
   - {fileID: 858975269}
-  - {fileID: 1055326890}
+  - {fileID: 294033090}

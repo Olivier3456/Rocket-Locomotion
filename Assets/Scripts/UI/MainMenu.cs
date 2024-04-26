@@ -154,7 +154,7 @@ public class MainMenu : MonoBehaviour
     // COMBAT MISSIONS MENU BUTTONS
     public void CombatMissionsMenu_Protect1Button()
     {
-        MainManager.Instance.LoadScene(MySceneManager.PROTECT_THE_SKYLORD_1);
+        //MainManager.Instance.LoadScene(MySceneManager.PROTECT_THE_SKYLORD_1);
     }
     public void CombatMissionsMenu_SurviveDroneAttackButton()
     {
