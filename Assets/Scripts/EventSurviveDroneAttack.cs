@@ -67,7 +67,7 @@ public class EventSurviveDroneAttack : MonoBehaviour, IGameEvent
 
     private int score = 0;
 
-
+    
     void Start()
     {
         currentIntervaleBetweenTwoDronesSpawn = startDronesSpawnInterval;
@@ -77,7 +77,7 @@ public class EventSurviveDroneAttack : MonoBehaviour, IGameEvent
         {
             InstantiateNewDrone();
         }
-
+        
         eventUiGameObject.SetActive(true);
         scoreText.text = $"killed: {score}";
 

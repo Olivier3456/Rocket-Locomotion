@@ -1219,11 +1219,16 @@ PrefabInstance:
     - target: {fileID: 1996666017985128070, guid: ee3e0da1d5a150340ba0306c8ff4331a,
         type: 3}
       propertyPath: m_Name
-      value: XR Rig Rocket Man - 9mm
+      value: XR Rig Rocket Man - 9mm - Survive Drone Attack
       objectReference: {fileID: 0}
     - target: {fileID: 2945058418437877986, guid: ee3e0da1d5a150340ba0306c8ff4331a,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3109697328137398965, guid: ee3e0da1d5a150340ba0306c8ff4331a,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8028644603875258032, guid: ee3e0da1d5a150340ba0306c8ff4331a,
@@ -1231,10 +1236,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scores Canvas
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3109697328137398965, guid: ee3e0da1d5a150340ba0306c8ff4331a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 768376521989546167, guid: ee3e0da1d5a150340ba0306c8ff4331a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7434273481733694179}
   m_SourcePrefab: {fileID: 100100000, guid: ee3e0da1d5a150340ba0306c8ff4331a, type: 3}
 --- !u!114 &7434273481733694176 stripped
 MonoBehaviour:
@@ -1254,6 +1264,45 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7434273481733694175}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7434273481733694178 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 768376521989546167, guid: ee3e0da1d5a150340ba0306c8ff4331a,
+    type: 3}
+  m_PrefabInstance: {fileID: 7434273481733694175}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7434273481733694179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434273481733694178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 770ce4ea6ce2c944f954f64c7da7cd88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSurviveDroneAttack: {fileID: 8227886879195716074}
+  scoresRectTransform: {fileID: 7434273481733694180}
+  scoreTextTemplate: {fileID: 7434273481733694181}
+--- !u!224 &7434273481733694180 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6632839737224496239, guid: ee3e0da1d5a150340ba0306c8ff4331a,
+    type: 3}
+  m_PrefabInstance: {fileID: 7434273481733694175}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7434273481733694181 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3334055631074835471, guid: ee3e0da1d5a150340ba0306c8ff4331a,
+    type: 3}
+  m_PrefabInstance: {fileID: 7434273481733694175}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8227886879195716073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1342,6 +1391,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9804061018be56140a63e6b67656c7ea, type: 3}
+--- !u!114 &8227886879195716074 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8823222087669228887, guid: 9804061018be56140a63e6b67656c7ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 8227886879195716073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f1ac18c00988194b8fcd9774d726ca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &9132470021307033317 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2144617599813308218, guid: ee3e0da1d5a150340ba0306c8ff4331a,
