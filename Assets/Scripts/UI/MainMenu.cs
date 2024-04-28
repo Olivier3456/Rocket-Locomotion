@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject windChoice;
     [SerializeField] private GameObject raceLevelsChoice;
     [SerializeField] private GameObject combatMissionsChoice;
+    [SerializeField] private GameObject howToPlay;
     [Space(20)]
     [SerializeField] private Slider windForceMinSlider;
     [SerializeField] private Slider windForceMaxSlider;
@@ -27,6 +28,7 @@ public class MainMenu : MonoBehaviour
         windChoice.SetActive(false);
         raceLevelsChoice.SetActive(false);
         combatMissionsChoice.SetActive(false);
+        howToPlay.SetActive(false);
     }
 
 
@@ -40,7 +42,17 @@ public class MainMenu : MonoBehaviour
 
     public void MainMenu_SettingsButton()
     {
+        main.SetActive(false);
+        howToPlay.SetActive(true);
+    }
 
+
+
+    // HOW TO PLAY
+    public void HowToPlay_BackButton()
+    {
+        howToPlay.SetActive(false);
+        main.SetActive(true);
     }
 
 

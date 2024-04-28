@@ -1853,6 +1853,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Rig Rocket Man - NO GUNS
       objectReference: {fileID: 0}
+    - target: {fileID: 6783707572293048921, guid: 1b5fe34035ab49848be082d7a856a4e8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9214336484023828279, guid: 1b5fe34035ab49848be082d7a856a4e8,
         type: 3}
       propertyPath: m_LocalPosition.x
