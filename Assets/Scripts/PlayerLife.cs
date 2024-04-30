@@ -89,17 +89,20 @@ public class PlayerLife : MonoBehaviour, IBreakableByDrone
 
         UpdateRedCanvasGroupAlpha();
 
-        if (currentLife <= 0)
+        if (MainManager.Instance.IsPlayerAlive)
         {
-            //isAlive = false;                
-            MainManager.Instance.PlayerDeath();
-            playerAudioSource.PlayOneShot(deathAudioClip);
-            //Debug.Log($"Player is dead. Life lost: {lifeLost}. Current life: {currentLife}");
-        }
-        else
-        {
-            playerAudioSource.PlayOneShot(injuryAudioClip);
-            //Debug.Log($"Player is injured. Life lost: {lifeLost}. Current life: {currentLife}");
+            if (currentLife <= 0)
+            {
+                //isAlive = false;                
+                MainManager.Instance.PlayerDeath();
+                playerAudioSource.PlayOneShot(deathAudioClip);
+                //Debug.Log($"Player is dead. Life lost: {lifeLost}. Current life: {currentLife}");
+            }
+            else
+            {
+                playerAudioSource.PlayOneShot(injuryAudioClip);
+                //Debug.Log($"Player is injured. Life lost: {lifeLost}. Current life: {currentLife}");
+            }
         }
     }
 }

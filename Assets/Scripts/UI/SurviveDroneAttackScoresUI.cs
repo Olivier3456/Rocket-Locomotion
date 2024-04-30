@@ -39,7 +39,7 @@ public class SurviveDroneAttackScoresUI : MonoBehaviour
         foreach (var score in eventScores.scores)
         {
             TextMeshProUGUI newScoreText = Instantiate(scoreTextTemplate, scoreTextTemplate.transform.parent);
-            newScoreText.text = score.date + " --- " + score.kills;
+            newScoreText.text = score.date + " --- " + score.kills + " kills";
 
             if (score == SurviveDroneAttackScoreAdded)
             {

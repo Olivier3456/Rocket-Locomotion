@@ -52,7 +52,7 @@ public static class GameEventResultsManager
         LoadRaceScoresFromFile(gameEventRace);
 
         RaceScore newRaceResult = new RaceScore();
-        newRaceResult.date = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
+        newRaceResult.date = DateTime.Now.ToString("MM/dd/yyyy");
         newRaceResult.time = time;
         newRaceResult.playerName = "No Name Yet";
         RaceScoreAdded = newRaceResult;
@@ -71,14 +71,14 @@ public static class GameEventResultsManager
         LoadSurviveDroneAttackScoresFromFile(gameEventSurviveDroneAttack);
 
         SurviveDroneAttackScore newScore = new SurviveDroneAttackScore();
-        newScore.date = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
+        newScore.date = DateTime.Now.ToString("MM/dd/yyyy");
         newScore.kills = kills;
         newScore.playerName = "No Name Yet";
         SurviveDroneAttackScoreAdded = newScore;
 
         ReorganizeSurviveDroneAttackScores(newScore);
 
-        Debug.Log($"Survive drone attack scores added to array: date = {newScore.date}, kills = {newScore.kills}, player name = {newScore.playerName}. Total race scores number: {surviveDroneAttackScores.scores.Length}.");
+        //Debug.Log($"Survive drone attack scores added to array: date = {newScore.date}, kills = {newScore.kills}, player name = {newScore.playerName}. Total race scores number: {surviveDroneAttackScores.scores.Length}.");
 
         SaveSurviveDroneAttackScoresToFile();
 
@@ -121,7 +121,7 @@ public static class GameEventResultsManager
             raceScores = new RaceScores();
         }
 
-        Debug.Log("Race results loaded from file");
+        //Debug.Log("Race results loaded from file");
 
         return raceScores;
     }
@@ -135,7 +135,7 @@ public static class GameEventResultsManager
 
         if (!File.Exists(path))
         {
-            Debug.Log("No file to load yet");
+            //Debug.Log("No file to load yet");
             surviveDroneAttackScores = new SurviveDroneAttackScores();
             return surviveDroneAttackScores;
         }
@@ -152,7 +152,7 @@ public static class GameEventResultsManager
             surviveDroneAttackScores = new SurviveDroneAttackScores();
         }
 
-        Debug.Log("Survive drone attack scores loaded from file");
+        //Debug.Log("Survive drone attack scores loaded from file");
 
         return surviveDroneAttackScores;
     }
