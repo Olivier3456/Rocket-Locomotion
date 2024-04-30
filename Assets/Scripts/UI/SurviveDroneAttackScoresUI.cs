@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using static GameEventResultsManager;
 
 
@@ -39,7 +40,9 @@ public class SurviveDroneAttackScoresUI : MonoBehaviour
         foreach (var score in eventScores.scores)
         {
             TextMeshProUGUI newScoreText = Instantiate(scoreTextTemplate, scoreTextTemplate.transform.parent);
-            newScoreText.text = score.date + " --- " + score.kills + " kills";
+
+            string kill = score.kills > 1 ? " kills" : " kill";
+            newScoreText.text = score.date + "   ---   " + score.kills + kill;
 
             if (score == SurviveDroneAttackScoreAdded)
             {
@@ -55,7 +58,8 @@ public class SurviveDroneAttackScoresUI : MonoBehaviour
         {
             TextMeshProUGUI newScoreText = Instantiate(scoreTextTemplate, scoreTextTemplate.transform.parent);
             SurviveDroneAttackScore scoreAdded = SurviveDroneAttackScoreAdded;
-            newScoreText.text = scoreAdded.date + " --- " + scoreAdded.kills + " kills";
+            string kill = scoreAdded.kills > 1 ? " kills" : " kill";
+            newScoreText.text = scoreAdded.date + "   ---   " + scoreAdded.kills + kill;
             newScoreText.color = Color.red;
             newScoreText.fontSize *= 1.25f;
             newScoreText.gameObject.SetActive(true);
