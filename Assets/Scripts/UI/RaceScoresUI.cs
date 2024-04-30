@@ -6,10 +6,11 @@ using static GameEventResultsManager;
 
 public class RaceScoresUI : MonoBehaviour
 {
-    [SerializeField] private EventRace race;
     [SerializeField] private RectTransform raceScoresRectTransform;
     [SerializeField] private TextMeshProUGUI scoreTextTemplate;
 
+    private EventRace race;
+    
     private bool isScoreAddedToBoard;
     private float distanceFromCamera = 2f;
 

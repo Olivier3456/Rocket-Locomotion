@@ -14,6 +14,8 @@ public class EventRace : MonoBehaviour, IGameEvent
     [SerializeField, Tooltip("In Player HUD")] private GameObject eventUiGameObject;
     [SerializeField, Tooltip("In Player HUD")] private TextMeshProUGUI countdownText;
     [SerializeField, Tooltip("In Player HUD")] private TextMeshProUGUI timerText;
+    [SerializeField, Tooltip("In Player HUD")] private TextMeshProUGUI currentCheckpointText;
+    [SerializeField, Tooltip("In Player HUD")] private TextMeshProUGUI totalCheckpointsText;
     [Space(20)]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip countdownClip;
@@ -100,6 +102,8 @@ public class EventRace : MonoBehaviour, IGameEvent
         }
 
         countdownText.text = string.Empty;
+        currentCheckpointText.text = "0";
+        totalCheckpointsText.text = checkPoints.Length.ToString();
         eventUiGameObject.SetActive(true);
 
         StartCoroutine(StartRaceCoroutine());
@@ -185,6 +189,7 @@ public class EventRace : MonoBehaviour, IGameEvent
         if (checkpoint == checkPoints[nextCheckpointIndex])
         {
             checkPoints[nextCheckpointIndex++].gameObject.SetActive(false);
+            currentCheckpointText.text = nextCheckpointIndex.ToString();
 
             //if (nextCheckpointIndex == 2)   // DEBUG
             if (nextCheckpointIndex == checkPoints.Length)

@@ -1094,6 +1094,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e62b5805adcd204a9fff66f4e05f45c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &120959979 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 312703345953883598, guid: 1b5fe34035ab49848be082d7a856a4e8,
+    type: 3}
+  m_PrefabInstance: {fileID: 909026466}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &120959980 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3078665570914345720, guid: 1b5fe34035ab49848be082d7a856a4e8,
+    type: 3}
+  m_PrefabInstance: {fileID: 909026466}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &164849636
 GameObject:
   m_ObjectHideFlags: 0
@@ -4139,12 +4163,7 @@ PrefabInstance:
     - target: {fileID: 4678887908120963039, guid: 1b5fe34035ab49848be082d7a856a4e8,
         type: 3}
       propertyPath: m_Name
-      value: XR Rig Rocket Man - NO GUNS
-      objectReference: {fileID: 0}
-    - target: {fileID: 6783707572293048921, guid: 1b5fe34035ab49848be082d7a856a4e8,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      value: XR Rig Rocket Man - RACE
       objectReference: {fileID: 0}
     - target: {fileID: 9214336484023828279, guid: 1b5fe34035ab49848be082d7a856a4e8,
         type: 3}
@@ -10957,6 +10976,8 @@ MonoBehaviour:
   eventUiGameObject: {fileID: 909026469}
   countdownText: {fileID: 909026468}
   timerText: {fileID: 909026467}
+  currentCheckpointText: {fileID: 120959980}
+  totalCheckpointsText: {fileID: 120959979}
   audioSource: {fileID: 9141675583232187859}
   countdownClip: {fileID: 8300000, guid: 59e23bb254f272544a533047f844448c, type: 3}
   countdownFinalClip: {fileID: 8300000, guid: bb5f6024710457f418b1e6600fed1935, type: 3}
