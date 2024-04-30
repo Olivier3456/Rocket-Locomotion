@@ -35,7 +35,7 @@ public class RaceScoresUI : MonoBehaviour
         foreach (var raceScore in raceScores.scores)
         {
             TextMeshProUGUI newScoreText = Instantiate(scoreTextTemplate, scoreTextTemplate.transform.parent);
-            newScoreText.text = raceScore.date + " --- " + MakeTimeDisplay(raceScore.time);
+            newScoreText.text = raceScore.date + " --- time: " + MakeTimeDisplay(raceScore.time);
 
             if (raceScore == RaceScoreAdded)
             {
@@ -51,7 +51,7 @@ public class RaceScoresUI : MonoBehaviour
         {
             TextMeshProUGUI newScoreText = Instantiate(scoreTextTemplate, scoreTextTemplate.transform.parent);
             RaceScore scoreAdded = RaceScoreAdded;
-            newScoreText.text = scoreAdded.date + " --- " + MakeTimeDisplay(scoreAdded.time);
+            newScoreText.text = scoreAdded.date + " --- time: " + MakeTimeDisplay(scoreAdded.time);
             newScoreText.color = Color.red;
             newScoreText.fontSize *= 1.25f;
             newScoreText.gameObject.SetActive(true);

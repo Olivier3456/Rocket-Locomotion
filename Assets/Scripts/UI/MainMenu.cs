@@ -97,7 +97,7 @@ public class MainMenu : MonoBehaviour
     public void FreeFlightMenu_NY2Button()
     {
         //MainManager.Instance.LoadScene(MySceneManager.NEW_YORK_2_FREE_FLIGHT);
-        freeFlightMapIndex = MySceneManager.NEW_YORK_2_FREE_FLIGHT;
+        //freeFlightMapIndex = MySceneManager.NEW_YORK_2_FREE_FLIGHT;
         windChoice.SetActive(true);
     }
 

@@ -15,9 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/02 - NY Block 1 - Free Flight.unity
     guid: e5ea90d75048a394e923ee057baad609
   - enabled: 1
-    path: Assets/Scenes/03 - NY Block 2 - Free Flight.unity
-    guid: 3409641ff3962cd4ab778b49ee2c0ec1
-  - enabled: 1
     path: Assets/Scenes/04 - Race 1.unity
     guid: 75f12393ed2feb34d9cdc8578f55dc7b
   - enabled: 1
@@ -26,9 +23,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/06 - Race 3.unity
     guid: 20b1669d50e7dab4885f9244d458ad85
-  - enabled: 1
-    path: Assets/Scenes/07 - Protect the Sky Lord.unity
-    guid: 6edcb47d1e656bf4ca57961f1a474491
   - enabled: 1
     path: Assets/Scenes/08 - Survive Drone Attack.unity
     guid: fbb67feb2d3524d42bf886230ab069e9

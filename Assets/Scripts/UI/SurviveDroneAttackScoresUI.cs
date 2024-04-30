@@ -55,7 +55,7 @@ public class SurviveDroneAttackScoresUI : MonoBehaviour
         {
             TextMeshProUGUI newScoreText = Instantiate(scoreTextTemplate, scoreTextTemplate.transform.parent);
             SurviveDroneAttackScore scoreAdded = SurviveDroneAttackScoreAdded;
-            newScoreText.text = scoreAdded.date + " --- " + scoreAdded.kills;
+            newScoreText.text = scoreAdded.date + " --- " + scoreAdded.kills + " kills";
             newScoreText.color = Color.red;
             newScoreText.fontSize *= 1.25f;
             newScoreText.gameObject.SetActive(true);

@@ -34,7 +34,7 @@ public class GameMenu : MonoBehaviour
 
     private void ShowOrHideMenu_Action_Started(InputAction.CallbackContext obj)
     {
-        if (SceneManager.GetActiveScene().buildIndex > MySceneManager.LOADING_SCENE_BUILD_INDEX)  // No effect if we are in Main Menu Scene or Loading scene
+        if (SceneManager.GetActiveScene().buildIndex > 1)  // No effect if we are in Main Menu Scene or Loading scene
         {
             if (MainManager.Instance.CanPause) // It must not be possible to deactivate this menu after player death
             {
@@ -96,7 +96,7 @@ public class GameMenu : MonoBehaviour
 
     public void ReturnToMainMenuButton()
     {
-        MainManager.Instance.LoadScene(MySceneManager.MAIN_MENU_SCENE_BUILD_INDEX);
+        MainManager.Instance.LoadScene(MySceneManager.MAIN_MENU_SCENE);
     }
 
     public void RestartButton()
