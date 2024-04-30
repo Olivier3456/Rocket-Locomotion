@@ -1241,6 +1241,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scores Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8164608136118718880, guid: ee3e0da1d5a150340ba0306c8ff4331a,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -110801897
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3109697328137398965, guid: ee3e0da1d5a150340ba0306c8ff4331a, type: 3}
     m_RemovedGameObjects: []
