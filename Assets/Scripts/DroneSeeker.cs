@@ -60,7 +60,7 @@ public class DroneSeeker : MonoBehaviour, IBreakableByGun
 
     private void Update()
     {
-        if (!isDead)
+        if (!isDead && MainManager.Instance.IsSimulationRunning)
         {
             if (target != null)
             {
