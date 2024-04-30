@@ -205,7 +205,7 @@ public class Thruster : MonoBehaviour
     }
 
 
-    public void AuthoriseBoost(bool canBoost)
+    public void AuthoriseBoost(bool canBoost, bool isChangeMadeByEvent) // The second bool is not used here.
     {
         this.canBoost = canBoost;
     }

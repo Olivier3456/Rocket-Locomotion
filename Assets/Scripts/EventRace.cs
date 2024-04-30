@@ -22,7 +22,7 @@ public class EventRace : MonoBehaviour, IGameEvent
     [SerializeField] private AudioClip countdownFinalClip;
     [SerializeField] private AudioClip checkpointReachedClip;
     [SerializeField] private AudioClip raceWonClip;
-    [SerializeField] private AudioClip raceLostClip;
+    [SerializeField] private AudioClip raceWonMusic;
 
     private float time = 0f;
     private int nextCheckpointIndex = 0;
@@ -229,8 +229,17 @@ public class EventRace : MonoBehaviour, IGameEvent
     IEnumerator RaceEndCoroutine()
     {
         canPause = false;
-        yield return waitOneSec;
-        yield return waitOneSec;
+        //yield return waitOneSec;
+        //yield return waitOneSec;
+
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
+
+        audioSource.clip = raceWonMusic;
+        audioSource.Play();
+
         countdownText.gameObject.SetActive(false);
         timerText.gameObject.SetActive(false);
         canUnpause = false;

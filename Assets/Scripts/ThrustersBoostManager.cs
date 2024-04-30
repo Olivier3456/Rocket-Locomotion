@@ -21,7 +21,7 @@ public class ThrustersBoostManager : MonoBehaviour
     private float currentBoostValueLeft = 0;
     private float currentBoostValueRight = 0;
 
-    public UnityEvent<bool> OnCanBoostStatusChange = new UnityEvent<bool>();
+    public UnityEvent<bool, bool> OnCanBoostStatusChange = new UnityEvent<bool, bool>();    // First bool = can boost, second bool = status changed by a game event (ex: race checkpoint reached).
 
     private bool isDepleted;
     public bool IsDepleted { get { return isDepleted; } }
@@ -40,7 +40,7 @@ public class ThrustersBoostManager : MonoBehaviour
     {
         currentReserve = MaxReserve;
         isDepleted = false;
-        OnCanBoostStatusChange.Invoke(true);
+        OnCanBoostStatusChange.Invoke(true, true);
     }
 
 
@@ -57,13 +57,13 @@ public class ThrustersBoostManager : MonoBehaviour
             {
                 //Debug.Log("Boost reserve depleted");
                 isDepleted = true;
-                OnCanBoostStatusChange.Invoke(false);
+                OnCanBoostStatusChange.Invoke(false, false);
             }
             else if (currentReserve > minimumReserveForNewBoost && isDepleted)
             {
                 //Debug.Log("Player can boost again");
                 isDepleted = false;
-                OnCanBoostStatusChange.Invoke(true);
+                OnCanBoostStatusChange.Invoke(true, false);
             }
         }
     }

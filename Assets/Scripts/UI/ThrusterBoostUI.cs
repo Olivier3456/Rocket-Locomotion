@@ -39,12 +39,15 @@ public class ThrusterBoostUI : MonoBehaviour
         }
     }
 
-    private void OnCanBoostStatusChange(bool canBoost)
+    private void OnCanBoostStatusChange(bool canBoost, bool isChangeMadeByEvent)
     {
         if (canBoost)
         {
-            audioSource.clip = boostAuthorizedAudioClip;
-            audioSource.Play();
+            if (!isChangeMadeByEvent)
+            {
+                audioSource.clip = boostAuthorizedAudioClip;
+                audioSource.Play();
+            }
 
             if (!isBoostAuthorizedCoroutineRunning)
             {

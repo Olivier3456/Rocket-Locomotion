@@ -50,7 +50,7 @@ public class ControllersVibrations : MonoBehaviour
     }
 
 
-    private void OnCanBoostAgain(bool canBoost)
+    private void OnCanBoostAgain(bool canBoost, bool changeMadeByEvent) // Second bool is not used here.
     {
         if (canBoost)
         {
