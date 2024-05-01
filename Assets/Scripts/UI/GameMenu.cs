@@ -10,6 +10,7 @@ public class GameMenu : MonoBehaviour
     [SerializeField] private GameObject menuGameObject;
     [SerializeField] private RectTransform menuRectTransform;
     [SerializeField] private GameObject continueButtonGameObject;
+    [SerializeField] private GameObject hudGameObject;
 
     [SerializeField] private float distanceFromCamera = 1f;
     [SerializeField] private float menuSize = 0.5f;
@@ -85,6 +86,8 @@ public class GameMenu : MonoBehaviour
 
             //isShown = true;
 
+            hudGameObject.SetActive(false);
+
             OnShow.Invoke();
         }
     }
@@ -96,6 +99,8 @@ public class GameMenu : MonoBehaviour
             menuGameObject.SetActive(false);
 
             //isShown = false;
+
+            hudGameObject.SetActive(true);
 
             OnHide.Invoke();
         }

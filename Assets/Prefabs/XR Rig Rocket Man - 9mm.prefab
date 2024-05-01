@@ -9232,6 +9232,7 @@ MonoBehaviour:
   menuGameObject: {fileID: 4042085264284681670}
   menuRectTransform: {fileID: 7456179299725297338}
   continueButtonGameObject: {fileID: 8621263507288552444}
+  hudGameObject: {fileID: 6214283958557852657}
   distanceFromCamera: 1
   menuSize: 0.3
   showOrHideMenu: {fileID: 617013274395499287, guid: c348712bda248c246b8c49b3db54643f,
