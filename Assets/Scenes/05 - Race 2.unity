@@ -11670,7 +11670,7 @@ MonoBehaviour:
   audioSource: {fileID: 9141675583232187859}
   countdownClip: {fileID: 8300000, guid: 59e23bb254f272544a533047f844448c, type: 3}
   countdownFinalClip: {fileID: 8300000, guid: bb5f6024710457f418b1e6600fed1935, type: 3}
-  checkpointReachedClip: {fileID: 8300000, guid: 1f45dcf2fde022a4e8523063d45f3039,
+  checkpointReachedClip: {fileID: 8300000, guid: f468f731108a76748a37c12d3efb9b85,
     type: 3}
   raceWonClip: {fileID: 8300000, guid: 31fc4d3f1b4c95b4597308ac732fc1cd, type: 3}
   raceWonMusic: {fileID: 8300000, guid: 95414f136a6942846925e72a30258cd1, type: 3}

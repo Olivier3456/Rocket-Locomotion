@@ -72,8 +72,9 @@ public class SurviveDroneAttackScoresUI : MonoBehaviour
     private void Show()
     {
         Transform cameraTransform = Camera.main.transform;
-        scoresRectTransform.position = cameraTransform.position + cameraTransform.forward * distanceFromCamera;
-        scoresRectTransform.forward = cameraTransform.forward;
+        Vector3 directionFromCamera = new Vector3(cameraTransform.forward.x, 0, cameraTransform.forward.z).normalized;
+        scoresRectTransform.position = cameraTransform.position + (directionFromCamera * distanceFromCamera);
+        scoresRectTransform.forward = directionFromCamera;
         scoresRectTransform.gameObject.SetActive(true);
     }
 

@@ -19,6 +19,8 @@ public class GameMenu : MonoBehaviour
     public UnityEvent OnShow = new UnityEvent();
     public UnityEvent OnHide = new UnityEvent();
 
+    //private bool isShown = false;
+
 
     private void Awake()
     {
@@ -48,20 +50,40 @@ public class GameMenu : MonoBehaviour
         menuGameObject.SetActive(false);
     }
 
+    //private void Update()
+    //{
+    //    if (isShown) 
+    //    {
+    //        FollowCamera();
+    //    }
+    //}
+
+
+    //private void FollowCamera()
+    //{
+    //    Transform cameraTransform = Camera.main.transform;
+    //    Vector3 targetPosition = cameraTransform.position + cameraTransform.forward * distanceFromCamera;
+    //    menuRectTransform.position = Vector3.Lerp(menuRectTransform.position, targetPosition, Time.deltaTime);
+    //    Vector3 targetForward = cameraTransform.forward;
+    //    menuRectTransform.forward = Vector3.Slerp(menuRectTransform.forward, targetForward, Time.deltaTime);
+    //}
+
 
     public void Show(bool withoutPause = false)
     {
         if (withoutPause || MainManager.Instance.Pause(true))
         {
             Transform cameraTransform = Camera.main.transform;
-
-            menuRectTransform.position = cameraTransform.position + cameraTransform.forward * distanceFromCamera;
-            menuRectTransform.forward = cameraTransform.forward;
+            Vector3 directionFromCamera = new Vector3(cameraTransform.forward.x, 0, cameraTransform.forward.z).normalized;
+            menuRectTransform.position = cameraTransform.position + (directionFromCamera * distanceFromCamera);
+            menuRectTransform.forward = directionFromCamera;
 
             menuRectTransform.localScale = Vector3.one * distanceFromCamera * menuSize;
             menuGameObject.SetActive(true);
 
             continueButtonGameObject.SetActive(MainManager.Instance.CanUnpause);
+
+            //isShown = true;
 
             OnShow.Invoke();
         }
@@ -72,6 +94,9 @@ public class GameMenu : MonoBehaviour
         if (withoutUnpause || MainManager.Instance.Pause(false))
         {
             menuGameObject.SetActive(false);
+
+            //isShown = false;
+
             OnHide.Invoke();
         }
     }

@@ -77,8 +77,9 @@ public class RaceScoresUI : MonoBehaviour
     private void Show()
     {
         Transform cameraTransform = Camera.main.transform;
-        raceScoresRectTransform.position = cameraTransform.position + cameraTransform.forward * distanceFromCamera;
-        raceScoresRectTransform.forward = cameraTransform.forward;
+        Vector3 directionFromCamera = new Vector3(cameraTransform.forward.x, 0, cameraTransform.forward.z).normalized;
+        raceScoresRectTransform.position = cameraTransform.position + (directionFromCamera * distanceFromCamera);
+        raceScoresRectTransform.forward = directionFromCamera;
         raceScoresRectTransform.gameObject.SetActive(true);
     }
 
