@@ -8,6 +8,8 @@ public class DeathUI : MonoBehaviour
 {
     [SerializeField] private GameObject deadText;
 
+    [SerializeField] private GameObject[] UiObjectsToDisableOnDeath;
+
     private void Start()
     {
         MainManager.Instance.OnDeath.AddListener(HandleDeath);
@@ -21,6 +23,14 @@ public class DeathUI : MonoBehaviour
     private Coroutine handleDeathCoroutine;
     private void HandleDeath()
     {
+        foreach (GameObject obj in UiObjectsToDisableOnDeath)
+        {
+            if (obj != null)
+            {
+                obj.SetActive(false);
+            }
+        }
+
         if (handleDeathCoroutine == null)
         {
             handleDeathCoroutine = StartCoroutine(HandleDeathCoroutine());

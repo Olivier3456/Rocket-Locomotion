@@ -7298,6 +7298,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deadText: {fileID: 1091181237859736206}
+  UiObjectsToDisableOnDeath:
+  - {fileID: 4219112978610216279}
+  - {fileID: 8485436092619798063}
+  - {fileID: 2727944263351691111}
+  - {fileID: 8755125570291650023}
+  - {fileID: 70805772186119392}
+  - {fileID: 7759031241976983234}
 --- !u!114 &7856075785880439418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12999,6 +13006,12 @@ MonoBehaviour:
 --- !u!224 &6252783930861137358 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7036628814123800572, guid: 5dc0a53e771ce7c41b4af05df9fdd53b,
+    type: 3}
+  m_PrefabInstance: {fileID: 3990604080780098098}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8485436092619798063 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4801728286402972701, guid: 5dc0a53e771ce7c41b4af05df9fdd53b,
     type: 3}
   m_PrefabInstance: {fileID: 3990604080780098098}
   m_PrefabAsset: {fileID: 0}
