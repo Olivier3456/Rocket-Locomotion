@@ -1415,6 +1415,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!20 &446946265 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8540257614787178198, guid: 1b5fe34035ab49848be082d7a856a4e8,
+    type: 3}
+  m_PrefabInstance: {fileID: 576893901}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &504370204
 Mesh:
   m_ObjectHideFlags: 0
@@ -2021,6 +2027,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Rig Rocket Man - RACE
       objectReference: {fileID: 0}
+    - target: {fileID: 7389259521075986414, guid: 1b5fe34035ab49848be082d7a856a4e8,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 446946265}
     - target: {fileID: 9214336484023828279, guid: 1b5fe34035ab49848be082d7a856a4e8,
         type: 3}
       propertyPath: m_LocalPosition.x

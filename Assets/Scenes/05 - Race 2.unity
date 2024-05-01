@@ -1877,6 +1877,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Rig Rocket Man - RACE
       objectReference: {fileID: 0}
+    - target: {fileID: 7389259521075986414, guid: 1b5fe34035ab49848be082d7a856a4e8,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1867824831}
     - target: {fileID: 9214336484023828279, guid: 1b5fe34035ab49848be082d7a856a4e8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10173,6 +10178,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e62b5805adcd204a9fff66f4e05f45c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!20 &1867824831 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8540257614787178198, guid: 1b5fe34035ab49848be082d7a856a4e8,
+    type: 3}
+  m_PrefabInstance: {fileID: 241645589}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1886307911
 Mesh:
   m_ObjectHideFlags: 0

@@ -45,11 +45,11 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Hud
-    uniqueID: 159089159
-    locked: 0
   - name: Red Injury
     uniqueID: 299766855
+    locked: 0
+  - name: Hud
+    uniqueID: 159089159
     locked: 0
   - name: Menu Butons
     uniqueID: 4184165399

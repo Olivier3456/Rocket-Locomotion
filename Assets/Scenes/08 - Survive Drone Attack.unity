@@ -1219,7 +1219,7 @@ PrefabInstance:
     - target: {fileID: 1996666017985128070, guid: ee3e0da1d5a150340ba0306c8ff4331a,
         type: 3}
       propertyPath: m_Name
-      value: XR Rig Rocket Man - 9mm - Survive Drone Attack
+      value: XR Rig Rocket Man - Survive Drone Attack
       objectReference: {fileID: 0}
     - target: {fileID: 2945058418437877986, guid: ee3e0da1d5a150340ba0306c8ff4331a,
         type: 3}
