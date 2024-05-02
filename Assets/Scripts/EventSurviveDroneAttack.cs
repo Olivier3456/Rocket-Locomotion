@@ -60,8 +60,8 @@ public class EventSurviveDroneAttack : MonoBehaviour, IGameEvent
     //[SerializeField, Tooltip("In Player HUD")] private TextMeshProUGUI countdownText;
     [SerializeField, Tooltip("In Player HUD")] private TextMeshProUGUI scoreText;
 
-    private float currentIntervaleBetweenTwoDronesSpawn;
-    private float droneSpawnTimer = 0f;
+    //private float currentIntervaleBetweenTwoDronesSpawn;
+    //private float droneSpawnTimer = 0f;
 
     public UnityEvent<SurviveDroneAttackScores> OnSurviveEventOver = new UnityEvent<SurviveDroneAttackScores>();
 
@@ -70,8 +70,8 @@ public class EventSurviveDroneAttack : MonoBehaviour, IGameEvent
     
     void Start()
     {
-        currentIntervaleBetweenTwoDronesSpawn = startDronesSpawnInterval;
-        droneSpawnTimer += startDronesSpawnInterval - (startDronesSpawnInterval - initialDroneSpawnDelay);
+        //currentIntervaleBetweenTwoDronesSpawn = startDronesSpawnInterval;
+        //droneSpawnTimer += startDronesSpawnInterval - (startDronesSpawnInterval - initialDroneSpawnDelay);
 
         for (int i = 0; i < 10; i++)
         {
@@ -99,30 +99,33 @@ public class EventSurviveDroneAttack : MonoBehaviour, IGameEvent
     {
         ++score;
         scoreText.text = $"killed: {score}";
+
+        InstantiateNewDrone();
+        InstantiateNewDrone();
     }
 
 
 
-    private void Update()
-    {
-        if (IsEventStarted() && !IsEventFinished())
-        {
-            droneSpawnTimer += Time.deltaTime;
+    //private void Update()
+    //{
+    //    if (IsEventStarted() && !IsEventFinished())
+    //    {
+    //        droneSpawnTimer += Time.deltaTime;
 
-            if (droneSpawnTimer > currentIntervaleBetweenTwoDronesSpawn)
-            {
-                if (InstantiateNewDrone())
-                {
-                    droneSpawnTimer = 0f;
+    //        if (droneSpawnTimer > currentIntervaleBetweenTwoDronesSpawn)
+    //        {
+    //            if (InstantiateNewDrone())
+    //            {
+    //                droneSpawnTimer = 0f;
 
-                    if (currentIntervaleBetweenTwoDronesSpawn > minDronesSpawnInterval)
-                    {
-                        currentIntervaleBetweenTwoDronesSpawn -= dronesSpawnIntervalReduction;
-                    }
-                }
-            }
-        }        
-    }
+    //                if (currentIntervaleBetweenTwoDronesSpawn > minDronesSpawnInterval)
+    //                {
+    //                    currentIntervaleBetweenTwoDronesSpawn -= dronesSpawnIntervalReduction;
+    //                }
+    //            }
+    //        }
+    //    }        
+    //}
 
 
     private void PlayerIsDead()
